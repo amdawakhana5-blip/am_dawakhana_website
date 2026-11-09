@@ -219,7 +219,7 @@ export default function LandingPage() {
       </div>
 
       {/* Top Urgency Banner */}
-      <div className="relative z-50 bg-gradient-to-r from-emerald-900 via-amber-600 to-emerald-900 text-white text-center py-2 px-2 sm:px-4 font-bold text-[11px] sm:text-sm shadow-2xl border-b border-amber-400/60">
+      <div className="relative z-50 bg-gradient-to-r from-emerald-900 via-amber-600 to-emerald-900 text-white text-center py-2.5 px-2 sm:px-4 font-bold text-[11px] sm:text-sm shadow-2xl border-b border-amber-400/60">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 flex-wrap">
           <div className="flex items-center gap-1.5">
             <span className="bg-amber-500 text-stone-950 font-black px-2 py-0.5 rounded-full text-[9px] sm:text-xs tracking-wider animate-bounce shadow">
@@ -238,7 +238,7 @@ export default function LandingPage() {
       </div>
 
       {/* Fully Responsive Header */}
-      <header className="relative z-40 py-2.5 sm:py-4 px-3 sm:px-6 border-b border-amber-400/40 bg-emerald-950/95 backdrop-blur-md sticky top-0 shadow-2xl">
+      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-amber-400/40 bg-emerald-950/95 backdrop-blur-md sticky top-0 shadow-2xl">
         <div className="max-w-6xl mx-auto flex justify-between items-center gap-2">
           
           <div className="flex items-center gap-2 sm:gap-3.5">
@@ -262,15 +262,15 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-sm transition-all flex items-center gap-1 shadow-md border border-emerald-400/50"
+              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-sm transition-all flex items-center gap-1.5 shadow-md border border-emerald-400/50"
               title="WhatsApp Chat"
             >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
               <span className="hidden xs:inline">WhatsApp</span>
@@ -278,7 +278,7 @@ export default function LandingPage() {
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 text-stone-950 font-black px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-lg shadow-amber-500/30 tracking-wider uppercase border border-amber-300 shrink-0"
+              className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 text-stone-950 font-black px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-lg shadow-amber-500/30 tracking-wider uppercase border border-amber-300 shrink-0"
             >
               Order Karein
             </a>
@@ -321,9 +321,9 @@ export default function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-              <div className="bg-gradient-to-br from-emerald-900/90 via-teal-900/80 to-stone-900 p-4 sm:p-5 rounded-2xl border border-amber-400/40 text-left shadow-xl hover:border-amber-400/80 transition-all">
+              <div className="bg-gradient-to-br from-emerald-900/95 via-teal-900/90 to-stone-900 p-4 sm:p-5 rounded-2xl border-2 border-amber-400/40 text-left shadow-2xl hover:border-amber-400 transition-all">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-amber-300 font-black text-[10px] uppercase tracking-widest bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+                  <span className="text-amber-300 font-black text-[10px] uppercase tracking-widest bg-amber-400/15 px-2.5 py-0.5 rounded border border-amber-400/30">
                     Product Overview
                   </span>
                   <span className="text-amber-400">✨</span>
@@ -333,10 +333,10 @@ export default function LandingPage() {
                 </p>
               </div>
               
-              <div className="bg-gradient-to-bl from-emerald-900/90 via-teal-900/80 to-stone-900 p-4 sm:p-5 rounded-2xl border border-amber-400/40 text-right shadow-xl hover:border-amber-400/80 transition-all" style={nastaliqStyle} dir="rtl">
+              <div className="bg-gradient-to-bl from-emerald-900/95 via-teal-900/90 to-stone-900 p-4 sm:p-5 rounded-2xl border-2 border-amber-400/40 text-right shadow-2xl hover:border-amber-400 transition-all" style={nastaliqStyle} dir="rtl">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-emerald-300">🌿</span>
-                  <span className="text-amber-300 font-black text-xs bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+                  <span className="text-amber-300 font-black text-xs bg-amber-400/15 px-2.5 py-0.5 rounded border border-amber-400/30">
                     پروڈکٹ کا تعارف
                   </span>
                 </div>
@@ -347,7 +347,7 @@ export default function LandingPage() {
             </div>
 
             {/* Q&A Section */}
-            <div className="bg-gradient-to-b from-emerald-950 via-teal-950 to-stone-900 border-2 border-amber-400/50 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
+            <div className="bg-gradient-to-b from-emerald-950 via-teal-950 to-stone-900 border-2 border-amber-400/60 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-teal-800/60">
                 <div className="text-left space-y-1">
                   <div className="text-amber-300 font-black text-xs sm:text-sm flex items-center gap-1.5">
@@ -391,15 +391,15 @@ export default function LandingPage() {
 
             {/* Badges */}
             <div className="grid grid-cols-3 gap-2">
-              <div className="bg-emerald-900/80 border border-amber-400/40 p-2.5 rounded-xl text-center shadow-lg">
+              <div className="bg-emerald-900/90 border border-amber-400/50 p-3 rounded-xl text-center shadow-lg">
                 <div className="text-amber-300 font-extrabold text-xs sm:text-sm">20 Tablets</div>
                 <div className="text-stone-200 text-xs mt-1 font-bold" style={nastaliqStyle}>20 ٹیبلٹس</div>
               </div>
-              <div className="bg-emerald-900/80 border border-emerald-400/40 p-2.5 rounded-xl text-center shadow-lg">
+              <div className="bg-emerald-900/90 border border-emerald-400/50 p-3 rounded-xl text-center shadow-lg">
                 <div className="text-emerald-300 font-extrabold text-xs sm:text-sm">100% Herbal</div>
                 <div className="text-stone-200 text-xs mt-1 font-bold" style={nastaliqStyle}>بغیر نقصان</div>
               </div>
-              <div className="bg-emerald-900/80 border border-amber-400/40 p-2.5 rounded-xl text-center shadow-lg">
+              <div className="bg-emerald-900/90 border border-amber-400/50 p-3 rounded-xl text-center shadow-lg">
                 <div className="text-amber-300 font-extrabold text-xs sm:text-sm">Free Delivery</div>
                 <div className="text-stone-200 text-xs mt-1 font-bold" style={nastaliqStyle}>مفت ڈلیوری</div>
               </div>
@@ -409,7 +409,7 @@ export default function LandingPage() {
 
           {/* Right Column: Image Sliders */}
           <div className="flex flex-col gap-6 w-full">
-            <div className="relative w-full bg-emerald-950/80 border-2 border-amber-400/50 rounded-2xl sm:rounded-3xl p-3 shadow-2xl group hover:border-amber-400 transition-all">
+            <div className="relative w-full bg-emerald-950/90 border-2 border-amber-400/60 rounded-2xl sm:rounded-3xl p-3.5 shadow-2xl group hover:border-amber-400 transition-all">
               <div className="relative w-full aspect-[4/3] max-h-[420px] overflow-hidden rounded-xl bg-emerald-900/50 flex items-center justify-center border border-teal-800 shadow-inner">
                 <Image
                   src={images[currentImageIndex]}
@@ -421,7 +421,7 @@ export default function LandingPage() {
                 />
               </div>
 
-              <div className="flex justify-center gap-1.5 mt-3">
+              <div className="flex justify-center gap-1.5 mt-3.5">
                 {images.map((_, idx) => (
                   <button
                     key={idx}
@@ -434,7 +434,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="relative w-full bg-emerald-950/80 border-2 border-amber-400/50 rounded-2xl sm:rounded-3xl p-3 shadow-2xl group hover:border-amber-400 transition-all">
+            <div className="relative w-full bg-emerald-950/90 border-2 border-amber-400/60 rounded-2xl sm:rounded-3xl p-3.5 shadow-2xl group hover:border-amber-400 transition-all">
               <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-xl bg-emerald-900/50 flex items-center justify-center border border-teal-800 shadow-inner">
                 <Image
                   src={extraImages[extraImageIndex]}
@@ -446,7 +446,7 @@ export default function LandingPage() {
                 />
               </div>
 
-              <div className="flex justify-center gap-1.5 mt-3">
+              <div className="flex justify-center gap-1.5 mt-3.5">
                 {extraImages.map((_, idx) => (
                   <button
                     key={idx}
@@ -891,13 +891,14 @@ export default function LandingPage() {
                   <span>Select Deal / Package</span>
                   <span style={nastaliqStyle} dir="rtl" className="text-amber-300 text-sm">پیکج منتخب کریں *</span>
                 </label>
+                {/* STYLISH DROPDOWN */}
                 <select
                   value={formData.quantity}
                   onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  className="w-full bg-emerald-900/60 border border-teal-700 rounded-xl px-4 py-3.5 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-400 transition-colors font-bold"
+                  className="w-full bg-emerald-900/90 border-2 border-amber-400/60 rounded-xl px-4 py-3.5 text-xs sm:text-sm text-amber-200 focus:outline-none focus:border-amber-400 transition-all font-extrabold shadow-inner cursor-pointer"
                 >
-                  <option value="1 Bottle (20 Tablets) - Rs. 2,299" className="bg-emerald-950 text-white">1 Bottle (20 Tablets) - Rs. 2,299 (Free Delivery)</option>
-                  <option value="2 Bottles (40 Tablets) - Rs. 4,400" className="bg-emerald-950 text-white">2 Bottles (40 Tablets) - Rs. 4,400 (Bachat Offer)</option>
+                  <option value="1 Bottle (20 Tablets) - Rs. 2,299" className="bg-emerald-950 text-white py-2">1 Bottle (20 Tablets) - Rs. 2,299 (Free Delivery)</option>
+                  <option value="2 Bottles (40 Tablets) - Rs. 4,400" className="bg-emerald-950 text-white py-2">2 Bottles (40 Tablets) - Rs. 4,400 (Bachat Offer)</option>
                 </select>
               </div>
 
@@ -930,15 +931,15 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Floating WhatsApp Chat Button */}
+      {/* Floating WhatsApp Chat Button with Slightly Larger Logo */}
       <a
         href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-20 sm:bottom-6 right-4 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 border-2 border-amber-400/60"
+        className="fixed bottom-20 sm:bottom-6 right-4 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 border-2 border-amber-400/80 shadow-emerald-500/30"
         title="Chat on WhatsApp"
       >
-        <svg className="w-7 h-7 fill-current" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
       </a>
