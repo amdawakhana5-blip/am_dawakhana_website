@@ -11,6 +11,9 @@ export default function LandingPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+  // Custom Dropdown State for Styling
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   // 9:16 Video Carousel States
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
@@ -395,7 +398,7 @@ export default function LandingPage() {
                 <div className="text-amber-300 font-extrabold text-xs sm:text-sm">20 Tablets</div>
                 <div className="text-stone-200 text-xs mt-1 font-bold" style={nastaliqStyle}>20 ٹیبلٹس</div>
               </div>
-              <div className="bg-emerald-900/90 border border-emerald-400/50 p-3 rounded-xl text-center shadow-lg">
+              <div className="bg-emerald-900/90 border border-amber-400/50 p-3 rounded-xl text-center shadow-lg">
                 <div className="text-emerald-300 font-extrabold text-xs sm:text-sm">100% Herbal</div>
                 <div className="text-stone-200 text-xs mt-1 font-bold" style={nastaliqStyle}>بغیر نقصان</div>
               </div>
@@ -886,20 +889,50 @@ export default function LandingPage() {
                 ></textarea>
               </div>
 
+              {/* HIGHLY STYLISH CUSTOM DROPDOWN */}
               <div>
                 <label className="block text-stone-200 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Select Deal / Package</span>
                   <span style={nastaliqStyle} dir="rtl" className="text-amber-300 text-sm">پیکج منتخب کریں *</span>
                 </label>
-                {/* STYLISH DROPDOWN */}
-                <select
-                  value={formData.quantity}
-                  onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  className="w-full bg-emerald-900/90 border-2 border-amber-400/60 rounded-xl px-4 py-3.5 text-xs sm:text-sm text-amber-200 focus:outline-none focus:border-amber-400 transition-all font-extrabold shadow-inner cursor-pointer"
-                >
-                  <option value="1 Bottle (20 Tablets) - Rs. 2,299" className="bg-emerald-950 text-white py-2">1 Bottle (20 Tablets) - Rs. 2,299 (Free Delivery)</option>
-                  <option value="2 Bottles (40 Tablets) - Rs. 4,400" className="bg-emerald-950 text-white py-2">2 Bottles (40 Tablets) - Rs. 4,400 (Bachat Offer)</option>
-                </select>
+
+                <div className="relative">
+                  <div 
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 border-2 border-amber-400/80 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-amber-200 font-black cursor-pointer flex justify-between items-center shadow-xl hover:border-amber-400 transition-all"
+                  >
+                    <span className="truncate pr-2">{formData.quantity}</span>
+                    <span className={`text-amber-400 transform transition-transform duration-300 text-lg ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}>
+                      ▼
+                    </span>
+                  </div>
+
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-emerald-950 border-2 border-amber-400 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-xl animate-fadeIn">
+                      <div 
+                        onClick={() => {
+                          setFormData({ ...formData, quantity: '1 Bottle (20 Tablets) - Rs. 2,299' });
+                          setIsDropdownOpen(false);
+                        }}
+                        className="px-4 py-3.5 text-xs sm:text-sm text-stone-100 font-bold hover:bg-amber-500 hover:text-stone-950 cursor-pointer border-b border-teal-900 transition-all flex items-center justify-between"
+                      >
+                        <span>1 Bottle (20 Tablets) - Rs. 2,299</span>
+                        <span className="text-[10px] bg-emerald-900 px-2 py-0.5 rounded text-amber-300 font-mono">Free Delivery</span>
+                      </div>
+
+                      <div 
+                        onClick={() => {
+                          setFormData({ ...formData, quantity: '2 Bottles (40 Tablets) - Rs. 4,400' });
+                          setIsDropdownOpen(false);
+                        }}
+                        className="px-4 py-3.5 text-xs sm:text-sm text-amber-300 font-black hover:bg-amber-500 hover:text-stone-950 cursor-pointer transition-all flex items-center justify-between"
+                      >
+                        <span>2 Bottles (40 Tablets) - Rs. 4,400</span>
+                        <span className="text-[10px] bg-amber-400 text-stone-950 px-2 py-0.5 rounded font-extrabold">Bachat Offer</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <button
@@ -1051,7 +1084,7 @@ export default function LandingPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
           <div className="bg-gradient-to-b from-emerald-950 via-teal-950 to-stone-900 border-2 border-amber-400 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
             
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-lg animate-bounce">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500/20 border-2 border-amber-400 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-lg animate-bounce">
               ✓
             </div>
 
