@@ -27,10 +27,12 @@ export default function LandingPage() {
   const [recentOrder, setRecentOrder] = useState({ name: 'Bilal Ahmed', city: 'Karachi', time: 'Just now' });
   const [showToast, setShowToast] = useState(false);
 
+  // Updated Form State with Separate Address and City
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     address: '',
+    city: '',
     quantity: '1 Bottle (20 Tablets) - Rs. 2,299',
   });
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,7 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Live Recent Order Toast Notification (Compact & Bottom-Left)
+  // Live Recent Order Toast Notification
   useEffect(() => {
     const buyers = [
       { name: 'Bilal Ahmed', city: 'Karachi' },
@@ -85,7 +87,6 @@ export default function LandingPage() {
   const images = ['/1.jpg', '/2.jpg', '/3.jpg', '/4.jpg', '/5.jpg', '/6.jpg', '/7.jpg', '/8.jpg', '/9.jpg'];
   const extraImages = ['/10.jpg', '/11.jpg'];
 
-  // Auto-play Image Sliders (Smooth and comfortable timing)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -101,7 +102,6 @@ export default function LandingPage() {
     };
   }, [images.length, extraImages.length]);
 
-  // Secondary Videos Controls
   const toggleVideo1 = () => {
     if (video1Ref.current) {
       if (video1Ref.current.paused) {
@@ -136,8 +136,14 @@ export default function LandingPage() {
     setLoading(true);
 
     try {
+      // Combine address and city into single format: "Address, City" for backend
+      const combinedAddress = `${formData.address.trim()}, ${formData.city.trim()}`;
+
       const payload = {
-        ...formData,
+        name: formData.name,
+        phone: formData.phone,
+        address: combinedAddress,
+        quantity: formData.quantity,
         quantityValue: formData.quantity.includes('2 Bottles') ? 2 : 1,
       };
 
@@ -153,6 +159,7 @@ export default function LandingPage() {
           name: '',
           phone: '',
           address: '',
+          city: '',
           quantity: '1 Bottle (20 Tablets) - Rs. 2,299',
         });
       } else {
@@ -168,7 +175,7 @@ export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-32 sm:pb-12">
       
-      {/* Top Compact & Stylish Timer Banner */}
+      {/* Top Timer Banner */}
       <div className="relative z-50 bg-gradient-to-r from-red-950 via-amber-900 to-red-900 text-white text-center py-2 px-3 shadow-md">
         <div className="max-w-md mx-auto flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 text-amber-300 text-xs font-bold">
@@ -191,7 +198,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Fully Responsive & Safe Header Container */}
+      {/* Header */}
       <header className="relative z-40 py-3 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
           
@@ -220,7 +227,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Mobile quick action buttons right next to logo on very small screens if needed */}
             <div className="flex sm:hidden items-center gap-1.5 shrink-0">
               <a
                 href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
@@ -263,16 +269,16 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 🚀 SMOOTH MOVING ANIMATED URDU SCRIPT TICKER PATTI (Right to Left flow corrected) */}
-      <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/30">
-        <div className="flex overflow-hidden whitespace-nowrap">
-          <div className="inline-flex items-center gap-12 animate-marquee-right font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
+      {/* 🚀 CONTINUOUS SMOOTH MARQUEE TICKER PATTI (Fixed infinite smooth loop) */}
+      <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/35">
+        <div className="flex whitespace-nowrap overflow-hidden">
+          <div className="inline-flex items-center gap-12 animate-marquee-continuous font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
             <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
           </div>
-          <div className="inline-flex items-center gap-12 animate-marquee-right font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl" aria-hidden="true">
+          <div className="inline-flex items-center gap-12 animate-marquee-continuous font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl" aria-hidden="true">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
@@ -314,7 +320,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Urdu description box */}
             <div className="bg-white/90 p-5 sm:p-6 rounded-2xl border-2 border-amber-200 shadow-md text-right w-full overflow-hidden" style={nastaliqStyle} dir="rtl">
               <p className="text-slate-900 text-base sm:text-lg font-bold leading-loose">
                 طاقتور ہربل فارمولا ہے جو خاص طور پر مردوں کے لیے تیار کیا گیا ہے جو کمزوری، کم ٹائمنگ اور اعصابی نقاہت کا شکار ہیں۔
@@ -347,7 +352,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Badges */}
             <div className="grid grid-cols-3 gap-2">
               <div className="bg-white/90 border border-amber-200 p-3 rounded-xl text-center shadow-sm">
                 <div className="text-red-800 font-extrabold text-xs sm:text-sm">20 Tablets</div>
@@ -365,10 +369,8 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Safe Container for Images & Thumbnails */}
           <div className="flex flex-col gap-6 w-full min-w-0">
             
-            {/* Box 1: Main Big Image Box */}
             <div className="relative w-full bg-white/70 backdrop-blur-sm rounded-3xl p-3 sm:p-5 shadow-xl flex flex-col gap-3">
               <div className="relative w-full aspect-[4/3] max-h-[360px] overflow-hidden rounded-2xl bg-[#111] shadow-inner flex items-center justify-center">
                 <Image
@@ -381,7 +383,6 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Smaller Centered Row for Slider Gallery Thumbnails */}
               <div className="flex items-center justify-center gap-1.5 overflow-x-auto pb-1 pt-1 max-w-full">
                 {images.map((img, idx) => (
                   <button
@@ -397,7 +398,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Box */}
             <div className="relative w-full bg-white/70 backdrop-blur-sm rounded-3xl p-3 sm:p-5 shadow-xl flex flex-col gap-3">
               <div className="relative w-full aspect-[4/3] max-h-[300px] overflow-hidden rounded-2xl bg-[#111] shadow-inner flex items-center justify-center">
                 <Image
@@ -410,7 +410,6 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Smaller Centered Row for Extra Gallery Thumbnails */}
               <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 pt-1 max-w-full">
                 {extraImages.map((img, idx) => (
                   <button
@@ -430,7 +429,7 @@ export default function LandingPage() {
 
         </section>
 
-        {/* SECONDARY VIDEOS SECTION */}
+        {/* VIDEOS SECTION */}
         <section className="mb-12 sm:mb-16">
           <div className="bg-white/90 border border-amber-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
             <span className="bg-amber-100 text-red-950 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-2">
@@ -662,7 +661,6 @@ export default function LandingPage() {
             <p className="text-xs sm:text-sm text-slate-700 mt-1 font-semibold">Verified buyers sharing their experience with AM Vitality Tablet.</p>
           </div>
 
-          {/* Rating Summary Box */}
           <div className="bg-white/90 border border-amber-200 rounded-3xl p-6 sm:p-8 max-w-3xl mx-auto shadow-md mb-8 flex flex-col sm:flex-row items-center justify-around gap-6">
             <div className="text-center">
               <div className="text-5xl font-black text-red-950">4.9</div>
@@ -691,10 +689,8 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Review Cards Grid */}
           <div className="grid md:grid-cols-3 gap-6">
             
-            {/* Review 1 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Bilal Ahmed</div>
@@ -707,7 +703,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 2 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Rizwan</div>
@@ -720,7 +715,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 3 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Ahmed Khan</div>
@@ -733,7 +727,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 4 (Urdu) */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right overflow-hidden" style={nastaliqStyle} dir="rtl">
               <div className="flex items-center justify-between">
                 <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
@@ -746,7 +739,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 5 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Muneeb</div>
@@ -759,7 +751,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 6 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Usman Ali</div>
@@ -772,7 +763,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 7 (Urdu) */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right overflow-hidden" style={nastaliqStyle} dir="rtl">
               <div className="flex items-center justify-between">
                 <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
@@ -785,7 +775,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 8 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Hamza</div>
@@ -798,7 +787,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Review 9 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Fahad Mustafa</div>
@@ -811,7 +799,6 @@ export default function LandingPage() {
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Expanded Reviews */}
             {showAllReviews && (
               <>
                 <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
@@ -869,7 +856,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya تھا۔ Highly recommended."
+                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya tha. Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -878,7 +865,6 @@ export default function LandingPage() {
 
           </div>
 
-          {/* See More Reviews Button */}
           <div className="text-center mt-8">
             <button
               onClick={() => setShowAllReviews(!showAllReviews)}
@@ -889,7 +875,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Order Form Section */}
+        {/* Order Form Section (Separate Address & City Fields) */}
         <section id="order-form" className="max-w-xl mx-auto">
           <div className="bg-white/95 border-2 border-red-700/50 rounded-3xl p-5 sm:p-10 shadow-xl relative">
             <div className="text-center mb-6 sm:mb-8">
@@ -932,19 +918,36 @@ export default function LandingPage() {
                 />
               </div>
 
+              {/* Separate Address Field */}
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
-                  <span>Complete Address & City</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">مکمل پتہ اور شہر کا نام *</span>
+                  <span>Street / House Address</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">گھر کا پتہ / گلی نمبر *</span>
                 </label>
-                <textarea
+                <input
+                  type="text"
                   required
-                  rows={3}
-                  placeholder="House/Shop No, Street, Area, City"
+                  placeholder="House/Shop No, Street, Area"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   className="w-full bg-[#FAF7EE] border border-amber-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-700 transition-colors"
-                ></textarea>
+                />
+              </div>
+
+              {/* Separate City Field */}
+              <div>
+                <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
+                  <span>City</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">شہر کا نام *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Karachi, Lahore, Islamabad"
+                  value={formData.city}
+                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                  className="w-full bg-[#FAF7EE] border border-amber-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-700 transition-colors"
+                />
               </div>
 
               {/* CUSTOM DROPDOWN */}
@@ -1006,7 +1009,7 @@ export default function LandingPage() {
 
       </main>
 
-      {/* 🔔 COMPACT RECENT ORDER TOAST POPUP */}
+      {/* Toast */}
       {showToast && (
         <div className="fixed bottom-20 sm:bottom-6 left-4 z-50 bg-white border border-red-700/40 text-slate-900 px-3 py-2.5 rounded-xl shadow-lg flex items-center gap-2.5 transition-all duration-300 max-w-[260px] animate-fadeIn">
           <div className="w-8 h-8 rounded-full bg-red-700 text-white font-black flex items-center justify-center shrink-0 text-xs shadow">
@@ -1034,7 +1037,7 @@ export default function LandingPage() {
         </svg>
       </a>
 
-      {/* Mobile Sticky Footer Button */}
+      {/* Mobile Sticky Footer */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#FAF7EE]/95 border-t border-amber-200 backdrop-blur-md">
         <a
           href="#order-form"
@@ -1111,7 +1114,7 @@ export default function LandingPage() {
               <p><strong className="text-red-900">Naam:</strong> {formData.name}</p>
               <p><strong className="text-red-900">Number:</strong> {formData.phone}</p>
               <p><strong className="text-red-900">Package:</strong> {formData.quantity}</p>
-              <p><strong className="text-red-900">Address:</strong> {formData.address}</p>
+              <p><strong className="text-red-900">Address:</strong> {formData.address}, {formData.city}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
@@ -1136,53 +1139,59 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* SUCCESS POPUP */}
+      {/* ✨ REDESIGNED PREMIUM SUCCESS POPUP */}
       {showSuccessPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-red-700 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+          <div className="bg-gradient-to-b from-white via-[#FFFDF9] to-[#FAF3E0] border-2 border-red-700 rounded-3xl p-6 sm:p-10 max-w-lg w-full text-center shadow-2xl space-y-6 relative overflow-hidden">
             
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md animate-bounce">
+            {/* Decorative Top Badge */}
+            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-red-800 via-amber-700 to-red-950 text-white text-[11px] font-black uppercase tracking-widest py-1.5 shadow">
+              🎉 AM Unani &amp; Herbal Labs - Order Success
+            </div>
+
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-100 border-4 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl sm:text-5xl shadow-xl animate-bounce mt-4">
               ✓
             </div>
 
-            <div className="space-y-1">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
-                Order Confirmed!
+            <div className="space-y-2">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                Order Placed Successfully!
               </h3>
-              <h4 className="text-xl sm:text-3xl font-bold text-red-900" style={nastaliqStyle} dir="rtl">
-                آرڈر کرنے کا شکریہ!
+              <h4 className="text-xl sm:text-2xl font-extrabold text-red-900" style={nastaliqStyle} dir="rtl">
+                آپ کا آرڈر کامیابی سے رجسٹر ہو گیا ہے!
               </h4>
             </div>
 
-            <div className="space-y-3 bg-[#FAF7EE] p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700">
-              <p className="font-semibold">
-                Thank you for ordering from <strong className="text-red-900">AM Unani &amp; Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
+            <div className="space-y-3.5 bg-white p-5 rounded-2xl border-2 border-amber-200 text-xs sm:text-sm text-slate-700 shadow-inner text-center">
+              <p className="font-bold text-slate-800">
+                Thank you for choosing <strong className="text-red-900">AM Unani &amp; Herbal Labs</strong>. Your parcel will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
               </p>
-              <p className="pt-2 border-t border-amber-200 text-right font-bold text-sm sm:text-base" style={nastaliqStyle} dir="rtl">
-                اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-red-900">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
-              </p>
+              
+              <div className="pt-3 border-t border-amber-100 text-right font-bold text-sm sm:text-base text-slate-900" style={nastaliqStyle} dir="rtl">
+                اے ایم دواخانہ سے خریداری کا شکریہ۔ آپ کا پارسل <strong className="text-red-800">2 سے 3 دنوں میں</strong> کیش آن ڈیلیوری پر آپ کے دیئے گئے پتے پر پہنچا دیا جائے گا۔
+              </div>
 
-              <div className="pt-3 border-t border-amber-200 text-center space-y-2.5">
+              <div className="pt-3 border-t border-amber-100 text-center space-y-2.5">
                 <p className="text-xs text-slate-600 font-bold">
-                  Agar mazeed maloomat darkaar hain toh WhatsApp par rabta karein:
+                  Kisi bhi qisam ki maloomat ke liye WhatsApp par rabta karein:
                 </p>
                 <a
                   href="https://wa.me/923150894064?text=Salam,%20maine%20order%20place%20kiya%20hai%2C%20mazeed%20maloomat%20chahiye."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm w-full transition-all shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm w-full transition-all shadow-md border border-emerald-400"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                   </svg>
-                  <span>Chat on WhatsApp / واٹس ایپ پر بات کریں</span>
+                  <span>Chat on WhatsApp / واٹس ایپ پر رابطہ کریں</span>
                 </a>
               </div>
             </div>
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
+              className="w-full bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider"
             >
               Close / بند کریں
             </button>
@@ -1191,17 +1200,17 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Global CSS for Marquee Animation (Moving from Right to Left for Urdu Text) */}
+      {/* Global CSS for Continuous Marquee Animation */}
       <style jsx global>{`
-        @keyframes marqueeRight {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+        @keyframes marqueeContinuous {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
         }
-        .animate-marquee-right {
+        .animate-marquee-continuous {
           display: inline-flex;
-          animation: marqueeRight 30s linear infinite;
+          animation: marqueeContinuous 25s linear infinite;
         }
-        .animate-marquee-right:hover {
+        .animate-marquee-continuous:hover {
           animation-play-state: paused;
         }
       `}</style>
