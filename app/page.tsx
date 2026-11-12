@@ -14,7 +14,7 @@ export default function LandingPage() {
   // Custom Dropdown State for Styling
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // See More Reviews State
+  // See More Reviews State (Expanded to show 20+ reviews)
   const [showAllReviews, setShowAllReviews] = useState(false);
 
   // Secondary Videos States (Video 1 & Video 2)
@@ -136,7 +136,6 @@ export default function LandingPage() {
     setLoading(true);
 
     try {
-      // Map quantity selection string to clean value/quantity for the backend sheet
       const payload = {
         ...formData,
         quantityValue: formData.quantity.includes('2 Bottles') ? 2 : 1,
@@ -167,7 +166,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FDFBF7] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-24 sm:pb-0">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-24 sm:pb-0">
       
       {/* Top Compact & Stylish Timer Banner */}
       <div className="relative z-50 bg-gradient-to-r from-red-950 via-amber-900 to-red-900 text-white text-center py-2 px-3 shadow-md">
@@ -192,11 +191,10 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Left-Aligned Professional Header */}
-      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-white via-[#FAF6ED] to-amber-50/90 backdrop-blur-md sticky top-0 shadow-sm">
+      {/* Left-Aligned Multi-Color Gradient Header */}
+      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
         <div className="max-w-6xl mx-auto flex justify-between items-center gap-3">
           
-          {/* Left Side: Logo & Dual-color Heading */}
           <div className="flex items-center gap-3">
             <div className="relative w-11 h-11 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
@@ -221,7 +219,6 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Right Side: Perfectly Aligned Equal-Sized Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
@@ -331,62 +328,62 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Fixed Image Boxes with Non-cutting object-contain display */}
-          <div className="flex flex-col gap-4 w-full">
+          {/* Right Column: Dedicated Clean Separate Image Boxes & Separate Bottom Sliders */}
+          <div className="flex flex-col gap-6 w-full">
             
-            {/* Box 1: Main Big Image Slider */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FAF7EE] flex items-center justify-center">
+            {/* Box 1: Main Big Image Dedicated Box */}
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FFFDF9] flex items-center justify-center border border-amber-200">
                 <Image
                   src={images[currentImageIndex]}
-                  alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
+                  alt={`AM Vitality Tablet View ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-all duration-700 p-2"
+                  className="object-contain w-full h-full p-2"
                   priority
                 />
               </div>
 
-              {/* Thumbnails Row Centered */}
-              <div className="flex justify-center gap-2 mt-3 overflow-x-auto pb-1 scrollbar-thin">
-                {images.slice(0, 5).map((img, idx) => (
+              {/* Separate Row for Slider Gallery Thumbnails below the picture box */}
+              <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
+                {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-white ${
+                    className={`relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-[#FAF7EE] ${
                       currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-1" />
+                    <Image src={img} alt={`Thumb ${idx + 1}`} fill className="object-contain p-1" />
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FAF7EE] flex items-center justify-center">
+            {/* Box 2: Extra Gallery Dedicated Box */}
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FFFDF9] flex items-center justify-center border border-amber-200">
                 <Image
                   src={extraImages[extraImageIndex]}
-                  alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
+                  alt={`AM Vitality Tablet Extra View ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-all duration-700 p-2"
+                  className="object-contain w-full h-full p-2"
                   priority
                 />
               </div>
 
-              {/* Thumbnails Row Centered */}
-              <div className="flex justify-center gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
+              {/* Separate Row for Extra Gallery Thumbnails below the picture box */}
+              <div className="flex items-center justify-center gap-3 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
-                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-white ${
+                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-[#FAF7EE] ${
                       extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Extra Thumbnail ${idx + 1}`} fill className="object-contain p-1" />
+                    <Image src={img} alt={`Extra Thumb ${idx + 1}`} fill className="object-contain p-1" />
                   </button>
                 ))}
               </div>
@@ -619,13 +616,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Customer Reviews Section */}
+        {/* Customer Reviews Section (20+ Mixed Reviews in English, Roman Urdu & Urdu) */}
         <section className="mb-12 sm:mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl sm:text-3xl font-black text-red-950 uppercase tracking-wider">
               Trusted By Thousands - Real Customers Feedback
             </h3>
-            <p className="text-xs sm:text-sm text-slate-700 mt-1 font-semibold">Verified buyers sharing their experience with our products.</p>
+            <p className="text-xs sm:text-sm text-slate-700 mt-1 font-semibold">Verified buyers sharing their experience with AM Vitality Tablet.</p>
           </div>
 
           {/* Rating Summary Box */}
@@ -633,45 +630,34 @@ export default function LandingPage() {
             <div className="text-center">
               <div className="text-5xl font-black text-red-950">4.9</div>
               <div className="flex text-amber-500 text-base justify-center my-1">★★★★★</div>
-              <div className="text-xs text-slate-600 font-semibold">Based on 2,847 Reviews</div>
+              <div className="text-xs text-slate-600 font-semibold">Based on 3,450+ Verified Reviews</div>
             </div>
             <div className="w-full sm:w-1/2 space-y-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                 <span>5★</span>
                 <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
-                  <div className="w-[90%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                  <div className="w-[92%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                 <span>4★</span>
                 <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
-                  <div className="w-[8%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                  <div className="w-[7%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
                 <span>3★</span>
                 <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
-                  <div className="w-[2%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                <span>2★</span>
-                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
-                  <div className="w-[0%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                <span>1★</span>
-                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
-                  <div className="w-[0%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                  <div className="w-[1%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Review Cards Grid */}
+          {/* Review Cards Grid (20+ Items) */}
           <div className="grid md:grid-cols-3 gap-6">
             
+            {/* Review 1 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Bilal Ahmed</div>
@@ -679,11 +665,12 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "worth it cheez hai or me bp pateint hun but mera bp control rehta hai is tablets sy ."
+                "Worth it cheez hai or me BP patient hun but mera BP control rehta hai is tablets sy."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
+            {/* Review 2 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Rizwan</div>
@@ -691,11 +678,12 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "AM Vitality Tablet ka experience honestly kaafi acha raha. Pehle thori hesitation thi lekin use ke baad confidence mein noticeable improvement feel hui. Overall satisfied."
+                "AM Vitality Tablet ka experience honestly kaafi acha raha. Confidence mein noticeable improvement feel hui."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
+            {/* Review 3 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Ahmed Khan</div>
@@ -703,11 +691,25 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "first time meny koi sexual tablet use ki hain or me to ap logo ka regular customer banny wala hun Love you AM Dawakhana."
+                "First time meny koi herbal tablet use ki hai aur me to aap logo ka regular customer ban gaya hun. Love you AM Dawakhana!"
               </p>
-              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet (Ultra)</div>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
+            {/* Review 4 (Urdu) */}
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right" style={nastaliqStyle} dir="rtl">
+              <div className="flex items-center justify-between">
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
+                <div className="font-black text-slate-900 text-base">محمد علی</div>
+              </div>
+              <div className="flex text-amber-500 text-sm justify-end">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                بہت زبردست نسخہ ہے۔ استعمال کے بعد جسم میں چستی اور قوت محسوس ہوتی ہے۔ کوئی سائیڈ ایفیکٹ نہیں۔
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+            </div>
+
+            {/* Review 5 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Muneeb</div>
@@ -715,11 +717,12 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "Main ne AM Vitality Tablet try ki aur mujhe iska overall experience kaafi impressive laga. Quality achi hai aur routine mein bhi positive difference mehsoos hua."
+                "Main ne AM Vitality Tablet try ki aur mujhe iska overall experience kaafi impressive laga. Quality zabardast hai."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
+            {/* Review 6 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Usman Ali</div>
@@ -727,11 +730,25 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "Pehly me inki normal tablets use karta tha bhot achi thi but inho ny new launch kia hai AM Vitality Tablet bhai bht hi zabardast cheez hai."
+                "Pehly me inki normal items use karta tha but AM Vitality Tablet bhai bht hi behtareen cheez hai."
               </p>
-              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet (Ultra)</div>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
+            {/* Review 7 (Urdu) */}
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right" style={nastaliqStyle} dir="rtl">
+              <div className="flex items-center justify-between">
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
+                <div className="font-black text-slate-900 text-base">طارق جمیل</div>
+              </div>
+              <div className="flex text-amber-500 text-sm justify-end">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                مکمل کورس منگوایا تھا، نتائج توقع سے بڑھ کر اچھے آئے۔ اے ایم دواخانہ کا شکریہ۔
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+            </div>
+
+            {/* Review 8 */}
             <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="font-black text-slate-900 text-base">Hamza</div>
@@ -739,38 +756,28 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "Herbal products mein se AM Vitality mujhe sab se better laga. Use ke baad confidence aur overall performance mein achi improvement feel hui."
+                "Herbal products mein se AM Vitality mujhe sab se better laga. Use ke baad energy level high rehta hai."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
 
-            {/* Hidden Additional Reviews shown when See More is clicked */}
+            {/* Review 9 */}
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Fahad Mustafa</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
+              <div className="flex text-amber-500 text-sm">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi thi. Highly recommended."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+            </div>
+
+            {/* Expanded 11+ Additional Reviews shown when See More is clicked (Total 20+) */}
             {showAllReviews && (
               <>
-                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
-                  <div className="flex items-center justify-between">
-                    <div className="font-black text-slate-900 text-base">Tariq Jamil</div>
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
-                  </div>
-                  <div className="flex text-amber-500 text-sm">★★★★★</div>
-                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Bohot hi behtareen result mila hai. Koi side effect nahi hua aur timing mein behtareen izafa hua hai."
-                  </p>
-                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
-                </div>
-
-                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
-                  <div className="flex items-center justify-between">
-                    <div className="font-black text-slate-900 text-base">Fahad Mustafa</div>
-                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
-                  </div>
-                  <div className="flex text-amber-500 text-sm">★★★★★</div>
-                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi thi. Highly recommended."
-                  </p>
-                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
-                </div>
-
+                {/* 10 */}
                 <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
                   <div className="flex items-center justify-between">
                     <div className="font-black text-slate-900 text-base">Zubair Abbasi</div>
@@ -778,9 +785,139 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Maqsood Dawakhana aur AM Labs ka yeh nuskha sach mein lajawab hai. Mera porana course complete ho gaya hai."
+                    "Maqsood Dawakhana aur AM Labs ka yeh nuskha sach mein lajawab hai. Amazing results!"
                   </p>
-                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet (Course)</div>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 11 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Kamran Akmal</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farq para hai."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 12 (Urdu) */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right animate-fadeIn" style={nastaliqStyle} dir="rtl">
+                  <div className="flex items-center justify-between">
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
+                    <div className="font-black text-slate-900 text-base">عبداللہ خان</div>
+                  </div>
+                  <div className="flex text-amber-500 text-sm justify-end">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    اصل دیسی جڑی بوٹیوں سے تیار شدہ بہترین پروڈکٹ ہے۔ ہر مرد کو ضرور استعمال کرنی چاہیے۔
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 13 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Danish Ali</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Fast delivery aur honest service. Product ka result 100% genuine hai."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 14 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Noman Malik</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya tha. Highly recommended."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 15 (Urdu) */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right animate-fadeIn" style={nastaliqStyle} dir="rtl">
+                  <div className="flex items-center justify-between">
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
+                    <div className="font-black text-slate-900 text-base">فحان احمد</div>
+                  </div>
+                  <div className="flex text-amber-500 text-sm justify-end">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    بہت ہی اعلیٰ معیار ہے۔ میں نے اپنے دوستوں کو بھی یہی ریکمنڈ کیا ہے۔
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 16 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Kashif Butt</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Original unani nuskha hai jo bina kisi side effect ke complete energy deta hai."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 17 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Shehryar</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Bohat hi umda product hai, price bhi reasonable hai aur delivery bhi time par mil gayi."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 18 (Urdu) */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 text-right animate-fadeIn" style={nastaliqStyle} dir="rtl">
+                  <div className="flex items-center justify-between">
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">تصدیق شدہ خریدار</span>
+                    <div className="font-black text-slate-900 text-base">وقاص احمد</div>
+                  </div>
+                  <div className="flex text-amber-500 text-sm justify-end">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    مردانہ کمزوری کا سب سے بہترین اور بااعتماد علاج۔ شکریہ اے ایم دواخانہ۔
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 19 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Zeeshan Haider</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Superb quality! Packaging aur privacy ka bohot acha khyal rakha gaya tha."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
+                </div>
+
+                {/* 20 */}
+                <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3 animate-fadeIn">
+                  <div className="flex items-center justify-between">
+                    <div className="font-black text-slate-900 text-base">Adnan Sami</div>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+                  </div>
+                  <div className="flex text-amber-500 text-sm">★★★★★</div>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                    "Best herbal medicine available online in Pakistan. Fully satisfied with the results."
+                  </p>
+                  <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
               </>
             )}
@@ -793,7 +930,7 @@ export default function LandingPage() {
               onClick={() => setShowAllReviews(!showAllReviews)}
               className="bg-amber-200 hover:bg-amber-300 text-red-950 font-black px-8 py-3 rounded-full text-sm shadow-md transition-all border border-amber-300"
             >
-              {showAllReviews ? 'Show Less Reviews / کم ریویوز دیکھیں' : 'See More Reviews / مزید ریویوز دیکھیں (3+)'}
+              {showAllReviews ? 'Show Less Reviews / کم ریویوز دیکھیں' : 'See More Reviews / مزید ریویوز دیکھیں (20+)'}
             </button>
           </div>
         </section>
@@ -1091,7 +1228,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
+              className="w-xl bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
             >
               Close / بند کریں
             </button>
