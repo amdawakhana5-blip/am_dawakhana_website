@@ -101,21 +101,6 @@ export default function LandingPage() {
     };
   }, [images.length, extraImages.length]);
 
-  // Image Arrow Controls
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  const handleNextExtraImage = () => {
-    setExtraImageIndex((prev) => (prev + 1) % extraImages.length);
-  };
-  const handlePrevExtraImage = () => {
-    setExtraImageIndex((prev) => (prev === 0 ? extraImages.length - 1 : prev - 1));
-  };
-
   // Secondary Videos Controls
   const toggleVideo1 = () => {
     if (video1Ref.current) {
@@ -335,42 +320,24 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Big Main Image Box + Thumbnail Cards Row */}
+          {/* Right Column: Borderless & Fixed Image Box */}
           <div className="flex flex-col gap-4 w-full">
             
-            {/* Box 1: Main Big Image with Arrows */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl group">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-amber-50 flex items-center justify-center border border-amber-100">
+            {/* Box 1: Main Big Borderless Image Slider */}
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-amber-50">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain p-2 transition-transform duration-500"
+                  className="object-cover w-full h-full transition-transform duration-500"
                   priority
                 />
-
-                {/* Left Arrow */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
-                  title="Previous Image"
-                >
-                  ❮
-                </button>
-
-                {/* Right Arrow */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
-                  title="Next Image"
-                >
-                  ❯
-                </button>
               </div>
 
               {/* Thumbnail Cards Row */}
-              <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
+              <div className="flex gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
                 {images.slice(0, 5).map((img, idx) => (
                   <button
                     key={idx}
@@ -385,39 +352,21 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl group">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-amber-50 flex items-center justify-center border border-amber-100">
+            {/* Box 2: Extra Gallery Borderless Slide */}
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-amber-50">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain p-2 transition-transform duration-500"
+                  className="object-cover w-full h-full transition-transform duration-500"
                   priority
                 />
-
-                {/* Left Arrow */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); handlePrevExtraImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
-                  title="Previous Image"
-                >
-                  ❮
-                </button>
-
-                {/* Right Arrow */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNextExtraImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
-                  title="Next Image"
-                >
-                  ❯
-                </button>
               </div>
 
               {/* Thumbnail Cards Row */}
-              <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
+              <div className="flex gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
@@ -461,7 +410,7 @@ export default function LandingPage() {
                     poster="/1.jpg"
                     onPlay={() => setIsVideo1Playing(true)}
                     onPause={() => setIsVideo1Playing(false)}
-                    className="w-full h-full object-contain bg-black"
+                    className="w-full h-full object-cover bg-black"
                   >
                     <source src="/video1.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -495,7 +444,7 @@ export default function LandingPage() {
                     poster="/2.jpg"
                     onPlay={() => setIsVideo2Playing(true)}
                     onPause={() => setIsVideo2Playing(false)}
-                    className="w-full h-full object-contain bg-black"
+                    className="w-full h-full object-cover bg-black"
                   >
                     <source src="/video2.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -659,7 +608,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Customer Reviews with AM Vitality Tablet Names & See More Feature */}
+        {/* Customer Reviews Section */}
         <section className="mb-12 sm:mb-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl sm:text-3xl font-black text-red-950 uppercase tracking-wider">
