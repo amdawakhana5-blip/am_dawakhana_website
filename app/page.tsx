@@ -191,9 +191,9 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Left-Aligned Multi-Color Gradient Header */}
+      {/* Fully Responsive Left-Aligned Header */}
       <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
-        <div className="max-w-6xl mx-auto flex justify-between items-center gap-3">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3">
           
           <div className="flex items-center gap-3">
             <div className="relative w-11 h-11 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
@@ -219,12 +219,12 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md flex items-center gap-1.5 border border-emerald-400/50 shrink-0"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md flex items-center gap-1.5 border border-emerald-400/50"
               title="WhatsApp Chat"
             >
               <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
@@ -235,7 +235,7 @@ export default function LandingPage() {
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-400/50 shrink-0"
+              className="bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-400/50"
             >
               Order Now
             </a>
@@ -243,6 +243,16 @@ export default function LandingPage() {
 
         </div>
       </header>
+
+      {/* 🚀 ANIMATED URDU SCRIPT TICKER PATTI */}
+      <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-2.5 overflow-hidden shadow-inner border-y border-amber-500/30">
+        <div className="whitespace-nowrap animate-marquee flex items-center gap-8 font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
+          <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
+          <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
+          <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
+          <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
+        </div>
+      </div>
 
       <main className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-10">
         
@@ -328,23 +338,23 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Dedicated Clean Separate Image Boxes & Separate Bottom Sliders */}
+          {/* Right Column: Dedicated Clean Separate Image Boxes & Perfectly Centered Thumbnails */}
           <div className="flex flex-col gap-6 w-full">
             
-            {/* Box 1: Main Big Image Dedicated Box */}
+            {/* Box 1: Main Big Image Dedicated Box (object-cover as requested) */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FFFDF9] flex items-center justify-center border border-amber-200">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FFFDF9] shadow-inner border border-amber-200">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Vitality Tablet View ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full p-2"
+                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
                   priority
                 />
               </div>
 
-              {/* Separate Row for Slider Gallery Thumbnails below the picture box */}
+              {/* Perfectly Centered Row for Slider Gallery Thumbnails */}
               <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
                 {images.map((img, idx) => (
                   <button
@@ -354,26 +364,26 @@ export default function LandingPage() {
                       currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Thumb ${idx + 1}`} fill className="object-contain p-1" />
+                    <Image src={img} alt={`Thumb ${idx + 1}`} fill className="object-cover" />
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Dedicated Box */}
+            {/* Box 2: Extra Gallery Dedicated Box (object-cover as requested) */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FFFDF9] flex items-center justify-center border border-amber-200">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FFFDF9] shadow-inner border border-amber-200">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Vitality Tablet Extra View ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full p-2"
+                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
                   priority
                 />
               </div>
 
-              {/* Separate Row for Extra Gallery Thumbnails below the picture box */}
+              {/* Perfectly Centered Row for Extra Gallery Thumbnails */}
               <div className="flex items-center justify-center gap-3 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
                 {extraImages.map((img, idx) => (
                   <button
@@ -383,7 +393,7 @@ export default function LandingPage() {
                       extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Extra Thumb ${idx + 1}`} fill className="object-contain p-1" />
+                    <Image src={img} alt={`Extra Thumb ${idx + 1}`} fill className="object-cover" />
                   </button>
                 ))}
               </div>
@@ -418,7 +428,7 @@ export default function LandingPage() {
                     poster="/1.jpg"
                     onPlay={() => setIsVideo1Playing(true)}
                     onPause={() => setIsVideo1Playing(false)}
-                    className="w-full h-full object-contain bg-black"
+                    className="w-full h-full object-cover bg-black"
                   >
                     <source src="/video1.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -452,7 +462,7 @@ export default function LandingPage() {
                     poster="/2.jpg"
                     onPlay={() => setIsVideo2Playing(true)}
                     onPause={() => setIsVideo2Playing(false)}
-                    className="w-full h-full object-contain bg-black"
+                    className="w-full h-full object-cover bg-black"
                   >
                     <source src="/video2.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -1228,7 +1238,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-xl bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
+              className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
             >
               Close / بند کریں
             </button>
