@@ -5,14 +5,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, phone, address, quantity } = body;
 
-    const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SHEETS_SCRIPT_URL;
-
-    if (!GOOGLE_SCRIPT_URL) {
-      return NextResponse.json(
-        { error: 'Google Script URL setup nahi hai.' },
-        { status: 500 }
-      );
-    }
+    // Yahan apna direct URL daal do (jaise pehle chal raha tha)
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgxx2TKUrsW54MqBtXS6B4HoLOK0cU0-TAkRH6f-FDsAjA6hMP1IWTWfRjc1Gv8avA/exec";
 
     // Send data directly to Google Sheets
     const response = await fetch(GOOGLE_SCRIPT_URL, {
