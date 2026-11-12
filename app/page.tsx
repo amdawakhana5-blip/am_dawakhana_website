@@ -417,7 +417,7 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Exact Sample Style (Big Main Image Box + Thumbnail Cards Row) */}
+          {/* Right Column: Sample Style (Big Main Image Box + Thumbnail Cards Row) */}
           <div className="flex flex-col gap-4 w-full">
             
             {/* Box 1: Main Big Image with Arrows */}
@@ -518,19 +518,16 @@ export default function LandingPage() {
 
         </section>
 
-        {/* 🎬 9:16 VERTICAL VIDEO CAROUSEL WITH ARROWS */}
+        {/* 🎬 9:16 VERTICAL VIDEO CAROUSEL WITH ARROWS (Cleaned Up) */}
         <section className="mb-12 sm:mb-16">
           <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
             
             <span className="bg-red-100 text-red-700 font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-full uppercase tracking-wider inline-block mb-2">
               Featured Video Presentation
             </span>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-6">
               Product Results & Demonstration
             </h3>
-            <p className="text-slate-600 text-sm mt-1 mb-6 font-bold" style={nastaliqStyle}>
-              اگلی یا پچھلی ویڈیو دیکھنے کے لیے سائیڈ والے تیر (Arrows) پر کلک کریں
-            </p>
 
             <div className="max-w-[280px] sm:max-w-[320px] mx-auto relative px-6">
               <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden border-2 border-red-600 shadow-2xl flex items-center justify-center">
@@ -625,10 +622,6 @@ export default function LandingPage() {
                   />
                 ))}
               </div>
-
-              <p className="text-red-700 font-bold text-xs sm:text-sm mt-2">
-                Video {currentVideoIndex + 1} of 3 (Official Result)
-              </p>
             </div>
           </div>
         </section>
