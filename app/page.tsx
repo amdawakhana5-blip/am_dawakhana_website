@@ -14,13 +14,6 @@ export default function LandingPage() {
   // Custom Dropdown State for Styling
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Touch Swipe States for Image Sliders
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
-
-  const [extraTouchStartX, setExtraTouchStartX] = useState(0);
-  const [extraTouchEndX, setExtraTouchEndX] = useState(0);
-
   // 9:16 Video Carousel States
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
@@ -147,38 +140,6 @@ export default function LandingPage() {
     setExtraImageIndex((prev) => (prev === 0 ? extraImages.length - 1 : prev - 1));
   };
 
-  // Touch handlers for main image slider
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.touches[0].clientX);
-  };
-  const handleTouchEnd = () => {
-    if (touchStartX - touchEndX > 50) {
-      handleNextImage();
-    }
-    if (touchEndX - touchStartX > 50) {
-      handlePrevImage();
-    }
-  };
-
-  // Touch handlers for extra image slider
-  const handleExtraTouchStart = (e: React.TouchEvent) => {
-    setExtraTouchStartX(e.touches[0].clientX);
-  };
-  const handleExtraTouchMove = (e: React.TouchEvent) => {
-    setExtraTouchEndX(e.touches[0].clientX);
-  };
-  const handleExtraTouchEnd = () => {
-    if (extraTouchStartX - extraTouchEndX > 50) {
-      handleNextExtraImage();
-    }
-    if (extraTouchEndX - extraTouchStartX > 50) {
-      handlePrevExtraImage();
-    }
-  };
-
   // 9:16 Slider Controls
   const handleNextVideo = () => {
     videoRefs.forEach((ref) => ref.current?.pause());
@@ -265,33 +226,33 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden selection:bg-emerald-500 selection:text-white pb-28 sm:pb-0">
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden selection:bg-red-500 selection:text-white pb-28 sm:pb-0">
       
-      {/* Top Urgency Banner */}
-      <div className="relative z-50 bg-gradient-to-r from-emerald-800 via-amber-600 to-emerald-800 text-white text-center py-2.5 px-2 sm:px-4 font-bold text-[11px] sm:text-sm shadow-md">
+      {/* Top Urgency Banner with Red & Emerald Mix */}
+      <div className="relative z-50 bg-gradient-to-r from-red-700 via-amber-600 to-emerald-800 text-white text-center py-2.5 px-2 sm:px-4 font-bold text-[11px] sm:text-sm shadow-md">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 flex-wrap">
           <div className="flex items-center gap-1.5">
-            <span className="bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-full text-[9px] sm:text-xs tracking-wider animate-bounce shadow">
-              DEAL
+            <span className="bg-red-600 text-white font-black px-2 py-0.5 rounded-full text-[9px] sm:text-xs tracking-wider animate-bounce shadow">
+              HOT DEAL
             </span>
             <span className="font-extrabold text-amber-100 text-[11px] sm:text-sm">50% OFF + Free Home Delivery</span>
           </div>
           
-          <div className="flex items-center gap-1 bg-emerald-950/90 px-2.5 py-0.5 rounded-full text-amber-300 font-mono text-[11px] sm:text-sm border border-amber-400/50 shadow-inner">
+          <div className="flex items-center gap-1 bg-slate-950/90 px-2.5 py-0.5 rounded-full text-amber-300 font-mono text-[11px] sm:text-sm border border-red-500/50 shadow-inner">
             <span className="text-slate-100 font-sans font-bold text-[10px] sm:text-xs">Waqt Baqi:</span>
-            <span className="font-bold text-white bg-emerald-800 px-1.5 py-0.5 rounded border border-amber-400/30">0{timeLeft.hours}</span>:
-            <span className="font-bold text-white bg-emerald-800 px-1.5 py-0.5 rounded border border-amber-400/30">{timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}</span>:
-            <span className="font-bold text-white bg-emerald-800 px-1.5 py-0.5 rounded border border-amber-400/30">{timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}</span>
+            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">0{timeLeft.hours}</span>:
+            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">{timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}</span>:
+            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">{timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}</span>
           </div>
         </div>
       </div>
 
-      {/* Fully Responsive Header */}
-      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 shadow-sm">
+      {/* Styled Header with Red Accent */}
+      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b-2 border-red-600/30 bg-white/95 backdrop-blur-md sticky top-0 shadow-sm">
         <div className="max-w-6xl mx-auto flex justify-between items-center gap-2">
           
           <div className="flex items-center gap-2 sm:gap-3.5">
-            <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-emerald-600 bg-emerald-50 shadow-md shrink-0">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-600 bg-red-50 shadow-md shrink-0">
               <Image
                 src="/logo.png"
                 alt="AM Dawakhana Logo"
@@ -302,10 +263,10 @@ export default function LandingPage() {
               />
             </div>
             <div>
-              <div className="text-xs sm:text-xl font-black text-emerald-900 tracking-wide leading-tight">
+              <div className="text-xs sm:text-xl font-black text-red-700 tracking-wide leading-tight">
                 AM Unani & Herbal Labs
               </div>
-              <div className="text-sm sm:text-lg text-amber-700 font-extrabold mt-0.5" style={nastaliqStyle} dir="rtl">
+              <div className="text-sm sm:text-lg text-emerald-800 font-extrabold mt-0.5" style={nastaliqStyle} dir="rtl">
                 اے ایم دواخانہ
               </div>
             </div>
@@ -327,7 +288,7 @@ export default function LandingPage() {
 
             <a
               href="#order-form"
-              className="bg-emerald-700 hover:bg-emerald-800 text-white font-black px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase shrink-0"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase shrink-0 border border-red-400/50"
             >
               Order Karein
             </a>
@@ -342,28 +303,28 @@ export default function LandingPage() {
         <section className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center mb-12 sm:mb-16">
           
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 font-extrabold px-3.5 py-1.5 rounded-full text-xs shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+            <div className="inline-flex items-center gap-2 bg-red-50 border border-red-300 text-red-700 font-extrabold px-3.5 py-1.5 rounded-full text-xs shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
               <span>100% Khalis Aur Mehfooz Nuskha</span>
               <span>•</span>
-              <span style={nastaliqStyle} className="text-emerald-900">20 ٹیبلٹس</span>
+              <span style={nastaliqStyle} className="text-red-900">20 ٹیبلٹس</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-slate-200 pb-5">
-              <div className="text-left border-l-4 border-emerald-600 pl-3.5 space-y-1">
+              <div className="text-left border-l-4 border-red-600 pl-3.5 space-y-1">
                 <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-wide">
                   Taqat Ka Khazana
                 </h1>
-                <p className="text-emerald-700 font-black text-xs sm:text-sm tracking-wide">
+                <p className="text-red-700 font-black text-xs sm:text-sm tracking-wide">
                   Mardana Quwwat Ka Asli Hal
                 </p>
               </div>
 
-              <div className="text-right border-r-4 border-emerald-600 pr-3.5 space-y-1" style={nastaliqStyle} dir="rtl">
-                <h2 className="text-2xl sm:text-4xl font-black text-emerald-900">
+              <div className="text-right border-r-4 border-red-600 pr-3.5 space-y-1" style={nastaliqStyle} dir="rtl">
+                <h2 className="text-2xl sm:text-4xl font-black text-slate-900">
                   طاقت کا خزانہ
                 </h2>
-                <p className="text-amber-700 font-extrabold text-base sm:text-xl">
+                <p className="text-red-700 font-extrabold text-base sm:text-xl">
                   مردانہ قوت کا بااعتماد حل
                 </p>
               </div>
@@ -372,10 +333,10 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
               <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-left shadow-md hover:shadow-lg transition-all">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-emerald-800 font-black text-[10px] uppercase tracking-widest bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                  <span className="text-red-700 font-black text-[10px] uppercase tracking-widest bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
                     Product Overview
                   </span>
-                  <span className="text-amber-500">✨</span>
+                  <span className="text-red-500">🔥</span>
                 </div>
                 <p className="text-slate-700 font-medium text-xs sm:text-sm leading-relaxed">
                   AM Vitality Tablet is a master blend of rare Himalayan herbs designed to deliver absolute vigor, peak stamina, and enduring performance.
@@ -384,8 +345,8 @@ export default function LandingPage() {
               
               <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-right shadow-md hover:shadow-lg transition-all" style={nastaliqStyle} dir="rtl">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-emerald-600">🌿</span>
-                  <span className="text-emerald-800 font-black text-xs bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+                  <span className="text-red-600">🌿</span>
+                  <span className="text-red-700 font-black text-xs bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
                     پروڈکٹ کا تعارف
                   </span>
                 </div>
@@ -399,7 +360,7 @@ export default function LandingPage() {
             <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-md space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-100">
                 <div className="text-left space-y-1">
-                  <div className="text-emerald-800 font-black text-xs sm:text-sm flex items-center gap-1.5">
+                  <div className="text-red-700 font-black text-xs sm:text-sm flex items-center gap-1.5">
                     <span>⚡</span> Sawaal: Asar kab tak hota hai?
                   </div>
                   <p className="text-slate-600 text-xs font-semibold pl-5">
@@ -408,7 +369,7 @@ export default function LandingPage() {
                 </div>
 
                 <div className="text-right space-y-1" style={nastaliqStyle} dir="rtl">
-                  <div className="text-emerald-800 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
+                  <div className="text-red-700 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
                     <span>⚡</span> <span>سوال: اثر کب تک ہوتا ہے؟</span>
                   </div>
                   <p className="text-slate-800 text-sm sm:text-base font-bold pr-5">
@@ -419,7 +380,7 @@ export default function LandingPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="text-left space-y-1">
-                  <div className="text-emerald-800 font-black text-xs sm:text-sm flex items-center gap-1.5">
+                  <div className="text-red-700 font-black text-xs sm:text-sm flex items-center gap-1.5">
                     <span>🛡️</span> Sawaal: Koi nuqsaan hai?
                   </div>
                   <p className="text-slate-600 text-xs font-semibold pl-5">
@@ -428,7 +389,7 @@ export default function LandingPage() {
                 </div>
 
                 <div className="text-right space-y-1" style={nastaliqStyle} dir="rtl">
-                  <div className="text-emerald-800 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
+                  <div className="text-red-700 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
                     <span>🛡️</span> <span>سوال: کیا کوئی نقصان ہے؟</span>
                   </div>
                   <p className="text-slate-800 text-sm sm:text-base font-bold pr-5">
@@ -441,32 +402,27 @@ export default function LandingPage() {
             {/* Badges */}
             <div className="grid grid-cols-3 gap-2">
               <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-xs sm:text-sm">20 Tablets</div>
+                <div className="text-red-700 font-extrabold text-xs sm:text-sm">20 Tablets</div>
                 <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>20 ٹیبلٹس</div>
               </div>
               <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-xs sm:text-sm">100% Herbal</div>
+                <div className="text-red-700 font-extrabold text-xs sm:text-sm">100% Herbal</div>
                 <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>بغیر نقصان</div>
               </div>
               <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-xs sm:text-sm">Free Delivery</div>
+                <div className="text-red-700 font-extrabold text-xs sm:text-sm">Free Delivery</div>
                 <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>مفت ڈلیوری</div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Separate Picture Boxes with Arrows, Auto-Slider & Touch Swipe */}
-          <div className="flex flex-col gap-6 w-full">
+          {/* Right Column: Exact Sample Style (Big Main Image Box + Thumbnail Cards Row) */}
+          <div className="flex flex-col gap-4 w-full">
             
-            {/* Box 1: Main Gallery Slide */}
-            <div 
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              className="relative w-full bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 shadow-lg group"
-            >
-              <div className="relative w-full aspect-[4/3] max-h-[400px] overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center border border-slate-100">
+            {/* Box 1: Main Big Image with Arrows */}
+            <div className="relative w-full bg-white border-2 border-red-200 rounded-3xl p-4 shadow-xl group">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-100">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
@@ -479,7 +435,7 @@ export default function LandingPage() {
                 {/* Left Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Previous Image"
                 >
                   ❮
@@ -488,34 +444,32 @@ export default function LandingPage() {
                 {/* Right Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Next Image"
                 >
                   ❯
                 </button>
               </div>
 
-              <div className="flex justify-center gap-1.5 mt-3.5">
-                {images.map((_, idx) => (
+              {/* Sample-Style Thumbnail Cards Row */}
+              <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
+                {images.slice(0, 5).map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      currentImageIndex === idx ? 'w-6 bg-emerald-600' : 'w-2 bg-slate-300'
+                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                      currentImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
                     }`}
-                  />
+                  >
+                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                  </button>
                 ))}
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide */}
-            <div 
-              onTouchStart={handleExtraTouchStart}
-              onTouchMove={handleExtraTouchMove}
-              onTouchEnd={handleExtraTouchEnd}
-              className="relative w-full bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 shadow-lg group"
-            >
-              <div className="relative w-full aspect-[4/3] max-h-[350px] overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center border border-slate-100">
+            {/* Box 2: Extra Gallery Slide (Thumbnails Row) */}
+            <div className="relative w-full bg-white border-2 border-red-200 rounded-3xl p-4 shadow-xl group">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-100">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
@@ -528,7 +482,7 @@ export default function LandingPage() {
                 {/* Left Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrevExtraImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Previous Image"
                 >
                   ❮
@@ -537,22 +491,25 @@ export default function LandingPage() {
                 {/* Right Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNextExtraImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Next Image"
                 >
                   ❯
                 </button>
               </div>
 
-              <div className="flex justify-center gap-1.5 mt-3.5">
-                {extraImages.map((_, idx) => (
+              {/* Sample-Style Thumbnail Cards Row */}
+              <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
+                {extraImages.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      extraImageIndex === idx ? 'w-6 bg-emerald-600' : 'w-2 bg-slate-300'
+                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                      extraImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
                     }`}
-                  />
+                  >
+                    <Image src={img} alt={`Extra Thumbnail ${idx + 1}`} fill className="object-cover" />
+                  </button>
                 ))}
               </div>
             </div>
@@ -565,7 +522,7 @@ export default function LandingPage() {
         <section className="mb-12 sm:mb-16">
           <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
             
-            <span className="bg-emerald-100 text-emerald-800 font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-full uppercase tracking-wider inline-block mb-2">
+            <span className="bg-red-100 text-red-700 font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-full uppercase tracking-wider inline-block mb-2">
               Featured Video Presentation
             </span>
             <h3 className="text-xl sm:text-2xl font-black text-slate-900">
@@ -576,7 +533,7 @@ export default function LandingPage() {
             </p>
 
             <div className="max-w-[280px] sm:max-w-[320px] mx-auto relative px-6">
-              <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden border-2 border-emerald-600 shadow-2xl flex items-center justify-center">
+              <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden border-2 border-red-600 shadow-2xl flex items-center justify-center">
                 
                 {/* Video 1 */}
                 <video
@@ -628,7 +585,7 @@ export default function LandingPage() {
                     onClick={toggleCurrentVideo}
                     className="absolute inset-0 bg-black/40 flex items-center justify-center z-20 cursor-pointer group hover:bg-black/20 transition-all"
                   >
-                    <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white transform group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white transform group-hover:scale-110 transition-transform">
                       <svg className="w-8 h-8 fill-white ml-1" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
@@ -639,7 +596,7 @@ export default function LandingPage() {
 
               <button
                 onClick={(e) => { e.stopPropagation(); handlePrevVideo(); }}
-                className="absolute left-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-emerald-600 hover:text-white text-emerald-800 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
+                className="absolute left-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-red-600 hover:text-white text-red-700 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
                 title="Pichli Video"
               >
                 ❮
@@ -647,7 +604,7 @@ export default function LandingPage() {
 
               <button
                 onClick={(e) => { e.stopPropagation(); handleNextVideo(); }}
-                className="absolute right-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-emerald-600 hover:text-white text-emerald-800 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
+                className="absolute right-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-red-600 hover:text-white text-red-700 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
                 title="Agli Video"
               >
                 ❯
@@ -663,13 +620,13 @@ export default function LandingPage() {
                       setCurrentVideoIndex(idx);
                     }}
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      currentVideoIndex === idx ? 'w-8 bg-emerald-600' : 'w-2 bg-slate-300'
+                      currentVideoIndex === idx ? 'w-8 bg-red-600' : 'w-2 bg-slate-300'
                     }`}
                   />
                 ))}
               </div>
 
-              <p className="text-emerald-800 font-bold text-xs sm:text-sm mt-2">
+              <p className="text-red-700 font-bold text-xs sm:text-sm mt-2">
                 Video {currentVideoIndex + 1} of 3 (Official Result)
               </p>
             </div>
@@ -712,7 +669,7 @@ export default function LandingPage() {
                       onClick={toggleVideo1}
                       className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer group-hover:bg-black/20 transition-all"
                     >
-                      <div className="w-14 h-14 bg-emerald-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
+                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
                         <svg className="w-7 h-7 fill-white ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
@@ -720,7 +677,7 @@ export default function LandingPage() {
                     </div>
                   )}
                 </div>
-                <p className="text-emerald-900 font-extrabold text-sm sm:text-base mt-3">
+                <p className="text-red-800 font-extrabold text-sm sm:text-base mt-3">
                   Official Introduction & Results
                 </p>
               </div>
@@ -746,7 +703,7 @@ export default function LandingPage() {
                       onClick={toggleVideo2}
                       className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer group-hover:bg-black/20 transition-all"
                     >
-                      <div className="w-14 h-14 bg-emerald-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
+                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
                         <svg className="w-7 h-7 fill-white ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
@@ -754,7 +711,7 @@ export default function LandingPage() {
                     </div>
                   )}
                 </div>
-                <p className="text-emerald-900 font-extrabold text-sm sm:text-base mt-3">
+                <p className="text-red-800 font-extrabold text-sm sm:text-base mt-3">
                   Unboxing & Customer Feedback
                 </p>
               </div>
@@ -767,11 +724,11 @@ export default function LandingPage() {
         <section className="mb-12 sm:mb-16">
           <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg">
             <div className="text-center mb-6 sm:mb-8">
-              <span className="bg-emerald-100 text-emerald-800 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
+              <span className="bg-red-100 text-red-700 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
                 Khaas Unani Nuskha
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-900 mt-3">
-                Key Ingredients / <span style={nastaliqStyle} className="text-emerald-700">نایاب دیسی اجزاء کی تفصیل</span>
+                Key Ingredients / <span style={nastaliqStyle} className="text-red-700">نایاب دیسی اجزاء کی تفصیل</span>
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm mt-1.5 font-semibold">
                 Har tablet mein shamil 12 behtareen qudrati aur kamil ajza jo aap ko dein mukammal quwwat.
@@ -779,52 +736,52 @@ export default function LandingPage() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Zafran (زعفران)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Zafran (زعفران)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Energy & Blood Circulation</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Salab Misri (ثعلب مصری)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Salab Misri (ثعلب مصری)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Stamina & Muscle Strength</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Shilajit (شیلاجیت)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Shilajit (شیلاجیت)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Pure Himalayan Mineral Tonic</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Akarkara (عقرقرحا)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Akarkara (عقرقرحا)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Nerve Stimulation & Josh</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Kasturi (کستوری)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Kasturi (کستوری)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Maximum Strength Booster</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Jund Bedastar (جند بدستر)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Jund Bedastar (جند بدستر)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Physical Power & Vigor</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Asgandh (اسگندھ ناگوری)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Asgandh (اسگندھ ناگوری)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Stress Relief & Stamina</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Maghaz Chilgoza (مغز جلغوزہ)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Maghaz Chilgoza (مغز جلغوزہ)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Natural Body Warmth</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Tukhm E Rehan (تخم ریحان)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Tukhm E Rehan (تخم ریحان)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Cooling & Energy Balance</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Darchini (دارچینی)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Darchini (دارچینی)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Metabolism & Circulation</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Jaifal & Javitri (جائفل و جوتری)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Jaifal & Javitri (جائفل و جوتری)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Vitality & Performance</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-emerald-500 transition-all shadow-sm">
-                <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Kushta Tilla (کشتہ طلا)</div>
+              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
+                <div className="text-red-700 font-extrabold text-sm sm:text-base">Kushta Tilla (کشتہ طلا)</div>
                 <div className="text-slate-500 text-[11px] font-medium">Ultimate Strength Formula</div>
               </div>
             </div>
@@ -837,30 +794,30 @@ export default function LandingPage() {
             <h3 className="text-xl sm:text-3xl font-black text-slate-900">
               Why Choose AM Dawakhana?
             </h3>
-            <p className="text-emerald-700 text-base sm:text-xl mt-1 font-bold" style={nastaliqStyle} dir="rtl">
+            <p className="text-red-700 text-base sm:text-xl mt-1 font-bold" style={nastaliqStyle} dir="rtl">
               اے ایم دواخانہ ہی کیوں منتخب کریں؟
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-emerald-500 transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
               <div className="text-3xl">🌿</div>
-              <div className="text-emerald-800 font-extrabold text-sm sm:text-base">100% Organic</div>
+              <div className="text-red-700 font-extrabold text-sm sm:text-base">100% Organic</div>
               <p className="text-slate-600 text-xs font-medium">Pure Herbal Formula</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-emerald-500 transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
               <div className="text-3xl">⚡</div>
-              <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Fast Action</div>
+              <div className="text-red-700 font-extrabold text-sm sm:text-base">Fast Action</div>
               <p className="text-slate-600 text-xs font-medium">Asar 1-2 Ghante Mein</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-emerald-500 transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
               <div className="text-3xl">📦</div>
-              <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Discreet Packing</div>
+              <div className="text-red-700 font-extrabold text-sm sm:text-base">Discreet Packing</div>
               <p className="text-slate-600 text-xs font-medium">Full Raazdaari Ke Saath</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-emerald-500 transition-all shadow-sm">
+            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
               <div className="text-3xl">🚚</div>
-              <div className="text-emerald-800 font-extrabold text-sm sm:text-base">Free Delivery</div>
+              <div className="text-red-700 font-extrabold text-sm sm:text-base">Free Delivery</div>
               <div className="text-slate-600 text-xs font-medium">Cash On Delivery</div>
             </div>
           </div>
@@ -868,33 +825,33 @@ export default function LandingPage() {
 
         {/* Pricing Packages Box */}
         <section className="bg-white border border-slate-200 text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-10 mb-12 sm:mb-16 text-center relative overflow-hidden shadow-lg">
-          <div className="inline-block bg-amber-500 text-slate-950 font-black text-xs px-4 py-1.5 rounded-full mb-3 shadow-sm uppercase tracking-wider animate-pulse">
+          <div className="inline-block bg-red-600 text-white font-black text-xs px-4 py-1.5 rounded-full mb-3 shadow-sm uppercase tracking-wider animate-pulse">
             Khaas Riayat Offer
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black mb-2 text-slate-900">
             AM Dawakhana Price Packages
           </h2>
-          <p className="text-emerald-700 text-base sm:text-xl mb-6 font-bold" style={nastaliqStyle} dir="rtl">
+          <p className="text-red-700 text-base sm:text-xl mb-6 font-bold" style={nastaliqStyle} dir="rtl">
             قیمت کی تفصیلات - پورے پاکستان میں مفت ہوم ڈیلیوری
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto">
             <div className="bg-slate-50 border border-slate-200 p-5 sm:p-6 rounded-2xl text-center shadow-sm">
               <div className="text-slate-800 font-extrabold text-sm sm:text-base">1 Bottle (20 Tablets)</div>
-              <div className="text-emerald-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">ایک بوتل (20 ٹیبلٹس)</div>
-              <div className="text-emerald-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 2,299</div>
+              <div className="text-red-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">ایک بوتل (20 ٹیبلٹس)</div>
+              <div className="text-red-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 2,299</div>
               <div className="text-[11px] sm:text-xs text-slate-500 font-semibold">Free Delivery Included</div>
             </div>
 
-            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-600 p-5 sm:p-6 rounded-2xl text-center shadow-md relative">
-              <div className="absolute -top-3.5 right-3 sm:right-4 bg-amber-500 text-slate-950 font-black text-[10px] sm:text-xs px-3.5 py-1 rounded-full shadow-sm">
+            <div className="bg-gradient-to-br from-red-50 to-amber-50 border-2 border-red-600 p-5 sm:p-6 rounded-2xl text-center shadow-md relative">
+              <div className="absolute -top-3.5 right-3 sm:right-4 bg-red-600 text-white font-black text-[10px] sm:text-xs px-3.5 py-1 rounded-full shadow-sm">
                 Bachat Offer
               </div>
-              <div className="text-emerald-900 font-extrabold text-sm sm:text-base">2 Bottles (40 Tablets)</div>
-              <div className="text-emerald-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">دو بوتلیں (40 ٹیبلٹس - مکمل کورس)</div>
-              <div className="text-emerald-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 4,400</div>
-              <div className="text-[11px] sm:text-xs text-emerald-800 font-bold">Special Discount + Free Delivery</div>
+              <div className="text-red-900 font-extrabold text-sm sm:text-base">2 Bottles (40 Tablets)</div>
+              <div className="text-red-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">دو بوتلیں (40 ٹیبلٹس - مکمل کورس)</div>
+              <div className="text-red-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 4,400</div>
+              <div className="text-[11px] sm:text-xs text-red-800 font-bold">Special Discount + Free Delivery</div>
             </div>
           </div>
         </section>
@@ -902,7 +859,7 @@ export default function LandingPage() {
         {/* Customer Reviews */}
         <section className="mb-12 sm:mb-16">
           <div className="text-center mb-6">
-            <h3 className="text-lg sm:text-2xl font-black text-emerald-800 uppercase tracking-wider">
+            <h3 className="text-lg sm:text-2xl font-black text-red-700 uppercase tracking-wider">
               Customer Reviews & Ratings / کسٹمرز کی رائے
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 font-semibold">100% Mutmaeen Sarfeen Across Pakistan (4.9 / 5.0 Star Rating)</p>
@@ -912,27 +869,27 @@ export default function LandingPage() {
             <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 shadow-sm">
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">"Bohot zabardast result hai. 1 se 2 ghante mein asar mehsoos hua. Highly recommended!"</p>
-              <div className="text-[11px] text-emerald-800 font-bold">— Tariq Khan (Lahore)</div>
+              <div className="text-[11px] text-red-700 font-bold">— Tariq Khan (Lahore)</div>
             </div>
             <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 text-right shadow-sm" style={nastaliqStyle} dir="rtl">
               <div className="flex justify-end text-amber-500 text-sm">★★★★★</div>
               <p className="text-sm sm:text-base text-slate-800 font-bold">"اے ایم دواخانہ کی پروڈکٹ نے مایوس نہیں کیا۔ بہت ہی شاندار اور قدرتی رزلٹ ہے۔"</p>
-              <div className="text-xs text-emerald-800 font-bold">— محمد عثمان (کراچی)</div>
+              <div className="text-xs text-red-700 font-bold">— محمد عثمان (کراچی)</div>
             </div>
             <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 shadow-sm">
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">"Zero nuqsaan hai. Delivery bhi bohot fast aur secret packing mein mili."</p>
-              <div className="text-[11px] text-emerald-800 font-bold">— Kamran Ahmed (Rawalpindi)</div>
+              <div className="text-[11px] text-red-700 font-bold">— Kamran Ahmed (Rawalpindi)</div>
             </div>
           </div>
         </section>
 
         {/* Order Form Section */}
         <section id="order-form" className="max-w-xl mx-auto">
-          <div className="bg-white border-2 border-emerald-600/40 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-xl relative">
+          <div className="bg-white border-2 border-red-600/40 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-xl relative">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-3xl font-black text-slate-900">
-                Order Form / <span style={nastaliqStyle} className="text-emerald-700">آرڈر فارم</span>
+                Order Form / <span style={nastaliqStyle} className="text-red-700">آرڈر فارم</span>
               </h2>
               <p className="text-slate-600 text-sm sm:text-lg mt-2 font-bold" style={nastaliqStyle} dir="rtl">
                 اپنی تفصیلات درج کریں، ہم آپ سے تصدیق کے لیے رابطہ کریں گے۔
@@ -943,7 +900,7 @@ export default function LandingPage() {
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Full Name</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-emerald-800 text-sm">پورا نام *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">پورا نام *</span>
                 </label>
                 <input
                   type="text"
@@ -951,14 +908,14 @@ export default function LandingPage() {
                   placeholder="Apna poora naam likhein / اپنا نام لکھیں"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Mobile / WhatsApp Number</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-emerald-800 text-sm">موبائل نمبر *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">موبائل نمبر *</span>
                 </label>
                 <input
                   type="tel"
@@ -966,14 +923,14 @@ export default function LandingPage() {
                   placeholder="03XXXXXXXXX"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Complete Address & City</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-emerald-800 text-sm">مکمل پتہ اور شہر کا نام *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">مکمل پتہ اور شہر کا نام *</span>
                 </label>
                 <textarea
                   required
@@ -981,7 +938,7 @@ export default function LandingPage() {
                   placeholder="House/Shop No, Street, Area, City"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
                 ></textarea>
               </div>
 
@@ -989,31 +946,31 @@ export default function LandingPage() {
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Select Deal / Package</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-emerald-800 text-sm">پیکج منتخب کریں *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">پیکج منتخب کریں *</span>
                 </label>
 
                 <div className="relative">
                   <div 
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="w-full bg-slate-50 border-2 border-emerald-600/60 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-emerald-900 font-black cursor-pointer flex justify-between items-center shadow-sm hover:border-emerald-600 transition-all"
+                    className="w-full bg-slate-50 border-2 border-red-600/60 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-red-900 font-black cursor-pointer flex justify-between items-center shadow-sm hover:border-red-600 transition-all"
                   >
                     <span className="truncate pr-2">{formData.quantity}</span>
-                    <span className={`text-emerald-700 transform transition-transform duration-300 text-lg ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}>
+                    <span className={`text-red-700 transform transition-transform duration-300 text-lg ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}>
                       ▼
                     </span>
                   </div>
 
                   {isDropdownOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-emerald-600 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-xl">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-red-600 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-xl">
                       <div 
                         onClick={() => {
                           setFormData({ ...formData, quantity: '1 Bottle (20 Tablets) - Rs. 2,299' });
                           setIsDropdownOpen(false);
                         }}
-                        className="px-4 py-3.5 text-xs sm:text-sm text-slate-800 font-bold hover:bg-emerald-600 hover:text-white cursor-pointer border-b border-slate-100 transition-all flex items-center justify-between"
+                        className="px-4 py-3.5 text-xs sm:text-sm text-slate-800 font-bold hover:bg-red-600 hover:text-white cursor-pointer border-b border-slate-100 transition-all flex items-center justify-between"
                       >
                         <span>1 Bottle (20 Tablets) - Rs. 2,299</span>
-                        <span className="text-[10px] bg-emerald-100 px-2 py-0.5 rounded text-emerald-800 font-mono">Free Delivery</span>
+                        <span className="text-[10px] bg-red-100 px-2 py-0.5 rounded text-red-800 font-mono">Free Delivery</span>
                       </div>
 
                       <div 
@@ -1021,7 +978,7 @@ export default function LandingPage() {
                           setFormData({ ...formData, quantity: '2 Bottles (40 Tablets) - Rs. 4,400' });
                           setIsDropdownOpen(false);
                         }}
-                        className="px-4 py-3.5 text-xs sm:text-sm text-emerald-900 font-black hover:bg-emerald-600 hover:text-white cursor-pointer transition-all flex items-center justify-between"
+                        className="px-4 py-3.5 text-xs sm:text-sm text-red-900 font-black hover:bg-red-600 hover:text-white cursor-pointer transition-all flex items-center justify-between"
                       >
                         <span>2 Bottles (40 Tablets) - Rs. 4,400</span>
                         <span className="text-[10px] bg-amber-500 text-slate-950 px-2 py-0.5 rounded font-extrabold">Bachat Offer</span>
@@ -1034,7 +991,7 @@ export default function LandingPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider"
+                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider border border-red-400/50"
               >
                 {loading ? 'Submitting...' : 'CONFIRM ORDER NOW / آرڈر کی تصدیق کریں'}
               </button>
@@ -1046,16 +1003,16 @@ export default function LandingPage() {
 
       {/* 🔔 LIVE RECENT ORDER TOAST POPUP */}
       {showToast && (
-        <div className="fixed bottom-24 sm:bottom-6 left-4 z-50 bg-white border-2 border-emerald-600 text-slate-900 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 transition-all duration-500 max-w-xs animate-pulse">
-          <div className="w-10 h-10 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center shrink-0 shadow">
+        <div className="fixed bottom-24 sm:bottom-6 left-4 z-50 bg-white border-2 border-red-600 text-slate-900 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 transition-all duration-500 max-w-xs animate-pulse">
+          <div className="w-10 h-10 rounded-full bg-red-600 text-white font-black flex items-center justify-center shrink-0 shadow">
             📦
           </div>
           <div>
-            <p className="text-xs font-bold text-emerald-800">Naya Order Moosool Hua!</p>
+            <p className="text-xs font-bold text-red-700">Naya Order Moosool Hua!</p>
             <p className="text-xs text-slate-700 font-semibold">
-              <strong className="text-slate-900">{recentOrder.name}</strong> ne <span className="text-emerald-700">{recentOrder.city}</span> se order kiya.
+              <strong className="text-slate-900">{recentOrder.name}</strong> ne <span className="text-red-700">{recentOrder.city}</span> se order kiya.
             </p>
-            <span className="text-[10px] text-emerald-600">{recentOrder.time}</span>
+            <span className="text-[10px] text-red-600">{recentOrder.time}</span>
           </div>
         </div>
       )}
@@ -1077,19 +1034,19 @@ export default function LandingPage() {
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-white/95 border-t border-slate-200 backdrop-blur-md">
         <a
           href="#order-form"
-          className="block text-center w-full bg-emerald-700 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase"
+          className="block text-center w-full bg-red-600 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-400"
         >
           ⚡ ORDER NOW (CASH ON DELIVERY)
         </a>
       </div>
 
-      {/* Luxury Footer */}
-      <footer className="relative z-10 border-t border-slate-200 bg-white pt-12 pb-16 sm:pb-8 text-slate-700 mt-16 shadow-inner">
+      {/* Luxury Footer with Red Accent */}
+      <footer className="relative z-10 border-t-2 border-red-600/30 bg-white pt-12 pb-16 sm:pb-8 text-slate-700 mt-16 shadow-inner">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full border border-emerald-600 overflow-hidden bg-emerald-50">
+              <div className="relative w-10 h-10 rounded-full border border-red-600 overflow-hidden bg-red-50">
                 <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
               </div>
               <h4 className="font-black text-slate-900 text-lg sm:text-xl">AM Unani & Herbal Labs</h4>
@@ -1100,21 +1057,21 @@ export default function LandingPage() {
           </div>
 
           <div className="space-y-3 text-left">
-            <h5 className="font-black text-emerald-800 text-sm uppercase tracking-wider">Quality Assurance</h5>
+            <h5 className="font-black text-red-700 text-sm uppercase tracking-wider">Quality Assurance</h5>
             <ul className="space-y-2 text-xs font-semibold text-slate-700">
-              <li className="flex items-center gap-2"><span className="text-emerald-600">✓</span> 100% Pure Himalayan Herbs</li>
-              <li className="flex items-center gap-2"><span className="text-emerald-600">✓</span> Zero Chemical Side Effects</li>
-              <li className="flex items-center gap-2"><span className="text-emerald-600">✓</span> Free Discreet Delivery Across Pakistan</li>
+              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> 100% Pure Himalayan Herbs</li>
+              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> Zero Chemical Side Effects</li>
+              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> Free Discreet Delivery Across Pakistan</li>
             </ul>
           </div>
 
           <div className="space-y-3 text-right" style={nastaliqStyle} dir="rtl">
-            <h5 className="font-black text-emerald-800 text-xl">اے ایم دواخانہ</h5>
+            <h5 className="font-black text-red-700 text-xl">اے ایم دواخانہ</h5>
             <p className="text-sm text-slate-700 font-bold">
               اعتماد، صحت اور قدرت کا بہترین امتزاج۔ 100٪ دیسی اور محفوظ نسخہ جات۔
             </p>
             <div className="pt-2">
-              <span className="inline-block bg-slate-100 border border-slate-200 text-emerald-800 text-xs px-3 py-1 rounded-lg font-mono">
+              <span className="inline-block bg-slate-100 border border-slate-200 text-red-700 text-xs px-3 py-1 rounded-lg font-mono">
                 📞 Help Desk: Cash on Delivery Available
               </span>
             </div>
@@ -1124,16 +1081,16 @@ export default function LandingPage() {
 
         <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-100 text-center flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500 font-semibold">
           <p>© 2026 AM Unani & Herbal Labs. All Rights Reserved.</p>
-          <p className="text-emerald-700">Pure Herbal Mastery</p>
+          <p className="text-red-700 font-bold">Pure Herbal Mastery</p>
         </div>
       </footer>
 
       {/* ❓ STEP 1: ORDER CONFIRMATION MODAL */}
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-emerald-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-6 relative">
+          <div className="bg-white border-2 border-red-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-6 relative">
             
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-600 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-100 border-2 border-red-600 text-red-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md">
               🛒
             </div>
 
@@ -1141,16 +1098,16 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Confirm Your Order?
               </h3>
-              <h4 className="text-lg sm:text-2xl font-bold text-emerald-800" style={nastaliqStyle} dir="rtl">
+              <h4 className="text-lg sm:text-2xl font-bold text-red-700" style={nastaliqStyle} dir="rtl">
                 کیا آپ آرڈر کی تصدیق کرنا چاہتے ہیں؟
               </h4>
             </div>
 
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-700 text-left space-y-2">
-              <p><strong className="text-emerald-800">Naam:</strong> {formData.name}</p>
-              <p><strong className="text-emerald-800">Number:</strong> {formData.phone}</p>
-              <p><strong className="text-emerald-800">Package:</strong> {formData.quantity}</p>
-              <p><strong className="text-emerald-800">Address:</strong> {formData.address}</p>
+              <p><strong className="text-red-700">Naam:</strong> {formData.name}</p>
+              <p><strong className="text-red-700">Number:</strong> {formData.phone}</p>
+              <p><strong className="text-red-700">Package:</strong> {formData.quantity}</p>
+              <p><strong className="text-red-700">Address:</strong> {formData.address}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
@@ -1165,7 +1122,7 @@ export default function LandingPage() {
               <button
                 type="button"
                 onClick={handleFinalOrderConfirm}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm"
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm"
               >
                 Haan / تصدیق کریں
               </button>
@@ -1178,9 +1135,9 @@ export default function LandingPage() {
       {/* 🎉 STEP 2: ORDER SUCCESS POPUP */}
       {showSuccessPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-emerald-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
+          <div className="bg-white border-2 border-red-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
             
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-600 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md animate-bounce">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md animate-bounce">
               ✓
             </div>
 
@@ -1188,17 +1145,17 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Order Confirmed!
               </h3>
-              <h4 className="text-xl sm:text-3xl font-bold text-emerald-800" style={nastaliqStyle} dir="rtl">
+              <h4 className="text-xl sm:text-3xl font-bold text-red-700" style={nastaliqStyle} dir="rtl">
                 آرڈر کرنے کا شکریہ!
               </h4>
             </div>
 
             <div className="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-700">
               <p className="font-semibold">
-                Thank you for ordering from <strong className="text-emerald-800">AM Unani & Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
+                Thank you for ordering from <strong className="text-red-700">AM Unani & Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
               </p>
               <p className="pt-2 border-t border-slate-200 text-right font-bold text-sm sm:text-base" style={nastaliqStyle} dir="rtl">
-                اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-emerald-800">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
+                اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-red-700">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
               </p>
 
               <div className="pt-3 border-t border-slate-200 text-center space-y-2.5">
@@ -1221,7 +1178,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl shadow-lg transition-all"
             >
               Close / بند کریں
             </button>
