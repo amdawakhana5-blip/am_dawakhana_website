@@ -85,15 +85,15 @@ export default function LandingPage() {
   const images = ['/1.jpg', '/2.jpg', '/3.jpg', '/4.jpg', '/5.jpg', '/6.jpg', '/7.jpg', '/8.jpg', '/9.jpg'];
   const extraImages = ['/10.jpg', '/11.jpg'];
 
-  // Auto-play Image Sliders
+  // Auto-play Image Sliders (Slower and smooth timing: 5s and 6s)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3500);
+    }, 5000);
 
     const extraTimer = setInterval(() => {
       setExtraImageIndex((prevIndex) => (prevIndex + 1) % extraImages.length);
-    }, 4000);
+    }, 6000);
 
     return () => {
       clearInterval(timer);
@@ -186,48 +186,52 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Perfectly Aligned Clean Responsive Header */}
-      <header className="relative z-40 py-2.5 sm:py-3.5 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-white via-[#FAF7EE] to-amber-50/80 backdrop-blur-md sticky top-0 shadow-sm">
-        <div className="max-w-6xl mx-auto flex justify-between items-center gap-2">
+      {/* Fully Centered Multi-Color Header */}
+      <header className="relative z-40 py-3 sm:py-5 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-white via-[#FAF7EE] to-amber-50/90 backdrop-blur-md sticky top-0 shadow-sm">
+        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center text-center gap-2">
           
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="relative w-9 h-9 sm:w-12 sm:h-12 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-sm shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
                 src="/logo.png"
                 alt="AM Dawakhana Logo"
                 fill
-                sizes="(max-width: 640px) 36px, 48px"
+                sizes="(max-width: 640px) 48px, 56px"
                 className="object-contain p-0.5"
                 priority
               />
             </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-xs sm:text-base font-black text-red-950 tracking-tight leading-tight">
-                AM Unani & Herbal Labs
-              </span>
-              <span className="text-[11px] sm:text-sm text-emerald-800 font-extrabold leading-tight" style={nastaliqStyle} dir="rtl">
-                اے ایم دواخانہ
-              </span>
+          </div>
+
+          <div className="flex flex-col items-center justify-center space-y-0.5">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight leading-tight">
+              <span className="text-amber-600 drop-shadow-sm">AM</span>{' '}
+              <span className="text-red-800">Unani</span>{' '}
+              <span className="text-slate-800">&amp;</span>{' '}
+              <span className="text-emerald-700">Herbal</span> Labs
+            </h1>
+            <div className="text-sm sm:text-lg text-emerald-800 font-extrabold tracking-wide" style={nastaliqStyle} dir="rtl">
+              اے ایم دواخانہ
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2.5 mt-1">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm transition-all flex items-center gap-1.5 shadow-sm"
+              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm"
               title="WhatsApp Chat"
             >
               <svg className="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
-              <span className="hidden xs:inline">WhatsApp</span>
+              <span>WhatsApp</span>
             </a>
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase shrink-0 border border-red-500/50"
+              className="bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black px-4 py-1.5 rounded-xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-500/50"
             >
               Order Karein
             </a>
@@ -269,7 +273,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Urdu description box matching sample */}
+            {/* Urdu description box */}
             <div className="bg-white/90 p-5 sm:p-6 rounded-2xl border-2 border-amber-200 shadow-md text-right" style={nastaliqStyle} dir="rtl">
               <p className="text-slate-900 text-base sm:text-lg font-bold">
                 طاقتور ہربل فارمولا ہے جو خاص طور پر مردوں کے لیے تیار کیا گیا ہے جو کمزوری، کم ٹائمنگ اور اعصابی نقاہت کا شکار ہیں۔
@@ -320,10 +324,10 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Fixed Borderless Image Boxes */}
+          {/* Right Column: Borderless Image Boxes with Centered Thumbnails */}
           <div className="flex flex-col gap-4 w-full">
             
-            {/* Box 1: Main Big Image Slider (No white background/cut issues) */}
+            {/* Box 1: Main Big Image Slider */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
               <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FAF7EE]">
                 <Image
@@ -331,18 +335,18 @@ export default function LandingPage() {
                   alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-transform duration-500"
+                  className="object-contain w-full h-full transition-transform duration-700"
                   priority
                 />
               </div>
 
-              {/* Thumbnail Cards Row */}
-              <div className="flex gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
+              {/* Thumbnails Row Centered */}
+              <div className="flex justify-center gap-2 mt-3 overflow-x-auto pb-1 scrollbar-thin">
                 {images.slice(0, 5).map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                       currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -352,7 +356,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide (Fixed Box & Dimensions) */}
+            {/* Box 2: Extra Gallery Slide */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
               <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FAF7EE]">
                 <Image
@@ -360,13 +364,13 @@ export default function LandingPage() {
                   alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-transform duration-500"
+                  className="object-contain w-full h-full transition-transform duration-700"
                   priority
                 />
               </div>
 
-              {/* Thumbnail Cards Row */}
-              <div className="flex gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
+              {/* Thumbnails Row Centered */}
+              <div className="flex justify-center gap-2.5 mt-3 overflow-x-auto pb-1 scrollbar-thin">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
@@ -755,7 +759,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi thi. Highly recommended."
+                    "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi تھی۔ Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -942,38 +946,38 @@ export default function LandingPage() {
         </a>
       </div>
 
-      {/* Stylish Gradient Footer */}
-      <footer className="relative z-10 border-t-2 border-red-700/20 bg-gradient-to-r from-amber-50 via-white to-[#FAF7EE] pt-12 pb-16 sm:pb-8 text-slate-700 mt-16 shadow-inner">
+      {/* Colorful Vibrant Footer */}
+      <footer className="relative z-10 border-t-4 border-red-700 bg-gradient-to-r from-red-950 via-amber-950 to-red-900 pt-12 pb-20 sm:pb-10 text-white mt-16 shadow-2xl">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full border border-red-700 overflow-hidden bg-amber-100">
+              <div className="relative w-12 h-12 rounded-full border-2 border-amber-400 overflow-hidden bg-amber-100 shadow-md">
                 <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
               </div>
-              <h4 className="font-black text-slate-900 text-lg sm:text-xl">AM Unani & Herbal Labs</h4>
+              <h4 className="font-black text-amber-300 text-lg sm:text-xl">AM Unani &amp; Herbal Labs</h4>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed font-semibold">
+            <p className="text-xs text-amber-100 leading-relaxed font-medium">
               Pakistan ka bharpoor aur qabil-e-itminan idara jo faraham karta hai 100% khalis aur behtareen herbal nuskha-jat.
             </p>
           </div>
 
           <div className="space-y-3 text-left">
-            <h5 className="font-black text-red-900 text-sm uppercase tracking-wider">Quality Assurance</h5>
-            <ul className="space-y-2 text-xs font-semibold text-slate-700">
-              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> 100% Pure Himalayan Herbs</li>
-              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> Zero Chemical Side Effects</li>
-              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> Free Discreet Delivery Across Pakistan</li>
+            <h5 className="font-black text-amber-400 text-sm uppercase tracking-wider">Quality Assurance</h5>
+            <ul className="space-y-2 text-xs font-semibold text-amber-100">
+              <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> 100% Pure Himalayan Herbs</li>
+              <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Zero Chemical Side Effects</li>
+              <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Free Discreet Delivery Across Pakistan</li>
             </ul>
           </div>
 
           <div className="space-y-3 text-right" style={nastaliqStyle} dir="rtl">
-            <h5 className="font-black text-red-900 text-xl">اے ایم دواخانہ</h5>
-            <p className="text-sm text-slate-700 font-bold">
+            <h5 className="font-black text-amber-400 text-2xl">اے ایم دواخانہ</h5>
+            <p className="text-sm text-amber-100 font-bold">
               اعتماد، صحت اور قدرت کا بہترین امتزاج۔ 100٪ دیسی اور محفوظ نسخہ جات۔
             </p>
             <div className="pt-2">
-              <span className="inline-block bg-[#FAF7EE] border border-amber-200 text-red-900 text-xs px-3 py-1 rounded-lg font-mono">
+              <span className="inline-block bg-red-900/80 border border-amber-400/50 text-amber-200 text-xs px-3.5 py-1 rounded-lg font-mono">
                 📞 Help Desk: Cash on Delivery Available
               </span>
             </div>
@@ -981,9 +985,9 @@ export default function LandingPage() {
 
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-amber-200 text-center flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500 font-semibold">
-          <p>© 2026 AM Unani & Herbal Labs. All Rights Reserved.</p>
-          <p className="text-red-900 font-bold">Pure Herbal Mastery</p>
+        <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-red-800 text-center flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-amber-200/80 font-semibold">
+          <p>© 2026 AM Unani &amp; Herbal Labs. All Rights Reserved.</p>
+          <p className="text-amber-400 font-bold tracking-wide">Pure Herbal Mastery</p>
         </div>
       </footer>
 
@@ -1054,7 +1058,7 @@ export default function LandingPage() {
 
             <div className="space-y-3 bg-[#FAF7EE] p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700">
               <p className="font-semibold">
-                Thank you for ordering from <strong className="text-red-900">AM Unani & Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
+                Thank you for ordering from <strong className="text-red-900">AM Unani &amp; Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
               </p>
               <p className="pt-2 border-t border-amber-200 text-right font-bold text-sm sm:text-base" style={nastaliqStyle} dir="rtl">
                 اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-red-900">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
