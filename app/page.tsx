@@ -7,17 +7,17 @@ export default function LandingPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [extraImageIndex, setExtraImageIndex] = useState(0);
 
-  // Popups States (Two-Step Confirmation Flow)
+  // Popups States
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   // Custom Dropdown State for Styling
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // See More Reviews State (Expanded to show 20+ reviews)
+  // See More Reviews State
   const [showAllReviews, setShowAllReviews] = useState(false);
 
-  // Secondary Videos States (Video 1 & Video 2)
+  // Secondary Videos States
   const [isVideo1Playing, setIsVideo1Playing] = useState(false);
   const [isVideo2Playing, setIsVideo2Playing] = useState(false);
   const video1Ref = useRef<HTMLVideoElement>(null);
@@ -27,7 +27,7 @@ export default function LandingPage() {
   const [recentOrder, setRecentOrder] = useState({ name: 'Bilal Ahmed', city: 'Karachi', time: 'Just now' });
   const [showToast, setShowToast] = useState(false);
 
-  // Updated Form State with Separate Address and City
+  // Form State
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -37,7 +37,7 @@ export default function LandingPage() {
   });
   const [loading, setLoading] = useState(false);
 
-  // Exact Classic Nastaliq Urdu Font Styling
+  // Nastaliq Font Styling
   const nastaliqStyle = {
     fontFamily: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaliq', serif",
     lineHeight: '2.6',
@@ -55,7 +55,7 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Live Recent Order Toast Notification
+  // Live Recent Order Toast
   useEffect(() => {
     const buyers = [
       { name: 'Bilal Ahmed', city: 'Karachi' },
@@ -136,15 +136,14 @@ export default function LandingPage() {
     setLoading(true);
 
     try {
-      // Combine address and city into single format: "Address, City" for backend
       const combinedAddress = `${formData.address.trim()}, ${formData.city.trim()}`;
 
+      // Explicit quantity payload mapping to ensure correct value gets saved
       const payload = {
         name: formData.name,
         phone: formData.phone,
         address: combinedAddress,
         quantity: formData.quantity,
-        quantityValue: formData.quantity.includes('2 Bottles') ? 2 : 1,
       };
 
       const res = await fetch('/api/order', {
@@ -269,16 +268,16 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 🚀 CONTINUOUS SMOOTH MARQUEE TICKER PATTI (Fixed infinite smooth loop) */}
+      {/* 🚀 SMOOTH MARQUEE TICKER PATTI (Right to Left flow corrected) */}
       <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/35">
         <div className="flex whitespace-nowrap overflow-hidden">
-          <div className="inline-flex items-center gap-12 animate-marquee-continuous font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl">
+          <div className="inline-flex items-center gap-12 animate-marquee-right font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
             <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
           </div>
-          <div className="inline-flex items-center gap-12 animate-marquee-continuous font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl" aria-hidden="true">
+          <div className="inline-flex items-center gap-12 animate-marquee-right font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl" aria-hidden="true">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
@@ -875,7 +874,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Order Form Section (Separate Address & City Fields) */}
+        {/* Order Form Section */}
         <section id="order-form" className="max-w-xl mx-auto">
           <div className="bg-white/95 border-2 border-red-700/50 rounded-3xl p-5 sm:p-10 shadow-xl relative">
             <div className="text-center mb-6 sm:mb-8">
@@ -918,7 +917,6 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Separate Address Field */}
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Street / House Address</span>
@@ -934,7 +932,6 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Separate City Field */}
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>City</span>
@@ -1139,49 +1136,41 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* ✨ REDESIGNED PREMIUM SUCCESS POPUP */}
+      {/* ✨ FULLY RESPONSIVE CENTERED SUCCESS POPUP */}
       {showSuccessPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
-          <div className="bg-gradient-to-b from-white via-[#FFFDF9] to-[#FAF3E0] border-2 border-red-700 rounded-3xl p-6 sm:p-10 max-w-lg w-full text-center shadow-2xl space-y-6 relative overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-fadeIn overflow-y-auto">
+          <div className="bg-gradient-to-b from-white via-[#FFFDF9] to-[#FAF3E0] border-2 border-red-700 rounded-3xl p-5 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-4 sm:space-y-5 relative my-auto max-h-[90vh] overflow-y-auto">
             
-            {/* Decorative Top Badge */}
-            <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-red-800 via-amber-700 to-red-950 text-white text-[11px] font-black uppercase tracking-widest py-1.5 shadow">
-              🎉 AM Unani &amp; Herbal Labs - Order Success
-            </div>
-
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-100 border-4 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl sm:text-5xl shadow-xl animate-bounce mt-4">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-3 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-lg animate-bounce">
               ✓
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            <div className="space-y-1">
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Order Placed Successfully!
               </h3>
-              <h4 className="text-xl sm:text-2xl font-extrabold text-red-900" style={nastaliqStyle} dir="rtl">
+              <h4 className="text-lg sm:text-xl font-extrabold text-red-900" style={nastaliqStyle} dir="rtl">
                 آپ کا آرڈر کامیابی سے رجسٹر ہو گیا ہے!
               </h4>
             </div>
 
-            <div className="space-y-3.5 bg-white p-5 rounded-2xl border-2 border-amber-200 text-xs sm:text-sm text-slate-700 shadow-inner text-center">
-              <p className="font-bold text-slate-800">
-                Thank you for choosing <strong className="text-red-900">AM Unani &amp; Herbal Labs</strong>. Your parcel will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
+            <div className="space-y-3 bg-white p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700 shadow-inner text-center">
+              <p className="font-semibold text-slate-800">
+                Thank you for ordering from <strong className="text-red-900">AM Unani &amp; Herbal Labs</strong>. Your parcel will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> via Cash on Delivery.
               </p>
               
-              <div className="pt-3 border-t border-amber-100 text-right font-bold text-sm sm:text-base text-slate-900" style={nastaliqStyle} dir="rtl">
-                اے ایم دواخانہ سے خریداری کا شکریہ۔ آپ کا پارسل <strong className="text-red-800">2 سے 3 دنوں میں</strong> کیش آن ڈیلیوری پر آپ کے دیئے گئے پتے پر پہنچا دیا جائے گا۔
-              </div>
+              <p className="pt-2 border-t border-amber-100 text-right font-bold text-xs sm:text-sm text-slate-900" style={nastaliqStyle} dir="rtl">
+                اے ایم دواخانہ سے خریداری کا شکریہ۔ آپ کا پارسل <strong className="text-red-800">2 سے 3 دنوں میں</strong> کیش آن ڈیلیوری پر پہنچا دیا جائے گا۔
+              </p>
 
-              <div className="pt-3 border-t border-amber-100 text-center space-y-2.5">
-                <p className="text-xs text-slate-600 font-bold">
-                  Kisi bhi qisam ki maloomat ke liye WhatsApp par rabta karein:
-                </p>
+              <div className="pt-2 border-t border-amber-100 text-center space-y-2">
                 <a
                   href="https://wa.me/923150894064?text=Salam,%20maine%20order%20place%20kiya%20hai%2C%20mazeed%20maloomat%20chahiye."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm w-full transition-all shadow-md border border-emerald-400"
+                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 px-3 rounded-xl text-xs w-full transition-all shadow-md border border-emerald-400"
                 >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                   </svg>
                   <span>Chat on WhatsApp / واٹس ایپ پر رابطہ کریں</span>
@@ -1191,7 +1180,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-full bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black py-3.5 rounded-xl shadow-lg transition-all text-sm uppercase tracking-wider"
+              className="w-full bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black py-3 rounded-xl shadow-md transition-all text-xs sm:text-sm uppercase tracking-wider"
             >
               Close / بند کریں
             </button>
@@ -1200,17 +1189,17 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Global CSS for Continuous Marquee Animation */}
+      {/* Global CSS for Marquee Animation (Right to Left flow) */}
       <style jsx global>{`
-        @keyframes marqueeContinuous {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-100%); }
+        @keyframes marqueeRight {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
-        .animate-marquee-continuous {
+        .animate-marquee-right {
           display: inline-flex;
-          animation: marqueeContinuous 25s linear infinite;
+          animation: marqueeRight 30s linear infinite;
         }
-        .animate-marquee-continuous:hover {
+        .animate-marquee-right:hover {
           animation-play-state: paused;
         }
       `}</style>
