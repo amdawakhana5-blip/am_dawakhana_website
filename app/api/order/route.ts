@@ -5,8 +5,14 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, phone, address, quantity } = body;
 
-    // Temporary direct URL dal kar check karo
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgxx2TKUrsW54MqBtXS6B4HoLOK0cU0-TAkRH6f-FDsAjA6hMP1IWTWfRjc1Gv8avA/exec";
+    const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SHEETS_SCRIPT_URL;
+
+    if (!GOOGLE_SCRIPT_URL) {
+      return NextResponse.json(
+        { error: 'Google Script URL setup nahi hai.' },
+        { status: 500 }
+      );
+    }
 
     // Send data directly to Google Sheets
     const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -23,9 +29,6 @@ export async function POST(request: Request) {
         date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' }),
       }),
     });
-
-    const resText = await response.text();
-    console.log("Google Sheet Response:", resText);
 
     return NextResponse.json({ success: true, message: 'Order submitted!' });
   } catch (error) {
