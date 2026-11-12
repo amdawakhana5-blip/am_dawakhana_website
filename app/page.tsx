@@ -166,7 +166,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-24 sm:pb-0">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-28 sm:pb-0">
       
       {/* Top Compact & Stylish Timer Banner */}
       <div className="relative z-50 bg-gradient-to-r from-red-950 via-amber-900 to-red-900 text-white text-center py-2 px-3 shadow-md">
@@ -191,51 +191,51 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Fully Responsive Left-Aligned Header */}
-      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
-        <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      {/* Fully Responsive Mobile-Friendly Header */}
+      <header className="relative z-40 py-3 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
+        <div className="max-w-6xl mx-auto flex flex-row justify-between items-center gap-2">
           
-          <div className="flex items-center gap-3">
-            <div className="relative w-11 h-11 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
                 src="/logo.png"
                 alt="AM Dawakhana Logo"
                 fill
-                sizes="(max-width: 640px) 44px, 56px"
+                sizes="(max-width: 640px) 40px, 56px"
                 className="object-contain p-0.5"
                 priority
               />
             </div>
-            <div className="flex flex-col justify-center">
-              <div className="text-sm sm:text-lg font-black tracking-tight leading-tight">
+            <div className="flex flex-col justify-center min-w-0">
+              <div className="text-xs sm:text-lg font-black tracking-tight leading-tight truncate">
                 <span className="text-amber-600">AM</span>{' '}
                 <span className="text-red-800">Unani</span>{' '}
                 <span className="text-slate-800">&amp;</span>{' '}
-                <span className="text-emerald-700">Herbal</span> Labs
+                <span className="text-emerald-700">Herbal</span>
               </div>
-              <div className="text-xs sm:text-base font-extrabold leading-tight tracking-wide flex items-center gap-1.5 mt-0.5" style={nastaliqStyle} dir="rtl">
+              <div className="text-[11px] sm:text-base font-extrabold leading-tight tracking-wide flex items-center gap-1 mt-0.5 truncate" style={nastaliqStyle} dir="rtl">
                 <span className="text-red-800">اے ایم</span> <span className="text-emerald-800">دواخانہ</span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md flex items-center gap-1.5 border border-emerald-400/50"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-1 border border-emerald-400/50"
               title="WhatsApp Chat"
             >
-              <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
-              <span>WhatsApp</span>
+              <span className="hidden xs:inline">WhatsApp</span>
             </a>
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-400/50"
+              className="bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md tracking-wider uppercase border border-red-400/50"
             >
               Order Now
             </a>
@@ -253,7 +253,7 @@ export default function LandingPage() {
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
             <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
           </div>
-          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide aria-hidden" style={nastaliqStyle} dir="rtl">
+          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl" aria-hidden="true">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
@@ -346,30 +346,30 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Borderless Clean Image Boxes with object-cover and Centered Thumbnails */}
+          {/* Right Column: Borderless Clean Image Boxes with object-contain & Smaller Centered Thumbnails */}
           <div className="flex flex-col gap-6 w-full">
             
             {/* Box 1: Main Big Image Borderless Box */}
-            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-black shadow-inner">
+            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-3">
+              <div className="relative w-full aspect-[4/3] max-h-[360px] overflow-hidden rounded-2xl bg-[#111] shadow-inner flex items-center justify-center">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Vitality Tablet View ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                  priority
+                  className="object-contain w-full h-full transition-transform duration-500 hover:scale-105"
+                  priority={currentImageIndex === 0}
                 />
               </div>
 
-              {/* Centered Row for Slider Gallery Thumbnails */}
-              <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-thin pt-2">
+              {/* Smaller Centered Row for Slider Gallery Thumbnails */}
+              <div className="flex items-center justify-center gap-1.5 overflow-x-auto pb-1 pt-1">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-black ${
-                      currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
+                    className={`relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 rounded-lg overflow-hidden border-2 transition-all bg-[#222] ${
+                      currentImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow' : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Thumb ${idx + 1}`} fill className="object-cover" />
@@ -379,26 +379,26 @@ export default function LandingPage() {
             </div>
 
             {/* Box 2: Extra Gallery Borderless Box */}
-            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-black shadow-inner">
+            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-3">
+              <div className="relative w-full aspect-[4/3] max-h-[300px] overflow-hidden rounded-2xl bg-[#111] shadow-inner flex items-center justify-center">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Vitality Tablet Extra View ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                  priority
+                  className="object-contain w-full h-full transition-transform duration-500 hover:scale-105"
+                  priority={false}
                 />
               </div>
 
-              {/* Centered Row for Extra Gallery Thumbnails */}
-              <div className="flex items-center justify-center gap-3 overflow-x-auto pb-1 scrollbar-thin pt-2">
+              {/* Smaller Centered Row for Extra Gallery Thumbnails */}
+              <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 pt-1">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
-                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-black ${
-                      extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
+                    className={`relative w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-lg overflow-hidden border-2 transition-all bg-[#222] ${
+                      extraImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow' : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Extra Thumb ${idx + 1}`} fill className="object-cover" />
@@ -436,7 +436,7 @@ export default function LandingPage() {
                     poster="/1.jpg"
                     onPlay={() => setIsVideo1Playing(true)}
                     onPause={() => setIsVideo1Playing(false)}
-                    className="w-full h-full object-cover bg-black"
+                    className="w-full h-full object-contain bg-black"
                   >
                     <source src="/video1.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -470,7 +470,7 @@ export default function LandingPage() {
                     poster="/2.jpg"
                     onPlay={() => setIsVideo2Playing(true)}
                     onPause={() => setIsVideo2Playing(false)}
-                    className="w-full h-full object-cover bg-black"
+                    className="w-full h-full object-contain bg-black"
                   >
                     <source src="/video2.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -816,7 +816,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farq para hai."
+                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farق para hai."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -855,7 +855,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya tha. Highly recommended."
+                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya تھا۔ Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -1090,10 +1090,10 @@ export default function LandingPage() {
         href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-20 sm:bottom-6 right-4 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-xl flex items-center justify-center transition-transform hover:scale-110 border-2 border-emerald-400"
+        className="fixed bottom-20 sm:bottom-6 right-4 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 sm:p-4 rounded-full shadow-xl flex items-center justify-center transition-transform hover:scale-110 border-2 border-emerald-400"
         title="Chat on WhatsApp"
       >
-        <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+        <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
       </a>
@@ -1102,14 +1102,14 @@ export default function LandingPage() {
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#FAF7EE]/95 border-t border-amber-200 backdrop-blur-md">
         <a
           href="#order-form"
-          className="block text-center w-full bg-gradient-to-r from-red-700 to-amber-700 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-500"
+          className="block text-center w-full bg-gradient-to-r from-red-700 to-amber-700 text-white font-black py-3 rounded-xl shadow-lg text-xs tracking-wider uppercase border border-red-500"
         >
           ⚡ ORDER NOW (CASH ON DELIVERY)
         </a>
       </div>
 
       {/* Colorful Vibrant Footer with Number +3150894064 */}
-      <footer className="relative z-10 border-t-4 border-red-700 bg-gradient-to-r from-red-950 via-amber-950 to-red-900 pt-12 pb-20 sm:pb-10 text-white mt-16 shadow-2xl">
+      <footer className="relative z-10 border-t-4 border-red-700 bg-gradient-to-r from-red-950 via-amber-950 to-red-900 pt-12 pb-24 sm:pb-10 text-white mt-16 shadow-2xl">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
           <div className="space-y-3">
