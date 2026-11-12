@@ -816,7 +816,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farق para hai."
+                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farq para hai."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -855,7 +855,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya تھا۔ Highly recommended."
+                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya tha. Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
