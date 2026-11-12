@@ -14,9 +14,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send data directly to Google Sheets
+    // Send data directly to Google Sheets with redirect handling
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
+      redirect: 'follow', // <-- Yeh add kar diya hai
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, message: 'Order submitted!' });
   } catch (error) {
+    console.error('Sheet Error:', error);
     return NextResponse.json(
       { error: 'Server error occurred' },
       { status: 500 }
