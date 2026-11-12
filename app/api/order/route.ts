@@ -5,19 +5,13 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, phone, address, quantity } = body;
 
-    const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SHEETS_SCRIPT_URL;
+    // Temporary direct URL dal kar check karo
+    const GOOGLE_SCRIPT_URL = https://script.google.com/macros/s/AKfycbwgxx2TKUrsW54MqBtXS6B4HoLOK0cU0-TAkRH6f-FDsAjA6hMP1IWTWfRjc1Gv8avA/exec;
 
-    if (!GOOGLE_SCRIPT_URL) {
-      return NextResponse.json(
-        { error: 'Google Script URL setup nahi hai.' },
-        { status: 500 }
-      );
-    }
-
-    // Send data directly to Google Sheets with redirect handling
-    await fetch(GOOGLE_SCRIPT_URL, {
+    // Send data directly to Google Sheets
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      redirect: 'follow', // <-- Yeh add kar diya hai
+      redirect: 'follow',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,9 +24,12 @@ export async function POST(request: Request) {
       }),
     });
 
+    const resText = await response.text();
+    console.log("Google Sheet Response:", resText);
+
     return NextResponse.json({ success: true, message: 'Order submitted!' });
   } catch (error) {
-    console.error('Sheet Error:', error);
+    console.error('Server Error:', error);
     return NextResponse.json(
       { error: 'Server error occurred' },
       { status: 500 }
