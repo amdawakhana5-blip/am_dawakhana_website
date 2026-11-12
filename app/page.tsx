@@ -244,13 +244,21 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 🚀 ANIMATED URDU SCRIPT TICKER PATTI */}
-      <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-2.5 overflow-hidden shadow-inner border-y border-amber-500/30">
-        <div className="whitespace-nowrap animate-marquee flex items-center gap-8 font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
-          <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
-          <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
-          <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
-          <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
+      {/* 🚀 SMOOTH MOVING ANIMATED URDU SCRIPT TICKER PATTI */}
+      <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/30">
+        <div className="flex overflow-hidden whitespace-nowrap">
+          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
+            <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
+            <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
+            <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
+            <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
+          </div>
+          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide aria-hidden" style={nastaliqStyle} dir="rtl">
+            <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
+            <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
+            <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
+            <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
+          </div>
         </div>
       </div>
 
@@ -338,12 +346,12 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Dedicated Clean Separate Image Boxes & Perfectly Centered Thumbnails */}
+          {/* Right Column: Borderless Clean Image Boxes with object-cover and Centered Thumbnails */}
           <div className="flex flex-col gap-6 w-full">
             
-            {/* Box 1: Main Big Image Dedicated Box (object-cover as requested) */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FFFDF9] shadow-inner border border-amber-200">
+            {/* Box 1: Main Big Image Borderless Box */}
+            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-4">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-black shadow-inner">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Vitality Tablet View ${currentImageIndex + 1}`}
@@ -354,14 +362,14 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Perfectly Centered Row for Slider Gallery Thumbnails */}
-              <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
+              {/* Centered Row for Slider Gallery Thumbnails */}
+              <div className="flex items-center justify-center gap-2 overflow-x-auto pb-1 scrollbar-thin pt-2">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-[#FAF7EE] ${
-                      currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
+                    className={`relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-black ${
+                      currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Thumb ${idx + 1}`} fill className="object-cover" />
@@ -370,9 +378,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Dedicated Box (object-cover as requested) */}
-            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl flex flex-col gap-4">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FFFDF9] shadow-inner border border-amber-200">
+            {/* Box 2: Extra Gallery Borderless Box */}
+            <div className="relative w-full bg-white/60 backdrop-blur-sm rounded-3xl p-3 sm:p-4 shadow-xl flex flex-col gap-4">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-black shadow-inner">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Vitality Tablet Extra View ${extraImageIndex + 1}`}
@@ -383,14 +391,14 @@ export default function LandingPage() {
                 />
               </div>
 
-              {/* Perfectly Centered Row for Extra Gallery Thumbnails */}
-              <div className="flex items-center justify-center gap-3 overflow-x-auto pb-1 scrollbar-thin pt-2 border-t border-amber-100">
+              {/* Centered Row for Extra Gallery Thumbnails */}
+              <div className="flex items-center justify-center gap-3 overflow-x-auto pb-1 scrollbar-thin pt-2">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
-                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-[#FAF7EE] ${
-                      extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
+                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-black ${
+                      extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Extra Thumb ${idx + 1}`} fill className="object-cover" />
@@ -1246,6 +1254,21 @@ export default function LandingPage() {
           </div>
         </div>
       )}
+
+      {/* Global CSS for Marquee Animation */}
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          display: inline-flex;
+          animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
     </div>
   );
