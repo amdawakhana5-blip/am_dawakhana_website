@@ -116,6 +116,37 @@ export default function LandingPage() {
   const images = ['/1.jpg', '/2.jpg', '/3.jpg', '/4.jpg', '/5.jpg', '/6.jpg', '/7.jpg', '/8.jpg', '/9.jpg'];
   const extraImages = ['/10.jpg', '/11.jpg'];
 
+  // Auto-play Image Sliders
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3500);
+
+    const extraTimer = setInterval(() => {
+      setExtraImageIndex((prevIndex) => (prevIndex + 1) % extraImages.length);
+    }, 4000);
+
+    return () => {
+      clearInterval(timer);
+      clearInterval(extraTimer);
+    };
+  }, [images.length, extraImages.length]);
+
+  // Image Arrow Controls
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNextExtraImage = () => {
+    setExtraImageIndex((prev) => (prev + 1) % extraImages.length);
+  };
+  const handlePrevExtraImage = () => {
+    setExtraImageIndex((prev) => (prev === 0 ? extraImages.length - 1 : prev - 1));
+  };
+
   // Touch handlers for main image slider
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
@@ -125,12 +156,10 @@ export default function LandingPage() {
   };
   const handleTouchEnd = () => {
     if (touchStartX - touchEndX > 50) {
-      // Swipe Left -> Next Image
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      handleNextImage();
     }
     if (touchEndX - touchStartX > 50) {
-      // Swipe Right -> Prev Image
-      setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+      handlePrevImage();
     }
   };
 
@@ -143,10 +172,10 @@ export default function LandingPage() {
   };
   const handleExtraTouchEnd = () => {
     if (extraTouchStartX - extraTouchEndX > 50) {
-      setExtraImageIndex((prev) => (prev + 1) % extraImages.length);
+      handleNextExtraImage();
     }
     if (extraTouchEndX - extraTouchStartX > 50) {
-      setExtraImageIndex((prev) => (prev === 0 ? extraImages.length - 1 : prev - 1));
+      handlePrevExtraImage();
     }
   };
 
@@ -427,20 +456,16 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Separate Picture Boxes with Touch Swipe */}
+          {/* Right Column: Separate Picture Boxes with Arrows, Auto-Slider & Touch Swipe */}
           <div className="flex flex-col gap-6 w-full">
             
-            {/* Box 1: Main Gallery Slide (Touch Swipe Enabled) */}
+            {/* Box 1: Main Gallery Slide */}
             <div 
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
               className="relative w-full bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 shadow-lg group"
             >
-              <div className="absolute top-3 left-3 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 z-10">
-                🖼️ Swipe / Touch to Slide
-              </div>
-
               <div className="relative w-full aspect-[4/3] max-h-[400px] overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center border border-slate-100">
                 <Image
                   src={images[currentImageIndex]}
@@ -450,6 +475,24 @@ export default function LandingPage() {
                   className="object-contain p-2 transition-transform duration-500"
                   priority
                 />
+
+                {/* Left Arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  title="Previous Image"
+                >
+                  ❮
+                </button>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  title="Next Image"
+                >
+                  ❯
+                </button>
               </div>
 
               <div className="flex justify-center gap-1.5 mt-3.5">
@@ -465,17 +508,13 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide (Touch Swipe Enabled) */}
+            {/* Box 2: Extra Gallery Slide */}
             <div 
               onTouchStart={handleExtraTouchStart}
               onTouchMove={handleExtraTouchMove}
               onTouchEnd={handleExtraTouchEnd}
               className="relative w-full bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-4 shadow-lg group"
             >
-              <div className="absolute top-3 left-3 bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-amber-200 z-10">
-                ✨ Swipe / Touch to Slide
-              </div>
-
               <div className="relative w-full aspect-[4/3] max-h-[350px] overflow-hidden rounded-xl bg-slate-100 flex items-center justify-center border border-slate-100">
                 <Image
                   src={extraImages[extraImageIndex]}
@@ -485,6 +524,24 @@ export default function LandingPage() {
                   className="object-contain p-2 transition-transform duration-500"
                   priority
                 />
+
+                {/* Left Arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handlePrevExtraImage(); }}
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  title="Previous Image"
+                >
+                  ❮
+                </button>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleNextExtraImage(); }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-emerald-600 hover:text-white text-emerald-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  title="Next Image"
+                >
+                  ❯
+                </button>
               </div>
 
               <div className="flex justify-center gap-1.5 mt-3.5">
