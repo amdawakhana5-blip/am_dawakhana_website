@@ -14,19 +14,14 @@ export default function LandingPage() {
   // Custom Dropdown State for Styling
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // 9:16 Video Carousel States
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [isPlayingVideo, setIsPlayingVideo] = useState(false);
-  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
-
   // Secondary Videos States (Video 1 & Video 2)
   const [isVideo1Playing, setIsVideo1Playing] = useState(false);
   const [isVideo2Playing, setIsVideo2Playing] = useState(false);
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
 
-  const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 32, seconds: 15 });
-  const [recentOrder, setRecentOrder] = useState({ name: 'Ali Nawaz', city: 'Karachi', time: 'Just now' });
+  const [timeLeft, setTimeLeft] = useState({ hours: 1, minutes: 38, seconds: 10 });
+  const [recentOrder, setRecentOrder] = useState({ name: 'Bilal Ahmed', city: 'Karachi', time: 'Just now' });
   const [showToast, setShowToast] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -40,26 +35,8 @@ export default function LandingPage() {
   // Exact Classic Nastaliq Urdu Font Styling
   const nastaliqStyle = {
     fontFamily: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaliq', serif",
-    lineHeight: '2.2',
+    lineHeight: '2.4',
   };
-
-  // Auto pause videos when scrolled out of view
-  useEffect(() => {
-    const handleScroll = () => {
-      videoRefs.forEach((ref, idx) => {
-        if (ref.current && !ref.current.paused) {
-          const rect = ref.current.getBoundingClientRect();
-          if (rect.top < -200 || rect.bottom > window.innerHeight + 200) {
-            ref.current.pause();
-            if (idx === currentVideoIndex) setIsPlayingVideo(false);
-          }
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentVideoIndex]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -73,19 +50,15 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Live Recent Order Toast Notification
+  // Live Recent Order Toast Notification (Compact & Bottom-Left)
   useEffect(() => {
     const buyers = [
-      { name: 'Ali Nawaz', city: 'Karachi' },
-      { name: 'Usman Malik', city: 'Islamabad' },
-      { name: 'Tariq Khan', city: 'Lahore' },
-      { name: 'Bilal Ahmed', city: 'Faisalabad' },
-      { name: 'Kamran Akram', city: 'Rawalpindi' },
-      { name: 'Zain Ul Abideen', city: 'Multan' },
-      { name: 'Hamza Sheikh', city: 'Peshawar' },
-      { name: 'Rehan Ali', city: 'Quetta' },
-      { name: 'Fahad Mustafa', city: 'Sialkot' },
-      { name: 'Danish Ali', city: 'Gujranwala' },
+      { name: 'Bilal Ahmed', city: 'Karachi' },
+      { name: 'Rizwan', city: 'Islamabad' },
+      { name: 'Ahmed Khan', city: 'Lahore' },
+      { name: 'Muneeb', city: 'Faisalabad' },
+      { name: 'Usman Ali', city: 'Rawalpindi' },
+      { name: 'Hamza', city: 'Multan' },
     ];
 
     const orderInterval = setInterval(() => {
@@ -94,13 +67,13 @@ export default function LandingPage() {
       setRecentOrder({
         name: randomBuyer.name,
         city: randomBuyer.city,
-        time: `${randomMinutes} Minutes ago`,
+        time: `${randomMinutes}m ago`,
       });
       setShowToast(true);
 
       setTimeout(() => {
         setShowToast(false);
-      }, 4500);
+      }, 4000);
     }, 7000);
 
     return () => clearInterval(orderInterval);
@@ -138,32 +111,6 @@ export default function LandingPage() {
   };
   const handlePrevExtraImage = () => {
     setExtraImageIndex((prev) => (prev === 0 ? extraImages.length - 1 : prev - 1));
-  };
-
-  // 9:16 Slider Controls
-  const handleNextVideo = () => {
-    videoRefs.forEach((ref) => ref.current?.pause());
-    setIsPlayingVideo(false);
-    setCurrentVideoIndex((prev) => (prev === 2 ? 0 : prev + 1));
-  };
-
-  const handlePrevVideo = () => {
-    videoRefs.forEach((ref) => ref.current?.pause());
-    setIsPlayingVideo(false);
-    setCurrentVideoIndex((prev) => (prev === 0 ? 2 : prev - 1));
-  };
-
-  const toggleCurrentVideo = () => {
-    const currentRef = videoRefs[currentVideoIndex].current;
-    if (currentRef) {
-      if (currentRef.paused) {
-        currentRef.play();
-        setIsPlayingVideo(true);
-      } else {
-        currentRef.pause();
-        setIsPlayingVideo(false);
-      }
-    }
   };
 
   // Secondary Videos Controls
@@ -226,33 +173,44 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden selection:bg-red-500 selection:text-white pb-28 sm:pb-0">
+    <div className="relative min-h-screen bg-[#FAF7EE] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-28 sm:pb-0">
       
-      {/* Top Urgency Banner with Red & Emerald Mix */}
-      <div className="relative z-50 bg-gradient-to-r from-red-700 via-amber-600 to-emerald-800 text-white text-center py-2.5 px-2 sm:px-4 font-bold text-[11px] sm:text-sm shadow-md">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-1.5 flex-wrap">
-          <div className="flex items-center gap-1.5">
-            <span className="bg-red-600 text-white font-black px-2 py-0.5 rounded-full text-[9px] sm:text-xs tracking-wider animate-bounce shadow">
-              HOT DEAL
-            </span>
-            <span className="font-extrabold text-amber-100 text-[11px] sm:text-sm">50% OFF + Free Home Delivery</span>
+      {/* Top Urgency Banner with Sample Timer Style */}
+      <div className="relative z-50 bg-gradient-to-r from-red-800 via-amber-700 to-red-900 text-white text-center py-3 px-2 sm:px-4 font-bold shadow-md">
+        <div className="max-w-xl mx-auto bg-red-950/80 border border-red-500/40 rounded-2xl p-3 shadow-inner text-center">
+          <div className="flex items-center justify-center gap-1.5 text-amber-300 text-xs sm:text-sm font-extrabold mb-2">
+            <span>🔥</span> <span>⏳</span> <span>Price will go up soon!</span> <span>⏳</span> <span>🔥</span>
           </div>
-          
-          <div className="flex items-center gap-1 bg-slate-950/90 px-2.5 py-0.5 rounded-full text-amber-300 font-mono text-[11px] sm:text-sm border border-red-500/50 shadow-inner">
-            <span className="text-slate-100 font-sans font-bold text-[10px] sm:text-xs">Waqt Baqi:</span>
-            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">0{timeLeft.hours}</span>:
-            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">{timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}</span>:
-            <span className="font-bold text-white bg-red-800 px-1.5 py-0.5 rounded border border-red-400/30">{timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}</span>
+
+          <div className="flex items-center justify-center gap-2">
+            <div className="bg-[#FAF7EE] text-red-950 px-3 py-1 rounded-xl font-black shadow text-center min-w-[50px]">
+              <div className="text-base sm:text-xl leading-none">{String(timeLeft.hours).padStart(2, '0')}</div>
+              <div className="text-[9px] text-slate-600 uppercase font-bold">hrs</div>
+            </div>
+            <span className="text-white text-lg font-bold">:</span>
+            <div className="bg-[#FAF7EE] text-red-950 px-3 py-1 rounded-xl font-black shadow text-center min-w-[50px]">
+              <div className="text-base sm:text-xl leading-none">{String(timeLeft.minutes).padStart(2, '0')}</div>
+              <div className="text-[9px] text-slate-600 uppercase font-bold">mins</div>
+            </div>
+            <span className="text-white text-lg font-bold">:</span>
+            <div className="bg-[#FAF7EE] text-red-950 px-3 py-1 rounded-xl font-black shadow text-center min-w-[50px]">
+              <div className="text-base sm:text-xl leading-none">{String(timeLeft.seconds).padStart(2, '0')}</div>
+              <div className="text-[9px] text-slate-600 uppercase font-bold">secs</div>
+            </div>
+          </div>
+
+          <div className="text-amber-200 text-[11px] sm:text-xs mt-2 font-semibold">
+            Limited Stock Left — hurry!
           </div>
         </div>
       </div>
 
-      {/* Styled Header with Red Accent */}
-      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b-2 border-red-600/30 bg-white/95 backdrop-blur-md sticky top-0 shadow-sm">
+      {/* Styled Header */}
+      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b-2 border-red-700/20 bg-[#FAF7EE]/95 backdrop-blur-md sticky top-0 shadow-sm">
         <div className="max-w-6xl mx-auto flex justify-between items-center gap-2">
           
           <div className="flex items-center gap-2 sm:gap-3.5">
-            <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-600 bg-red-50 shadow-md shrink-0">
+            <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
                 src="/logo.png"
                 alt="AM Dawakhana Logo"
@@ -263,7 +221,7 @@ export default function LandingPage() {
               />
             </div>
             <div>
-              <div className="text-xs sm:text-xl font-black text-red-700 tracking-wide leading-tight">
+              <div className="text-xs sm:text-xl font-black text-red-900 tracking-wide leading-tight">
                 AM Unani & Herbal Labs
               </div>
               <div className="text-sm sm:text-lg text-emerald-800 font-extrabold mt-0.5" style={nastaliqStyle} dir="rtl">
@@ -277,7 +235,7 @@ export default function LandingPage() {
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-sm transition-all flex items-center gap-1.5 shadow-sm"
+              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] sm:text-sm transition-all flex items-center gap-1.5 shadow-sm"
               title="WhatsApp Chat"
             >
               <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-current shrink-0" viewBox="0 0 24 24">
@@ -288,7 +246,7 @@ export default function LandingPage() {
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase shrink-0 border border-red-400/50"
+              className="bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase shrink-0 border border-red-500/50"
             >
               Order Karein
             </a>
@@ -303,52 +261,59 @@ export default function LandingPage() {
         <section className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center mb-12 sm:mb-16">
           
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-red-50 border border-red-300 text-red-700 font-extrabold px-3.5 py-1.5 rounded-full text-xs shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+            <div className="inline-flex items-center gap-2 bg-amber-100 border border-amber-300 text-red-900 font-extrabold px-3.5 py-1.5 rounded-full text-xs shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-red-700 animate-ping"></span>
               <span>100% Khalis Aur Mehfooz Nuskha</span>
               <span>•</span>
               <span style={nastaliqStyle} className="text-red-900">20 ٹیبلٹس</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-slate-200 pb-5">
-              <div className="text-left border-l-4 border-red-600 pl-3.5 space-y-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b border-amber-200 pb-5">
+              <div className="text-left border-l-4 border-red-700 pl-3.5 space-y-1">
                 <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-wide">
                   Taqat Ka Khazana
                 </h1>
-                <p className="text-red-700 font-black text-xs sm:text-sm tracking-wide">
+                <p className="text-red-800 font-black text-xs sm:text-sm tracking-wide">
                   Mardana Quwwat Ka Asli Hal
                 </p>
               </div>
 
-              <div className="text-right border-r-4 border-red-600 pr-3.5 space-y-1" style={nastaliqStyle} dir="rtl">
-                <h2 className="text-2xl sm:text-4xl font-black text-slate-900">
+              <div className="text-right border-r-4 border-red-700 pr-3.5 space-y-1" style={nastaliqStyle} dir="rtl">
+                <h2 className="text-2xl sm:text-4xl font-black text-red-950">
                   طاقت کا خزانہ
                 </h2>
-                <p className="text-red-700 font-extrabold text-base sm:text-xl">
+                <p className="text-red-800 font-extrabold text-base sm:text-xl">
                   مردانہ قوت کا بااعتماد حل
                 </p>
               </div>
             </div>
 
+            {/* Urdu description box matching sample */}
+            <div className="bg-white/90 p-5 sm:p-6 rounded-2xl border-2 border-amber-200 shadow-md text-right" style={nastaliqStyle} dir="rtl">
+              <p className="text-slate-900 text-base sm:text-lg font-bold">
+                طاقتور ہربل فارمولا ہے جو خاص طور پر مردوں کے لیے تیار کیا گیا ہے جو کمزوری، کم ٹائمنگ اور اعصابی نقاہت کا شکار ہیں۔
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-left shadow-md hover:shadow-lg transition-all">
+              <div className="bg-white/90 p-4 sm:p-5 rounded-2xl border border-amber-200 text-left shadow-md">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-red-700 font-black text-[10px] uppercase tracking-widest bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  <span className="text-red-800 font-black text-[10px] uppercase tracking-widest bg-amber-100 px-2.5 py-0.5 rounded">
                     Product Overview
                   </span>
-                  <span className="text-red-500">🔥</span>
+                  <span className="text-red-600">🔥</span>
                 </div>
                 <p className="text-slate-700 font-medium text-xs sm:text-sm leading-relaxed">
                   AM Vitality Tablet is a master blend of rare Himalayan herbs designed to deliver absolute vigor, peak stamina, and enduring performance.
                 </p>
               </div>
               
-              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-right shadow-md hover:shadow-lg transition-all" style={nastaliqStyle} dir="rtl">
+              <div className="bg-white/90 p-4 sm:p-5 rounded-2xl border border-amber-200 text-right shadow-md" style={nastaliqStyle} dir="rtl">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-red-600">🌿</span>
-                  <span className="text-red-700 font-black text-xs bg-red-50 px-2.5 py-0.5 rounded border border-red-200">
+                  <span className="text-red-700 font-black text-xs bg-amber-100 px-2.5 py-0.5 rounded">
                     پروڈکٹ کا تعارف
                   </span>
+                  <span className="text-red-700">🌿</span>
                 </div>
                 <p className="text-slate-800 text-base sm:text-lg font-bold">
                   اے ایم وائٹلٹی ٹیبلٹ نایاب دیسی جڑی بوٹیوں کا شاہکار مرکب ہے، جو دیتا ہے بھرپور طاقت اور دیرپا اسٹیمنا۔
@@ -356,73 +321,30 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Q&A Section */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-md space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-100">
-                <div className="text-left space-y-1">
-                  <div className="text-red-700 font-black text-xs sm:text-sm flex items-center gap-1.5">
-                    <span>⚡</span> Sawaal: Asar kab tak hota hai?
-                  </div>
-                  <p className="text-slate-600 text-xs font-semibold pl-5">
-                    Jawab: Sirf 1 se 2 ghante mein mukammal josh mehsoos hota hai.
-                  </p>
-                </div>
-
-                <div className="text-right space-y-1" style={nastaliqStyle} dir="rtl">
-                  <div className="text-red-700 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
-                    <span>⚡</span> <span>سوال: اثر کب تک ہوتا ہے؟</span>
-                  </div>
-                  <p className="text-slate-800 text-sm sm:text-base font-bold pr-5">
-                    جواب: صرف 1 سے 2 گھنٹے میں مکمل جوش محسوس ہوتا ہے۔
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="text-left space-y-1">
-                  <div className="text-red-700 font-black text-xs sm:text-sm flex items-center gap-1.5">
-                    <span>🛡️</span> Sawaal: Koi nuqsaan hai?
-                  </div>
-                  <p className="text-slate-600 text-xs font-semibold pl-5">
-                    Jawab: Bilkul nahi, 100% natural aur herbal nuskha hai.
-                  </p>
-                </div>
-
-                <div className="text-right space-y-1" style={nastaliqStyle} dir="rtl">
-                  <div className="text-red-700 font-black text-base sm:text-lg flex items-center justify-start gap-1.5">
-                    <span>🛡️</span> <span>سوال: کیا کوئی نقصان ہے؟</span>
-                  </div>
-                  <p className="text-slate-800 text-sm sm:text-base font-bold pr-5">
-                    جواب: بالکل نہیں، 100% قدرتی اور دیسی نسخہ ہے۔
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Badges */}
             <div className="grid grid-cols-3 gap-2">
-              <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-red-700 font-extrabold text-xs sm:text-sm">20 Tablets</div>
-                <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>20 ٹیبلٹس</div>
+              <div className="bg-white/90 border border-amber-200 p-3 rounded-xl text-center shadow-sm">
+                <div className="text-red-800 font-extrabold text-xs sm:text-sm">20 Tablets</div>
+                <div className="text-slate-700 text-xs mt-1 font-bold" style={nastaliqStyle}>20 ٹیبلٹس</div>
               </div>
-              <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-red-700 font-extrabold text-xs sm:text-sm">100% Herbal</div>
-                <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>بغیر نقصان</div>
+              <div className="bg-white/90 border border-amber-200 p-3 rounded-xl text-center shadow-sm">
+                <div className="text-red-800 font-extrabold text-xs sm:text-sm">100% Herbal</div>
+                <div className="text-slate-700 text-xs mt-1 font-bold" style={nastaliqStyle}>بغیر نقصان</div>
               </div>
-              <div className="bg-white border border-slate-200 p-3 rounded-xl text-center shadow-sm">
-                <div className="text-red-700 font-extrabold text-xs sm:text-sm">Free Delivery</div>
-                <div className="text-slate-600 text-xs mt-1 font-bold" style={nastaliqStyle}>مفت ڈلیوری</div>
+              <div className="bg-white/90 border border-amber-200 p-3 rounded-xl text-center shadow-sm">
+                <div className="text-red-800 font-extrabold text-xs sm:text-sm">Free Delivery</div>
+                <div className="text-slate-700 text-xs mt-1 font-bold" style={nastaliqStyle}>مفت ڈلیوری</div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Sample Style (Big Main Image Box + Thumbnail Cards Row) */}
+          {/* Right Column: Big Main Image Box + Thumbnail Cards Row */}
           <div className="flex flex-col gap-4 w-full">
             
             {/* Box 1: Main Big Image with Arrows */}
-            <div className="relative w-full bg-white border-2 border-red-200 rounded-3xl p-4 shadow-xl group">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-100">
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl group">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-amber-50 flex items-center justify-center border border-amber-100">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
@@ -435,7 +357,7 @@ export default function LandingPage() {
                 {/* Left Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Previous Image"
                 >
                   ❮
@@ -444,21 +366,21 @@ export default function LandingPage() {
                 {/* Right Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Next Image"
                 >
                   ❯
                 </button>
               </div>
 
-              {/* Sample-Style Thumbnail Cards Row */}
+              {/* Thumbnail Cards Row */}
               <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
                 {images.slice(0, 5).map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
                     className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
-                      currentImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
+                      currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
@@ -467,9 +389,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Box 2: Extra Gallery Slide (Thumbnails Row) */}
-            <div className="relative w-full bg-white border-2 border-red-200 rounded-3xl p-4 shadow-xl group">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-100">
+            {/* Box 2: Extra Gallery Slide */}
+            <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-4 shadow-xl group">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-amber-50 flex items-center justify-center border border-amber-100">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
@@ -482,7 +404,7 @@ export default function LandingPage() {
                 {/* Left Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrevExtraImage(); }}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Previous Image"
                 >
                   ❮
@@ -491,21 +413,21 @@ export default function LandingPage() {
                 {/* Right Arrow */}
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNextExtraImage(); }}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-600 hover:text-white text-red-700 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 shadow-md flex items-center justify-center text-base font-black transition-all"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-red-700 hover:text-white text-red-800 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-amber-300 shadow-md flex items-center justify-center text-base font-black transition-all"
                   title="Next Image"
                 >
                   ❯
                 </button>
               </div>
 
-              {/* Sample-Style Thumbnail Cards Row */}
+              {/* Thumbnail Cards Row */}
               <div className="flex gap-2.5 mt-4 overflow-x-auto pb-1 scrollbar-thin">
                 {extraImages.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
                     className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
-                      extraImageIndex === idx ? 'border-red-600 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'
+                      extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
                     <Image src={img} alt={`Extra Thumbnail ${idx + 1}`} fill className="object-cover" />
@@ -518,131 +440,23 @@ export default function LandingPage() {
 
         </section>
 
-        {/* 🎬 9:16 VERTICAL VIDEO CAROUSEL WITH ARROWS (Cleaned Up) */}
-        <section className="mb-12 sm:mb-16">
-          <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
-            
-            <span className="bg-red-100 text-red-700 font-black text-[11px] sm:text-xs px-3.5 py-1 rounded-full uppercase tracking-wider inline-block mb-2">
-              Featured Video Presentation
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-6">
-              Product Results & Demonstration
-            </h3>
-
-            <div className="max-w-[280px] sm:max-w-[320px] mx-auto relative px-6">
-              <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden border-2 border-red-600 shadow-2xl flex items-center justify-center">
-                
-                {/* Video 1 */}
-                <video
-                  ref={videoRefs[0]}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  poster="/1.jpg"
-                  onPlay={() => setIsPlayingVideo(true)}
-                  onPause={() => setIsPlayingVideo(false)}
-                  className={`w-full h-full object-contain absolute inset-0 transition-opacity duration-500 ${currentVideoIndex === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-                >
-                  <source src="/video3.mp4" type="video/mp4" />
-                  Aap ka browser video support nahi karta.
-                </video>
-
-                {/* Video 2 */}
-                <video
-                  ref={videoRefs[1]}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  poster="/1.jpg"
-                  onPlay={() => setIsPlayingVideo(true)}
-                  onPause={() => setIsPlayingVideo(false)}
-                  className={`w-full h-full object-contain absolute inset-0 transition-opacity duration-500 ${currentVideoIndex === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-                >
-                  <source src="/video4.mp4" type="video/mp4" />
-                  Aap ka browser video support nahi karta.
-                </video>
-
-                {/* Video 3 */}
-                <video
-                  ref={videoRefs[2]}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  poster="/2.jpg"
-                  onPlay={() => setIsPlayingVideo(true)}
-                  onPause={() => setIsPlayingVideo(false)}
-                  className={`w-full h-full object-contain absolute inset-0 transition-opacity duration-500 ${currentVideoIndex === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
-                >
-                  <source src="/video5.mp4" type="video/mp4" />
-                  Aap ka browser video support nahi karta.
-                </video>
-
-                {!isPlayingVideo && (
-                  <div 
-                    onClick={toggleCurrentVideo}
-                    className="absolute inset-0 bg-black/40 flex items-center justify-center z-20 cursor-pointer group hover:bg-black/20 transition-all"
-                  >
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white transform group-hover:scale-110 transition-transform">
-                      <svg className="w-8 h-8 fill-white ml-1" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              <button
-                onClick={(e) => { e.stopPropagation(); handlePrevVideo(); }}
-                className="absolute left-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-red-600 hover:text-white text-red-700 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
-                title="Pichli Video"
-              >
-                ❮
-              </button>
-
-              <button
-                onClick={(e) => { e.stopPropagation(); handleNextVideo(); }}
-                className="absolute right-[-2px] top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-red-600 hover:text-white text-red-700 w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-slate-300 shadow-lg flex items-center justify-center text-lg font-black transition-all"
-                title="Agli Video"
-              >
-                ❯
-              </button>
-
-              <div className="flex justify-center gap-2 mt-4">
-                {[0, 1, 2].map((idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      videoRefs.forEach((ref) => ref.current?.pause());
-                      setIsPlayingVideo(false);
-                      setCurrentVideoIndex(idx);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      currentVideoIndex === idx ? 'w-8 bg-red-600' : 'w-2 bg-slate-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* SECONDARY VIDEOS SECTION */}
         <section className="mb-12 sm:mb-16">
-          <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
-            <span className="bg-slate-100 text-slate-800 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-2">
+          <div className="bg-white/90 border border-amber-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg text-center">
+            <span className="bg-amber-100 text-red-900 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-2">
               Extra Demonstration
             </span>
             <h3 className="text-xl sm:text-2xl font-black text-slate-900">
               Product Videos
             </h3>
-            <p className="text-slate-600 text-sm mt-1 mb-6 font-bold" style={nastaliqStyle}>
+            <p className="text-slate-700 text-sm mt-1 mb-6 font-bold" style={nastaliqStyle}>
               مزید ویڈیوز اور کسٹمرز کے تجربات ملاحظہ کریں
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
-              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl shadow-sm flex flex-col items-center">
-                <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-300 group flex items-center justify-center">
+              <div className="bg-[#FAF7EE] border border-amber-200 p-3.5 rounded-2xl shadow-sm flex flex-col items-center">
+                <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative border border-amber-300 group flex items-center justify-center">
                   <video 
                     ref={video1Ref}
                     controls 
@@ -662,7 +476,7 @@ export default function LandingPage() {
                       onClick={toggleVideo1}
                       className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer group-hover:bg-black/20 transition-all"
                     >
-                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
+                      <div className="w-14 h-14 bg-red-700 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
                         <svg className="w-7 h-7 fill-white ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
@@ -670,13 +484,13 @@ export default function LandingPage() {
                     </div>
                   )}
                 </div>
-                <p className="text-red-800 font-extrabold text-sm sm:text-base mt-3">
+                <p className="text-red-900 font-extrabold text-sm sm:text-base mt-3">
                   Official Introduction & Results
                 </p>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl shadow-sm flex flex-col items-center">
-                <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-300 group flex items-center justify-center">
+              <div className="bg-[#FAF7EE] border border-amber-200 p-3.5 rounded-2xl shadow-sm flex flex-col items-center">
+                <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative border border-amber-300 group flex items-center justify-center">
                   <video 
                     ref={video2Ref}
                     controls 
@@ -696,7 +510,7 @@ export default function LandingPage() {
                       onClick={toggleVideo2}
                       className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer group-hover:bg-black/20 transition-all"
                     >
-                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
+                      <div className="w-14 h-14 bg-red-700 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
                         <svg className="w-7 h-7 fill-white ml-1" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
@@ -704,7 +518,7 @@ export default function LandingPage() {
                     </div>
                   )}
                 </div>
-                <p className="text-red-800 font-extrabold text-sm sm:text-base mt-3">
+                <p className="text-red-900 font-extrabold text-sm sm:text-base mt-3">
                   Unboxing & Customer Feedback
                 </p>
               </div>
@@ -715,67 +529,67 @@ export default function LandingPage() {
 
         {/* 12 Key Ingredients Section */}
         <section className="mb-12 sm:mb-16">
-          <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg">
+          <div className="bg-white/90 border border-amber-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg">
             <div className="text-center mb-6 sm:mb-8">
-              <span className="bg-red-100 text-red-700 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
+              <span className="bg-amber-100 text-red-900 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest">
                 Khaas Unani Nuskha
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-900 mt-3">
-                Key Ingredients / <span style={nastaliqStyle} className="text-red-700">نایاب دیسی اجزاء کی تفصیل</span>
+                Key Ingredients / <span style={nastaliqStyle} className="text-red-800">نایاب دیسی اجزاء کی تفصیل</span>
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm mt-1.5 font-semibold">
+              <p className="text-slate-700 text-xs sm:text-sm mt-1.5 font-semibold">
                 Har tablet mein shamil 12 behtareen qudrati aur kamil ajza jo aap ko dein mukammal quwwat.
               </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Zafran (زعفران)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Energy & Blood Circulation</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Zafran (زعفران)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Energy & Blood Circulation</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Salab Misri (ثعلب مصری)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Stamina & Muscle Strength</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Salab Misri (ثعلب مصری)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Stamina & Muscle Strength</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Shilajit (شیلاجیت)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Pure Himalayan Mineral Tonic</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Shilajit (شیلاجیت)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Pure Himalayan Mineral Tonic</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Akarkara (عقرقرحا)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Nerve Stimulation & Josh</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Akarkara (عقرقرحا)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Nerve Stimulation & Josh</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Kasturi (کستوری)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Maximum Strength Booster</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Kasturi (کستوری)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Maximum Strength Booster</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Jund Bedastar (جند بدستر)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Physical Power & Vigor</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Jund Bedastar (جند بدستر)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Physical Power & Vigor</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Asgandh (اسگندھ ناگوری)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Stress Relief & Stamina</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Asgandh (اسگندھ ناگوری)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Stress Relief & Stamina</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Maghaz Chilgoza (مغز جلغوزہ)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Natural Body Warmth</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Maghaz Chilgoza (مغز جلغوزہ)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Natural Body Warmth</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Tukhm E Rehan (تخم ریحان)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Cooling & Energy Balance</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Tukhm E Rehan (تخم ریحان)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Cooling & Energy Balance</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Darchini (دارچینی)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Metabolism & Circulation</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Darchini (دارچینی)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Metabolism & Circulation</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Jaifal & Javitri (جائفل و جوتری)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Vitality & Performance</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Jaifal & Javitri (جائفل و جوتری)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Vitality & Performance</div>
               </div>
-              <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 hover:border-red-500 transition-all shadow-sm">
-                <div className="text-red-700 font-extrabold text-sm sm:text-base">Kushta Tilla (کشتہ طلا)</div>
-                <div className="text-slate-500 text-[11px] font-medium">Ultimate Strength Formula</div>
+              <div className="bg-[#FAF7EE] border border-amber-200 p-4 rounded-xl text-center space-y-1 hover:border-red-600 transition-all shadow-sm">
+                <div className="text-red-900 font-extrabold text-sm sm:text-base">Kushta Tilla (کشتہ طلا)</div>
+                <div className="text-slate-600 text-[11px] font-medium">Ultimate Strength Formula</div>
               </div>
             </div>
           </div>
@@ -787,104 +601,204 @@ export default function LandingPage() {
             <h3 className="text-xl sm:text-3xl font-black text-slate-900">
               Why Choose AM Dawakhana?
             </h3>
-            <p className="text-red-700 text-base sm:text-xl mt-1 font-bold" style={nastaliqStyle} dir="rtl">
+            <p className="text-red-800 text-base sm:text-xl mt-1 font-bold" style={nastaliqStyle} dir="rtl">
               اے ایم دواخانہ ہی کیوں منتخب کریں؟
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
+            <div className="bg-white/90 border border-amber-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-600 transition-all shadow-sm">
               <div className="text-3xl">🌿</div>
-              <div className="text-red-700 font-extrabold text-sm sm:text-base">100% Organic</div>
-              <p className="text-slate-600 text-xs font-medium">Pure Herbal Formula</p>
+              <div className="text-red-900 font-extrabold text-sm sm:text-base">100% Organic</div>
+              <p className="text-slate-700 text-xs font-medium">Pure Herbal Formula</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
+            <div className="bg-white/90 border border-amber-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-600 transition-all shadow-sm">
               <div className="text-3xl">⚡</div>
-              <div className="text-red-700 font-extrabold text-sm sm:text-base">Fast Action</div>
-              <p className="text-slate-600 text-xs font-medium">Asar 1-2 Ghante Mein</p>
+              <div className="text-red-900 font-extrabold text-sm sm:text-base">Fast Action</div>
+              <p className="text-slate-700 text-xs font-medium">Asar 1-2 Ghante Mein</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
+            <div className="bg-white/90 border border-amber-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-600 transition-all shadow-sm">
               <div className="text-3xl">📦</div>
-              <div className="text-red-700 font-extrabold text-sm sm:text-base">Discreet Packing</div>
-              <p className="text-slate-600 text-xs font-medium">Full Raazdaari Ke Saath</p>
+              <div className="text-red-900 font-extrabold text-sm sm:text-base">Discreet Packing</div>
+              <p className="text-slate-700 text-xs font-medium">Full Raazdaari Ke Saath</p>
             </div>
-            <div className="bg-white border border-slate-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-500 transition-all shadow-sm">
+            <div className="bg-white/90 border border-amber-200 p-4.5 rounded-2xl text-center space-y-2 hover:border-red-600 transition-all shadow-sm">
               <div className="text-3xl">🚚</div>
-              <div className="text-red-700 font-extrabold text-sm sm:text-base">Free Delivery</div>
-              <div className="text-slate-600 text-xs font-medium">Cash On Delivery</div>
+              <div className="text-red-900 font-extrabold text-sm sm:text-base">Free Delivery</div>
+              <div className="text-slate-700 text-xs font-medium">Cash On Delivery</div>
             </div>
           </div>
         </section>
 
         {/* Pricing Packages Box */}
-        <section className="bg-white border border-slate-200 text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-10 mb-12 sm:mb-16 text-center relative overflow-hidden shadow-lg">
-          <div className="inline-block bg-red-600 text-white font-black text-xs px-4 py-1.5 rounded-full mb-3 shadow-sm uppercase tracking-wider animate-pulse">
+        <section className="bg-white/90 border border-amber-200 text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-10 mb-12 sm:mb-16 text-center relative overflow-hidden shadow-lg">
+          <div className="inline-block bg-red-700 text-white font-black text-xs px-4 py-1.5 rounded-full mb-3 shadow-sm uppercase tracking-wider animate-pulse">
             Khaas Riayat Offer
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black mb-2 text-slate-900">
             AM Dawakhana Price Packages
           </h2>
-          <p className="text-red-700 text-base sm:text-xl mb-6 font-bold" style={nastaliqStyle} dir="rtl">
+          <p className="text-red-800 text-base sm:text-xl mb-6 font-bold" style={nastaliqStyle} dir="rtl">
             قیمت کی تفصیلات - پورے پاکستان میں مفت ہوم ڈیلیوری
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto">
-            <div className="bg-slate-50 border border-slate-200 p-5 sm:p-6 rounded-2xl text-center shadow-sm">
+            <div className="bg-[#FAF7EE] border border-amber-200 p-5 sm:p-6 rounded-2xl text-center shadow-sm">
               <div className="text-slate-800 font-extrabold text-sm sm:text-base">1 Bottle (20 Tablets)</div>
-              <div className="text-red-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">ایک بوتل (20 ٹیبلٹس)</div>
-              <div className="text-red-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 2,299</div>
-              <div className="text-[11px] sm:text-xs text-slate-500 font-semibold">Free Delivery Included</div>
+              <div className="text-red-900 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">ایک بوتل (20 ٹیبلٹس)</div>
+              <div className="text-red-800 text-3xl sm:text-4xl font-black my-2.5">Rs. 2,299</div>
+              <div className="text-[11px] sm:text-xs text-slate-600 font-semibold">Free Delivery Included</div>
             </div>
 
-            <div className="bg-gradient-to-br from-red-50 to-amber-50 border-2 border-red-600 p-5 sm:p-6 rounded-2xl text-center shadow-md relative">
-              <div className="absolute -top-3.5 right-3 sm:right-4 bg-red-600 text-white font-black text-[10px] sm:text-xs px-3.5 py-1 rounded-full shadow-sm">
+            <div className="bg-gradient-to-br from-red-50 to-amber-100 border-2 border-red-700 p-5 sm:p-6 rounded-2xl text-center shadow-md relative">
+              <div className="absolute -top-3.5 right-3 sm:right-4 bg-red-700 text-white font-black text-[10px] sm:text-xs px-3.5 py-1 rounded-full shadow-sm">
                 Bachat Offer
               </div>
-              <div className="text-red-900 font-extrabold text-sm sm:text-base">2 Bottles (40 Tablets)</div>
-              <div className="text-red-800 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">دو بوتلیں (40 ٹیبلٹس - مکمل کورس)</div>
-              <div className="text-red-700 text-3xl sm:text-4xl font-black my-2.5">Rs. 4,400</div>
-              <div className="text-[11px] sm:text-xs text-red-800 font-bold">Special Discount + Free Delivery</div>
+              <div className="text-red-950 font-extrabold text-sm sm:text-base">2 Bottles (40 Tablets)</div>
+              <div className="text-red-900 text-sm sm:text-lg font-bold mt-0.5" style={nastaliqStyle} dir="rtl">دو بوتلیں (40 ٹیبلٹس - مکمل کورس)</div>
+              <div className="text-red-800 text-3xl sm:text-4xl font-black my-2.5">Rs. 4,400</div>
+              <div className="text-[11px] sm:text-xs text-red-900 font-bold">Special Discount + Free Delivery</div>
             </div>
           </div>
         </section>
 
-        {/* Customer Reviews */}
+        {/* Customer Reviews matching sample style */}
         <section className="mb-12 sm:mb-16">
-          <div className="text-center mb-6">
-            <h3 className="text-lg sm:text-2xl font-black text-red-700 uppercase tracking-wider">
-              Customer Reviews & Ratings / کسٹمرز کی رائے
+          <div className="text-center mb-8">
+            <h3 className="text-2xl sm:text-3xl font-black text-red-900 uppercase tracking-wider">
+              Trusted By Thousands - Real Customers Feedback
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1 font-semibold">100% Mutmaeen Sarfeen Across Pakistan (4.9 / 5.0 Star Rating)</p>
+            <p className="text-xs sm:text-sm text-slate-700 mt-1 font-semibold">Verified buyers sharing their experience with our products.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 shadow-sm">
+          {/* Rating Summary Box */}
+          <div className="bg-white/90 border border-amber-200 rounded-3xl p-6 sm:p-8 max-w-3xl mx-auto shadow-md mb-8 flex flex-col sm:flex-row items-center justify-around gap-6">
+            <div className="text-center">
+              <div className="text-5xl font-black text-red-900">4.9</div>
+              <div className="flex text-amber-500 text-base justify-center my-1">★★★★★</div>
+              <div className="text-xs text-slate-600 font-semibold">Based on 2,847 Reviews</div>
+            </div>
+            <div className="w-full sm:w-1/2 space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span>5★</span>
+                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
+                  <div className="w-[90%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span>4★</span>
+                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
+                  <div className="w-[8%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span>3★</span>
+                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
+                  <div className="w-[2%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span>2★</span>
+                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
+                  <div className="w-[0%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span>1★</span>
+                <div className="flex-1 h-3 bg-amber-100 rounded-full overflow-hidden">
+                  <div className="w-[0%] h-full bg-gradient-to-r from-red-800 to-amber-600 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Review Cards Grid with Product Names */}
+          <div className="grid md:grid-cols-3 gap-6">
+            
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Bilal Ahmed</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
-              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">"Bohot zabardast result hai. 1 se 2 ghante mein asar mehsoos hua. Highly recommended!"</p>
-              <div className="text-[11px] text-red-700 font-bold">— Tariq Khan (Lahore)</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "worth it cheez hai or me bp pateint hun but mera bp control rehta hai is tablets sy ."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Play More</div>
             </div>
-            <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 text-right shadow-sm" style={nastaliqStyle} dir="rtl">
-              <div className="flex justify-end text-amber-500 text-sm">★★★★★</div>
-              <p className="text-sm sm:text-base text-slate-800 font-bold">"اے ایم دواخانہ کی پروڈکٹ نے مایوس نہیں کیا۔ بہت ہی شاندار اور قدرتی رزلٹ ہے۔"</p>
-              <div className="text-xs text-red-700 font-bold">— محمد عثمان (کراچی)</div>
-            </div>
-            <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-2.5 shadow-sm">
+
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Rizwan</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
-              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">"Zero nuqsaan hai. Delivery bhi bohot fast aur secret packing mein mili."</p>
-              <div className="text-[11px] text-red-700 font-bold">— Kamran Ahmed (Rawalpindi)</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "Play More ka experience honestly kaafi acha raha. Pehle thori hesitation thi lekin use ke baad confidence mein noticeable improvement feel hui. Overall satisfied."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Play More</div>
             </div>
+
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Ahmed Khan</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
+              <div className="flex text-amber-500 text-sm">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "first time meny koi sexual tablet use ki hain or me to ap logo ka regular customer banny wala hun Love you herbs2heart."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Xtreme Power Ultra</div>
+            </div>
+
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Muneeb</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
+              <div className="flex text-amber-500 text-sm">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "Main ne Play More try ki aur mujhe iska overall experience kaafi impressive laga. Quality achi hai aur routine mein bhi positive difference mehsoos hua. Definitely recommended."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Play More</div>
+            </div>
+
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Usman Ali</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
+              <div className="flex text-amber-500 text-sm">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "Pehly me inki xtreme power use karta tha bhot achi thi but inho ny new launch kia hai xtreme power ultra bhai bht hi zabardast cheez hai me kehta hun banda thak jaye lakin farig na ho Overall experience great!."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Xtreme Power Ultra</div>
+            </div>
+
+            <div className="bg-white/95 border-t-4 border-red-700 border-x border-b border-amber-200 p-6 rounded-2xl shadow-md space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="font-black text-slate-900 text-base">Hamza</div>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Verified Buyer</span>
+              </div>
+              <div className="flex text-amber-500 text-sm">★★★★★</div>
+              <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                "Herbal products mein se Play More mujhe sab se better laga. Use ke baad confidence aur overall performance mein achi improvement feel hui. Ab dobara order karunga."
+              </p>
+              <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">Play More</div>
+            </div>
+
           </div>
         </section>
 
         {/* Order Form Section */}
         <section id="order-form" className="max-w-xl mx-auto">
-          <div className="bg-white border-2 border-red-600/40 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-xl relative">
+          <div className="bg-white/95 border-2 border-red-700/50 rounded-3xl p-5 sm:p-10 shadow-xl relative">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-3xl font-black text-slate-900">
-                Order Form / <span style={nastaliqStyle} className="text-red-700">آرڈر فارم</span>
+                Order Form / <span style={nastaliqStyle} className="text-red-800">آرڈر فارم</span>
               </h2>
-              <p className="text-slate-600 text-sm sm:text-lg mt-2 font-bold" style={nastaliqStyle} dir="rtl">
+              <p className="text-slate-700 text-sm sm:text-lg mt-2 font-bold" style={nastaliqStyle} dir="rtl">
                 اپنی تفصیلات درج کریں، ہم آپ سے تصدیق کے لیے رابطہ کریں گے۔
               </p>
             </div>
@@ -893,7 +807,7 @@ export default function LandingPage() {
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Full Name</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">پورا نام *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">پورا نام *</span>
                 </label>
                 <input
                   type="text"
@@ -901,14 +815,14 @@ export default function LandingPage() {
                   placeholder="Apna poora naam likhein / اپنا نام لکھیں"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
+                  className="w-full bg-[#FAF7EE] border border-amber-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-700 transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Mobile / WhatsApp Number</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">موبائل نمبر *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">موبائل نمبر *</span>
                 </label>
                 <input
                   type="tel"
@@ -916,14 +830,14 @@ export default function LandingPage() {
                   placeholder="03XXXXXXXXX"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
+                  className="w-full bg-[#FAF7EE] border border-amber-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-700 transition-colors"
                 />
               </div>
 
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Complete Address & City</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">مکمل پتہ اور شہر کا نام *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">مکمل پتہ اور شہر کا نام *</span>
                 </label>
                 <textarea
                   required
@@ -931,39 +845,39 @@ export default function LandingPage() {
                   placeholder="House/Shop No, Street, Area, City"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 transition-colors"
+                  className="w-full bg-[#FAF7EE] border border-amber-300 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-700 transition-colors"
                 ></textarea>
               </div>
 
-              {/* HIGHLY STYLISH CUSTOM DROPDOWN */}
+              {/* CUSTOM DROPDOWN */}
               <div>
                 <label className="block text-slate-800 font-extrabold text-xs sm:text-base mb-1.5 flex justify-between items-center">
                   <span>Select Deal / Package</span>
-                  <span style={nastaliqStyle} dir="rtl" className="text-red-700 text-sm">پیکج منتخب کریں *</span>
+                  <span style={nastaliqStyle} dir="rtl" className="text-red-800 text-sm">پیکج منتخب کریں *</span>
                 </label>
 
                 <div className="relative">
                   <div 
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="w-full bg-slate-50 border-2 border-red-600/60 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-red-900 font-black cursor-pointer flex justify-between items-center shadow-sm hover:border-red-600 transition-all"
+                    className="w-full bg-[#FAF7EE] border-2 border-red-700/60 rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-red-950 font-black cursor-pointer flex justify-between items-center shadow-sm hover:border-red-700 transition-all"
                   >
                     <span className="truncate pr-2">{formData.quantity}</span>
-                    <span className={`text-red-700 transform transition-transform duration-300 text-lg ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}>
+                    <span className={`text-red-800 transform transition-transform duration-300 text-lg ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}>
                       ▼
                     </span>
                   </div>
 
                   {isDropdownOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-red-600 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-xl">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-red-700 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-xl">
                       <div 
                         onClick={() => {
                           setFormData({ ...formData, quantity: '1 Bottle (20 Tablets) - Rs. 2,299' });
                           setIsDropdownOpen(false);
                         }}
-                        className="px-4 py-3.5 text-xs sm:text-sm text-slate-800 font-bold hover:bg-red-600 hover:text-white cursor-pointer border-b border-slate-100 transition-all flex items-center justify-between"
+                        className="px-4 py-3.5 text-xs sm:text-sm text-slate-800 font-bold hover:bg-red-700 hover:text-white cursor-pointer border-b border-amber-100 transition-all flex items-center justify-between"
                       >
                         <span>1 Bottle (20 Tablets) - Rs. 2,299</span>
-                        <span className="text-[10px] bg-red-100 px-2 py-0.5 rounded text-red-800 font-mono">Free Delivery</span>
+                        <span className="text-[10px] bg-amber-100 px-2 py-0.5 rounded text-red-900 font-mono">Free Delivery</span>
                       </div>
 
                       <div 
@@ -971,7 +885,7 @@ export default function LandingPage() {
                           setFormData({ ...formData, quantity: '2 Bottles (40 Tablets) - Rs. 4,400' });
                           setIsDropdownOpen(false);
                         }}
-                        className="px-4 py-3.5 text-xs sm:text-sm text-red-900 font-black hover:bg-red-600 hover:text-white cursor-pointer transition-all flex items-center justify-between"
+                        className="px-4 py-3.5 text-xs sm:text-sm text-red-950 font-black hover:bg-red-700 hover:text-white cursor-pointer transition-all flex items-center justify-between"
                       >
                         <span>2 Bottles (40 Tablets) - Rs. 4,400</span>
                         <span className="text-[10px] bg-amber-500 text-slate-950 px-2 py-0.5 rounded font-extrabold">Bachat Offer</span>
@@ -984,7 +898,7 @@ export default function LandingPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider border border-red-400/50"
+                className="w-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider border border-red-500/50"
               >
                 {loading ? 'Submitting...' : 'CONFIRM ORDER NOW / آرڈر کی تصدیق کریں'}
               </button>
@@ -994,23 +908,22 @@ export default function LandingPage() {
 
       </main>
 
-      {/* 🔔 LIVE RECENT ORDER TOAST POPUP */}
+      {/* 🔔 COMPACT RECENT ORDER TOAST POPUP (Bottom-Left Corner) */}
       {showToast && (
-        <div className="fixed bottom-24 sm:bottom-6 left-4 z-50 bg-white border-2 border-red-600 text-slate-900 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 transition-all duration-500 max-w-xs animate-pulse">
-          <div className="w-10 h-10 rounded-full bg-red-600 text-white font-black flex items-center justify-center shrink-0 shadow">
+        <div className="fixed bottom-20 sm:bottom-6 left-4 z-50 bg-white border border-red-700/40 text-slate-900 px-3 py-2.5 rounded-xl shadow-lg flex items-center gap-2.5 transition-all duration-300 max-w-[260px] animate-fadeIn">
+          <div className="w-8 h-8 rounded-full bg-red-700 text-white font-black flex items-center justify-center shrink-0 text-xs shadow">
             📦
           </div>
           <div>
-            <p className="text-xs font-bold text-red-700">Naya Order Moosool Hua!</p>
-            <p className="text-xs text-slate-700 font-semibold">
-              <strong className="text-slate-900">{recentOrder.name}</strong> ne <span className="text-red-700">{recentOrder.city}</span> se order kiya.
+            <p className="text-[11px] font-bold text-red-900 leading-tight">Naya Order Moosool Hua!</p>
+            <p className="text-[10px] text-slate-700 font-medium leading-tight">
+              <strong className="text-slate-900">{recentOrder.name}</strong> ({recentOrder.city}) • <span className="text-red-700">{recentOrder.time}</span>
             </p>
-            <span className="text-[10px] text-red-600">{recentOrder.time}</span>
           </div>
         </div>
       )}
 
-      {/* Floating WhatsApp Chat Button with Slightly Larger Logo */}
+      {/* Floating WhatsApp Chat Button */}
       <a
         href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
         target="_blank"
@@ -1024,22 +937,22 @@ export default function LandingPage() {
       </a>
 
       {/* Mobile Sticky Footer Button */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-white/95 border-t border-slate-200 backdrop-blur-md">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#FAF7EE]/95 border-t border-amber-200 backdrop-blur-md">
         <a
           href="#order-form"
-          className="block text-center w-full bg-red-600 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-400"
+          className="block text-center w-full bg-red-700 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-500"
         >
           ⚡ ORDER NOW (CASH ON DELIVERY)
         </a>
       </div>
 
-      {/* Luxury Footer with Red Accent */}
-      <footer className="relative z-10 border-t-2 border-red-600/30 bg-white pt-12 pb-16 sm:pb-8 text-slate-700 mt-16 shadow-inner">
+      {/* Luxury Footer */}
+      <footer className="relative z-10 border-t-2 border-red-700/20 bg-white/90 pt-12 pb-16 sm:pb-8 text-slate-700 mt-16 shadow-inner">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full border border-red-600 overflow-hidden bg-red-50">
+              <div className="relative w-10 h-10 rounded-full border border-red-700 overflow-hidden bg-amber-100">
                 <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" />
               </div>
               <h4 className="font-black text-slate-900 text-lg sm:text-xl">AM Unani & Herbal Labs</h4>
@@ -1050,21 +963,21 @@ export default function LandingPage() {
           </div>
 
           <div className="space-y-3 text-left">
-            <h5 className="font-black text-red-700 text-sm uppercase tracking-wider">Quality Assurance</h5>
+            <h5 className="font-black text-red-800 text-sm uppercase tracking-wider">Quality Assurance</h5>
             <ul className="space-y-2 text-xs font-semibold text-slate-700">
-              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> 100% Pure Himalayan Herbs</li>
-              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> Zero Chemical Side Effects</li>
-              <li className="flex items-center gap-2"><span className="text-red-600">✓</span> Free Discreet Delivery Across Pakistan</li>
+              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> 100% Pure Himalayan Herbs</li>
+              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> Zero Chemical Side Effects</li>
+              <li className="flex items-center gap-2"><span className="text-red-700">✓</span> Free Discreet Delivery Across Pakistan</li>
             </ul>
           </div>
 
           <div className="space-y-3 text-right" style={nastaliqStyle} dir="rtl">
-            <h5 className="font-black text-red-700 text-xl">اے ایم دواخانہ</h5>
+            <h5 className="font-black text-red-800 text-xl">اے ایم دواخانہ</h5>
             <p className="text-sm text-slate-700 font-bold">
               اعتماد، صحت اور قدرت کا بہترین امتزاج۔ 100٪ دیسی اور محفوظ نسخہ جات۔
             </p>
             <div className="pt-2">
-              <span className="inline-block bg-slate-100 border border-slate-200 text-red-700 text-xs px-3 py-1 rounded-lg font-mono">
+              <span className="inline-block bg-[#FAF7EE] border border-amber-200 text-red-800 text-xs px-3 py-1 rounded-lg font-mono">
                 📞 Help Desk: Cash on Delivery Available
               </span>
             </div>
@@ -1072,18 +985,18 @@ export default function LandingPage() {
 
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-100 text-center flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500 font-semibold">
+        <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-amber-100 text-center flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500 font-semibold">
           <p>© 2026 AM Unani & Herbal Labs. All Rights Reserved.</p>
-          <p className="text-red-700 font-bold">Pure Herbal Mastery</p>
+          <p className="text-red-800 font-bold">Pure Herbal Mastery</p>
         </div>
       </footer>
 
-      {/* ❓ STEP 1: ORDER CONFIRMATION MODAL */}
+      {/* CONFIRMATION MODAL */}
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-red-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-6 relative">
+          <div className="bg-white border-2 border-red-700 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-6 relative">
             
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-100 border-2 border-red-600 text-red-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-100 border-2 border-red-700 text-red-700 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md">
               🛒
             </div>
 
@@ -1091,16 +1004,16 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Confirm Your Order?
               </h3>
-              <h4 className="text-lg sm:text-2xl font-bold text-red-700" style={nastaliqStyle} dir="rtl">
+              <h4 className="text-lg sm:text-2xl font-bold text-red-800" style={nastaliqStyle} dir="rtl">
                 کیا آپ آرڈر کی تصدیق کرنا چاہتے ہیں؟
               </h4>
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-700 text-left space-y-2">
-              <p><strong className="text-red-700">Naam:</strong> {formData.name}</p>
-              <p><strong className="text-red-700">Number:</strong> {formData.phone}</p>
-              <p><strong className="text-red-700">Package:</strong> {formData.quantity}</p>
-              <p><strong className="text-red-700">Address:</strong> {formData.address}</p>
+            <div className="bg-[#FAF7EE] p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700 text-left space-y-2">
+              <p><strong className="text-red-800">Naam:</strong> {formData.name}</p>
+              <p><strong className="text-red-800">Number:</strong> {formData.phone}</p>
+              <p><strong className="text-red-800">Package:</strong> {formData.quantity}</p>
+              <p><strong className="text-red-800">Address:</strong> {formData.address}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
@@ -1115,7 +1028,7 @@ export default function LandingPage() {
               <button
                 type="button"
                 onClick={handleFinalOrderConfirm}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm"
+                className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm"
               >
                 Haan / تصدیق کریں
               </button>
@@ -1125,10 +1038,10 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* 🎉 STEP 2: ORDER SUCCESS POPUP */}
+      {/* SUCCESS POPUP */}
       {showSuccessPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-red-600 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
+          <div className="bg-white border-2 border-red-700 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-5 relative">
             
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-600 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md animate-bounce">
               ✓
@@ -1138,20 +1051,20 @@ export default function LandingPage() {
               <h3 className="text-xl sm:text-2xl font-black text-slate-900">
                 Order Confirmed!
               </h3>
-              <h4 className="text-xl sm:text-3xl font-bold text-red-700" style={nastaliqStyle} dir="rtl">
+              <h4 className="text-xl sm:text-3xl font-bold text-red-800" style={nastaliqStyle} dir="rtl">
                 آرڈر کرنے کا شکریہ!
               </h4>
             </div>
 
-            <div className="space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-700">
+            <div className="space-y-3 bg-[#FAF7EE] p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700">
               <p className="font-semibold">
-                Thank you for ordering from <strong className="text-red-700">AM Unani & Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
+                Thank you for ordering from <strong className="text-red-800">AM Unani & Herbal Labs</strong>. Your order will be delivered within <strong className="text-emerald-700">2 to 3 working days</strong> across Pakistan via Cash on Delivery.
               </p>
-              <p className="pt-2 border-t border-slate-200 text-right font-bold text-sm sm:text-base" style={nastaliqStyle} dir="rtl">
-                اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-red-700">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
+              <p className="pt-2 border-t border-amber-200 text-right font-bold text-sm sm:text-base" style={nastaliqStyle} dir="rtl">
+                اے ایم دواخانہ سے آرڈر کرنے کا شکریہ۔ آپ کا آرڈر <strong className="text-red-800">2 سے 3 کام کے دنوں میں</strong> کیش آن ڈیلیوری کے ذریعے آپ تک پہنچا دیا جائے گا۔
               </p>
 
-              <div className="pt-3 border-t border-slate-200 text-center space-y-2.5">
+              <div className="pt-3 border-t border-amber-200 text-center space-y-2.5">
                 <p className="text-xs text-slate-600 font-bold">
                   Agar mazeed maloomat darkaar hain toh WhatsApp par rabta karein:
                 </p>
@@ -1171,7 +1084,7 @@ export default function LandingPage() {
 
             <button
               onClick={() => setShowSuccessPopup(false)}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl shadow-lg transition-all"
+              className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all"
             >
               Close / بند کریں
             </button>
