@@ -181,10 +181,30 @@ export default function LandingPage() {
     setShowConfirmModal(true);
   };
 
-  // Step 2: Final Submission after clicking "YES"
+  // Step 2: Final Submission after clicking "YES" (Meta Purchase Event Added Here)
   const handleFinalOrderConfirm = async () => {
     setShowConfirmModal(false);
     setLoading(true);
+
+    // 1. Determine price based on selected quantity text
+    const isTwoBottles = formData.quantity.includes('4,400');
+    const orderValue = isTwoBottles ? 4400 : 2299;
+
+    // 2. Trigger Meta Purchase Event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Purchase', {
+        currency: 'PKR',
+        value: orderValue,
+        content_name: 'AM Vitality Tablet',
+        contents: [
+          {
+            id: isTwoBottles ? 'am_vitality_2x' : 'am_vitality_1x',
+            quantity: isTwoBottles ? 2 : 1,
+            item_price: orderValue,
+          }
+        ],
+      });
+    }
 
     try {
       const res = await fetch('/api/order', {
@@ -386,7 +406,7 @@ export default function LandingPage() {
                     <span>🛡️</span> <span>سوال: کیا کوئی نقصان ہے؟</span>
                   </div>
                   <p className="text-stone-50 text-sm sm:text-base font-bold pr-5">
-                    جواب: بالکل نہیں،% 100% قدرتی اور دیسی نسخہ ہے۔
+                    جواب: بالکل نہیں، 100% قدرتی اور دیسی نسخہ ہے۔
                   </p>
                 </div>
               </div>
