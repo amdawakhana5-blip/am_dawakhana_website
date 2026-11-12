@@ -85,7 +85,7 @@ export default function LandingPage() {
   const images = ['/1.jpg', '/2.jpg', '/3.jpg', '/4.jpg', '/5.jpg', '/6.jpg', '/7.jpg', '/8.jpg', '/9.jpg'];
   const extraImages = ['/10.jpg', '/11.jpg'];
 
-  // Auto-play Image Sliders (Slower and smooth timing: 5s and 6s)
+  // Auto-play Image Sliders (Smooth and comfortable timing)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -136,10 +136,16 @@ export default function LandingPage() {
     setLoading(true);
 
     try {
+      // Map quantity selection string to clean value/quantity for the backend sheet
+      const payload = {
+        ...formData,
+        quantityValue: formData.quantity.includes('2 Bottles') ? 2 : 1,
+      };
+
       const res = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
@@ -161,10 +167,10 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FAF7EE] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-28 sm:pb-0">
+    <div className="relative min-h-screen bg-[#FDFBF7] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-24 sm:pb-0">
       
       {/* Top Compact & Stylish Timer Banner */}
-      <div className="relative z-50 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-white text-center py-2 px-3 shadow-md">
+      <div className="relative z-50 bg-gradient-to-r from-red-950 via-amber-900 to-red-900 text-white text-center py-2 px-3 shadow-md">
         <div className="max-w-md mx-auto flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-1.5 text-amber-300 text-xs font-bold">
             <span>🔥</span> <span>⏳</span> <span>Price will go up soon!</span>
@@ -186,44 +192,45 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Fully Centered Multi-Color Header */}
-      <header className="relative z-40 py-3 sm:py-5 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-white via-[#FAF7EE] to-amber-50/90 backdrop-blur-md sticky top-0 shadow-sm">
-        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center text-center gap-2">
+      {/* Left-Aligned Professional Header */}
+      <header className="relative z-40 py-3 sm:py-4 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-white via-[#FAF6ED] to-amber-50/90 backdrop-blur-md sticky top-0 shadow-sm">
+        <div className="max-w-6xl mx-auto flex justify-between items-center gap-3">
           
+          {/* Left Side: Logo & Dual-color Heading */}
           <div className="flex items-center gap-3">
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
+            <div className="relative w-11 h-11 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
                 src="/logo.png"
                 alt="AM Dawakhana Logo"
                 fill
-                sizes="(max-width: 640px) 48px, 56px"
+                sizes="(max-width: 640px) 44px, 56px"
                 className="object-contain p-0.5"
                 priority
               />
             </div>
-          </div>
-
-          <div className="flex flex-col items-center justify-center space-y-0.5">
-            <h1 className="text-xl sm:text-3xl font-black tracking-tight leading-tight">
-              <span className="text-amber-600 drop-shadow-sm">AM</span>{' '}
-              <span className="text-red-800">Unani</span>{' '}
-              <span className="text-slate-800">&amp;</span>{' '}
-              <span className="text-emerald-700">Herbal</span> Labs
-            </h1>
-            <div className="text-sm sm:text-lg text-emerald-800 font-extrabold tracking-wide" style={nastaliqStyle} dir="rtl">
-              اے ایم دواخانہ
+            <div className="flex flex-col justify-center">
+              <div className="text-sm sm:text-lg font-black tracking-tight leading-tight">
+                <span className="text-amber-600">AM</span>{' '}
+                <span className="text-red-800">Unani</span>{' '}
+                <span className="text-slate-800">&amp;</span>{' '}
+                <span className="text-emerald-700">Herbal</span> Labs
+              </div>
+              <div className="text-xs sm:text-base font-extrabold leading-tight tracking-wide flex items-center gap-1.5 mt-0.5" style={nastaliqStyle} dir="rtl">
+                <span className="text-red-800">اے ایم</span> <span className="text-emerald-800">دواخانہ</span>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 mt-1">
+          {/* Right Side: Perfectly Aligned Equal-Sized Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md flex items-center gap-1.5 border border-emerald-400/50 shrink-0"
               title="WhatsApp Chat"
             >
-              <svg className="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
               <span>WhatsApp</span>
@@ -231,16 +238,16 @@ export default function LandingPage() {
 
             <a
               href="#order-form"
-              className="bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black px-4 py-1.5 rounded-xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-500/50"
+              className="bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-800 hover:to-amber-800 text-white font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl text-xs sm:text-sm transition-all transform hover:scale-105 shadow-md tracking-wider uppercase border border-red-400/50 shrink-0"
             >
-              Order Karein
+              Order Now
             </a>
           </div>
 
         </div>
       </header>
 
-      <main className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-12">
+      <main className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-10">
         
         {/* Main Hero Section */}
         <section className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center mb-12 sm:mb-16">
@@ -324,18 +331,18 @@ export default function LandingPage() {
 
           </div>
 
-          {/* Right Column: Borderless Image Boxes with Centered Thumbnails */}
+          {/* Right Column: Fixed Image Boxes with Non-cutting object-contain display */}
           <div className="flex flex-col gap-4 w-full">
             
             {/* Box 1: Main Big Image Slider */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
-              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FAF7EE]">
+              <div className="relative w-full aspect-[4/3] max-h-[380px] overflow-hidden rounded-2xl bg-[#FAF7EE] flex items-center justify-center">
                 <Image
                   src={images[currentImageIndex]}
                   alt={`AM Dawakhana Slide ${currentImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-transform duration-700"
+                  className="object-contain w-full h-full transition-all duration-700 p-2"
                   priority
                 />
               </div>
@@ -346,11 +353,11 @@ export default function LandingPage() {
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-white ${
                       currentImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" />
+                    <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-contain p-1" />
                   </button>
                 ))}
               </div>
@@ -358,13 +365,13 @@ export default function LandingPage() {
 
             {/* Box 2: Extra Gallery Slide */}
             <div className="relative w-full bg-white border-2 border-amber-300 rounded-3xl p-3 shadow-xl overflow-hidden">
-              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FAF7EE]">
+              <div className="relative w-full aspect-[4/3] max-h-[320px] overflow-hidden rounded-2xl bg-[#FAF7EE] flex items-center justify-center">
                 <Image
                   src={extraImages[extraImageIndex]}
                   alt={`AM Dawakhana Extra Slide ${extraImageIndex + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 550px"
-                  className="object-contain w-full h-full transition-transform duration-700"
+                  className="object-contain w-full h-full transition-all duration-700 p-2"
                   priority
                 />
               </div>
@@ -375,11 +382,11 @@ export default function LandingPage() {
                   <button
                     key={idx}
                     onClick={() => setExtraImageIndex(idx)}
-                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl overflow-hidden border-2 transition-all bg-white ${
                       extraImageIndex === idx ? 'border-red-700 ring-2 ring-red-400/50 scale-105 shadow-md' : 'border-amber-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt={`Extra Thumbnail ${idx + 1}`} fill className="object-cover" />
+                    <Image src={img} alt={`Extra Thumbnail ${idx + 1}`} fill className="object-contain p-1" />
                   </button>
                 ))}
               </div>
@@ -414,7 +421,7 @@ export default function LandingPage() {
                     poster="/1.jpg"
                     onPlay={() => setIsVideo1Playing(true)}
                     onPause={() => setIsVideo1Playing(false)}
-                    className="w-full h-full object-cover bg-black"
+                    className="w-full h-full object-contain bg-black"
                   >
                     <source src="/video1.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -448,7 +455,7 @@ export default function LandingPage() {
                     poster="/2.jpg"
                     onPlay={() => setIsVideo2Playing(true)}
                     onPause={() => setIsVideo2Playing(false)}
-                    className="w-full h-full object-cover bg-black"
+                    className="w-full h-full object-contain bg-black"
                   >
                     <source src="/video2.mp4" type="video/mp4" />
                     Aap ka browser video support nahi karta.
@@ -759,7 +766,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi تھی۔ Highly recommended."
+                    "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi thi. Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -898,7 +905,7 @@ export default function LandingPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider border border-red-500/50"
+                className="w-full bg-gradient-to-r from-red-700 via-amber-700 to-red-900 hover:from-red-800 hover:to-red-950 text-white font-black text-sm sm:text-lg py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 uppercase tracking-wider border border-red-500/50"
               >
                 {loading ? 'Submitting...' : 'CONFIRM ORDER NOW / آرڈر کی تصدیق کریں'}
               </button>
@@ -940,13 +947,13 @@ export default function LandingPage() {
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 p-3 bg-[#FAF7EE]/95 border-t border-amber-200 backdrop-blur-md">
         <a
           href="#order-form"
-          className="block text-center w-full bg-red-700 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-500"
+          className="block text-center w-full bg-gradient-to-r from-red-700 to-amber-700 text-white font-black py-3 rounded-xl shadow-lg text-sm tracking-wider uppercase border border-red-500"
         >
           ⚡ ORDER NOW (CASH ON DELIVERY)
         </a>
       </div>
 
-      {/* Colorful Vibrant Footer */}
+      {/* Colorful Vibrant Footer with Number +3150894064 */}
       <footer className="relative z-10 border-t-4 border-red-700 bg-gradient-to-r from-red-950 via-amber-950 to-red-900 pt-12 pb-20 sm:pb-10 text-white mt-16 shadow-2xl">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
@@ -963,10 +970,10 @@ export default function LandingPage() {
           </div>
 
           <div className="space-y-3 text-left">
-            <h5 className="font-black text-amber-400 text-sm uppercase tracking-wider">Quality Assurance</h5>
+            <h5 className="font-black text-amber-400 text-sm uppercase tracking-wider">Contact &amp; Support</h5>
             <ul className="space-y-2 text-xs font-semibold text-amber-100">
+              <li className="flex items-center gap-2"><span className="text-amber-400">📞</span> Contact / WhatsApp: +92 315 0894064</li>
               <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> 100% Pure Himalayan Herbs</li>
-              <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Zero Chemical Side Effects</li>
               <li className="flex items-center gap-2"><span className="text-amber-400">✓</span> Free Discreet Delivery Across Pakistan</li>
             </ul>
           </div>
@@ -978,7 +985,7 @@ export default function LandingPage() {
             </p>
             <div className="pt-2">
               <span className="inline-block bg-red-900/80 border border-amber-400/50 text-amber-200 text-xs px-3.5 py-1 rounded-lg font-mono">
-                📞 Help Desk: Cash on Delivery Available
+                📞 Help Desk / WhatsApp: +92 315 0894064
               </span>
             </div>
           </div>
