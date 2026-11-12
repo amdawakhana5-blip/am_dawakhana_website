@@ -166,7 +166,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-28 sm:pb-0">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E0] to-[#F9EBEA] text-slate-900 font-sans overflow-x-hidden selection:bg-red-600 selection:text-white pb-32 sm:pb-0">
       
       {/* Top Compact & Stylish Timer Banner */}
       <div className="relative z-50 bg-gradient-to-r from-red-950 via-amber-900 to-red-900 text-white text-center py-2 px-3 shadow-md">
@@ -191,11 +191,11 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Fully Responsive Mobile-Friendly Header */}
+      {/* Fully Responsive Header with Responsive Flex Wrap */}
       <header className="relative z-40 py-3 px-3 sm:px-6 border-b border-red-700/20 bg-gradient-to-r from-amber-50 via-[#FFF9EE] to-pink-50/70 backdrop-blur-md sticky top-0 shadow-sm">
-        <div className="max-w-6xl mx-auto flex flex-row justify-between items-center gap-2">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2.5">
           
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div className="flex items-center gap-2 min-w-0">
             <div className="relative w-10 h-10 sm:w-14 sm:h-14 overflow-hidden rounded-full border-2 border-red-700 bg-amber-100 shadow-md shrink-0">
               <Image
                 src="/logo.png"
@@ -219,18 +219,18 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             <a
               href="https://wa.me/923150894064?text=Salam,%20mujhe%20AM%20Dawakhana%20ke%20bary%20mein%20puchna%20hai."
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-1 border border-emerald-400/50"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-1.5 border border-emerald-400/50"
               title="WhatsApp Chat"
             >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
               </svg>
-              <span className="hidden xs:inline">WhatsApp</span>
+              <span>WhatsApp</span>
             </a>
 
             <a
@@ -244,16 +244,16 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 🚀 SMOOTH MOVING ANIMATED URDU SCRIPT TICKER PATTI */}
+      {/* 🚀 SMOOTH MOVING ANIMATED URDU SCRIPT TICKER PATTI (Corrected to move Leftward for Urdu) */}
       <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/30">
         <div className="flex overflow-hidden whitespace-nowrap">
-          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
+          <div className="inline-flex items-center gap-12 animate-marquee-left font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
             <span>🌿 100% خالص دیسی جڑی بوٹیاں، کوئی سائیڈ ایفیکٹ نہیں، پورے پاکستان میں فری ہوم ڈلیوری! 🚚</span>
           </div>
-          <div className="inline-flex items-center gap-12 animate-marquee font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl" aria-hidden="true">
+          <div className="inline-flex items-center gap-12 animate-marquee-left font-extrabold text-sm sm:text-base tracking-wide" style={nastaliqStyle} dir="rtl" aria-hidden="true">
             <span>🚨 اے ایم دواخانہ کی طرف سے ایک بہترین نسخہ جو کہ مردانہ طاقت، جوش اور ٹائمنگ پر زبردست کام کرتا ہے! 🌿</span>
             <span>⚡ اسے کھاتے ہی صرف دو گھنٹے میں اثر دکھانا شروع ہو جاتا ہے، مکمل آزمودہ اور بے ضرر! 🔥</span>
             <span>💯 اتنا شاندار نتیجہ کہ آپ کا لائف پارٹنر بھی خوش ہو جائے گا! آج ہی آرڈر کریں۔ 📦</span>
@@ -1255,17 +1255,17 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Global CSS for Marquee Animation */}
+      {/* Global CSS for Marquee Animation (Moving Leftwards for Urdu text flow) */}
       <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
+        @keyframes marqueeLeft {
+          0% { transform: translateX(100%); }
           100% { transform: translateX(-100%); }
         }
-        .animate-marquee {
+        .animate-marquee-left {
           display: inline-flex;
-          animation: marquee 25s linear infinite;
+          animation: marqueeLeft 30s linear infinite;
         }
-        .animate-marquee:hover {
+        .animate-marquee-left:hover {
           animation-play-state: paused;
         }
       `}</style>
