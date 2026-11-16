@@ -153,6 +153,14 @@ export default function LandingPage() {
       });
 
       if (res.ok) {
+        // 🔥 Meta Pixel Purchase Tracking Event
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Purchase', {
+            value: 2000.00,
+            currency: 'PKR',
+          });
+        }
+
         setShowSuccessPopup(true);
         setFormData({
           name: '',
@@ -268,7 +276,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 🚀 SMOOTH MARQUEE TICKER PATTI (Right to Left flow corrected) */}
+      {/* 🚀 SMOOTH MARQUEE TICKER PATTI */}
       <div className="relative z-30 bg-gradient-to-r from-red-900 via-amber-800 to-red-950 text-amber-200 py-3 overflow-hidden shadow-inner border-y border-amber-500/35">
         <div className="flex whitespace-nowrap overflow-hidden">
           <div className="inline-flex items-center gap-12 animate-marquee-right font-extrabold text-sm sm:text-base tracking-wide shrink-0" style={nastaliqStyle} dir="rtl">
@@ -819,7 +827,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farq para hai."
+                    "Bhai bohot lajawab product hai. stamina aur timing dono mein zabardast farق para hai."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
@@ -1189,7 +1197,7 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Global CSS for Marquee Animation (Right to Left flow) */}
+      {/* Global CSS for Marquee Animation */}
       <style jsx global>{`
         @keyframes marqueeRight {
           0% { transform: translateX(-100%); }
