@@ -156,7 +156,7 @@ export default function LandingPage() {
         // 🔥 Meta Pixel Purchase Tracking Event
         if (typeof window !== 'undefined' && (window as any).fbq) {
           (window as any).fbq('track', 'Purchase', {
-            value: 2000.00,
+            value: 2299.00,
             currency: 'PKR',
           });
         }
