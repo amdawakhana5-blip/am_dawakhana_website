@@ -153,10 +153,11 @@ export default function LandingPage() {
       });
 
       if (res.ok) {
-        // 🔥 Meta Pixel Purchase Tracking Event
+        // 🔥 Meta Pixel Purchase Event Trigger
+        const orderValue = formData.quantity.includes('4,400') ? 4400.00 : 2299.00;
         if (typeof window !== 'undefined' && (window as any).fbq) {
           (window as any).fbq('track', 'Purchase', {
-            value: 2299.00,
+            value: orderValue,
             currency: 'PKR',
           });
         }
@@ -765,7 +766,7 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "Pehly me inki normal items use karta tha but AM Vitality Tablet bhai bht hi behtareen cheez hai."
+                "Pehly me inki normal items use karta تھا but AM Vitality Tablet bhai bht hi behtareen cheez hai."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
@@ -863,7 +864,7 @@ export default function LandingPage() {
                   </div>
                   <div className="flex text-amber-500 text-sm">★★★★★</div>
                   <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                    "Awesome results! Pehli khurak se hi farq mehsoos ho gaya tha. Highly recommended."
+                    "Awesome results! Pehli khurak سے hi farq mehsoos ho gaya tha. Highly recommended."
                   </p>
                   <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
                 </div>
