@@ -9,9 +9,6 @@ export default function LandingPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [extraImageIndex, setExtraImageIndex] = useState(0);
 
-  // Popups States
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-
   // Custom Dropdown State for Styling
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -35,19 +32,17 @@ export default function LandingPage() {
     address: '',
     city: '',
     quantity: '1 Bottle (20 Tablets) - Rs. 2,299',
-    priceValue: 2299, // Dynamic price value for Meta Pixel / Thank You page
+    priceValue: 2299, // Dynamic price value for Thank You page & Meta Pixel
   });
   const [loading, setLoading] = useState(false);
 
-  // 🔥 100% Permanent Fix for Back button "Submitting..." freeze bug
+  // 🔥 Permanent Fix for Back button "Submitting..." freeze bug
   useEffect(() => {
     setLoading(false);
-    setShowConfirmModal(false);
 
     const handlePageShow = (event: PageTransitionEvent) => {
       if (event.persisted || (window.performance && (window.performance.navigation.type === 2 || window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type === 'back_forward')) {
         setLoading(false);
-        setShowConfirmModal(false);
       }
     };
 
@@ -146,13 +141,9 @@ export default function LandingPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  // Direct Order Submission without popup modal
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowConfirmModal(true);
-  };
-
-  const handleFinalOrderConfirm = async () => {
-    setShowConfirmModal(false);
     setLoading(true);
 
     try {
@@ -165,12 +156,14 @@ export default function LandingPage() {
         quantity: formData.quantity,
       };
 
+      // Backend API call (agar webhook ya sheets par data bhejna ho)
       await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       }).catch(() => {});
 
+      // Redirecting directly to Thank You page with selected price
       router.push(`/thank-you?price=${formData.priceValue}`);
     } catch (err) {
       setLoading(false);
@@ -800,7 +793,7 @@ export default function LandingPage() {
               </div>
               <div className="flex text-amber-500 text-sm">★★★★★</div>
               <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
-                "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi thi. Highly recommended."
+                "Packing bohot secure aur confidential thi. Delivery bhi 2 din mein mil gayi تھی۔ Highly recommended."
               </p>
               <div className="pt-2 text-xs font-bold text-red-800 uppercase tracking-wide">AM Vitality Tablet</div>
             </div>
@@ -1103,57 +1096,6 @@ export default function LandingPage() {
           <p className="text-amber-400 font-bold tracking-wide">Pure Herbal Mastery</p>
         </div>
       </footer>
-
-      {/* CONFIRMATION MODAL */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border-2 border-red-700 rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl space-y-6 relative">
-            
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-amber-100 border-2 border-red-700 text-red-700 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl shadow-md">
-              🛒
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
-                Confirm Your Order?
-              </h3>
-              <h4 className="text-lg sm:text-2xl font-bold text-red-900" style={nastaliqStyle} dir="rtl">
-                کیا آپ آرڈر کی تصدیق کرنا چاہتے ہیں؟
-              </h4>
-            </div>
-
-            <div className="bg-[#FAF7EE] p-4 rounded-2xl border border-amber-200 text-xs sm:text-sm text-slate-700 text-left space-y-2">
-              <p><strong className="text-red-900">Naam:</strong> {formData.name}</p>
-              <p><strong className="text-red-900">Number:</strong> {formData.phone}</p>
-              <p><strong className="text-red-900">Package:</strong> {formData.quantity}</p>
-              <p><strong className="text-red-900">Address:</strong> {formData.address}, {formData.city}</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setShowConfirmModal(false);
-                  setLoading(false);
-                }}
-                className="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-extrabold py-3 rounded-xl transition-all text-xs sm:text-sm"
-              >
-                Nahi / بند کریں
-              </button>
-
-              <button
-                type="button"
-                onClick={handleFinalOrderConfirm}
-                disabled={loading}
-                className="w-full bg-red-700 hover:bg-red-800 text-white font-black py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm disabled:opacity-50"
-              >
-                {loading ? 'Submitting...' : 'Haan / تصدیق کریں'}
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
 
       {/* Global CSS for Marquee Animation */}
       <style jsx global>{`
