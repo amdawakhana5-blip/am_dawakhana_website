@@ -1,18 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 export default function ThankYouPage() {
+  const searchParams = useSearchParams();
+  const orderPrice = Number(searchParams.get('price')) || 2299; // Jo price URL se aayegi wahi aayegi
+
   useEffect(() => {
-    // 🔥 Meta Pixel Purchase Event Trigger
+    // 🔥 Meta Pixel Purchase Event with Dynamic Price
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Purchase', {
         currency: 'PKR',
-        value: 2299,
+        value: orderPrice, // Yahan ab wohi price jayegi jo user ne select ki hogi!
       });
     }
-  }, []);
+  }, [orderPrice]);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#1b4332] via-[#2d6a4f] to-[#081c15] flex items-center justify-center p-4 sm:p-6 text-slate-100 font-sans relative overflow-hidden">
@@ -46,6 +50,10 @@ export default function ThankYouPage() {
           <div className="flex justify-between font-semibold border-b border-amber-200 pb-2">
             <span>Status:</span>
             <span className="text-emerald-700 font-bold">Confirmed & Processing</span>
+          </div>
+          <div className="flex justify-between font-semibold border-b border-amber-200 pb-2">
+            <span>Selected Package Price:</span>
+            <span className="text-slate-900 font-bold">Rs. {orderPrice.toLocaleString()}</span>
           </div>
           <div className="flex justify-between font-semibold">
             <span>Payment Method:</span>
